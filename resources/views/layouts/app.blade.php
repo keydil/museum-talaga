@@ -13,6 +13,39 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Tambahkan baris ini di dalam tag head aplikasi Anda jika belum ada -->
+    <script defer src="https://jsdelivr.net"></script>
+    <script defer src="https://jsdelivr.net"></script>
+
+    <style>
+        /* CSS tambahan untuk mencegah menu berkedip saat pertama dimuat */
+        [x-cloak] { display: none !important; }
+        /* Menghilangkan panah bawaan browser pada tag summary */
+summary::-webkit-details-marker,
+summary::marker {
+    display: none !important;
+    content: "";
+}
+
+/* Animasi slide down untuk konten details */
+details[open] + div, 
+details .dropdown-content {
+    animation: slideDown 0.25s ease-out-step;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
     </head>
     <!-- PERBAIKAN: Mengunci warna dasar body menggunakan warna krem museum agar tidak ada bocor hitam -->
     <body class="font-sans antialiased bg-[#fdfbf2]">

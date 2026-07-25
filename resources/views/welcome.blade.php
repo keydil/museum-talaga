@@ -128,44 +128,157 @@
 
 <main class="bg-[#fdfbf2]">
 
-    <!-- 2. BAGIAN HERO (Menggunakan Efek Fade Up Keseluruhan) -->
-    <section data-aos="fade-up" data-aos-duration="1000" class="relative isolate overflow-hidden pt-20 pb-24 flex items-center min-h-[80vh] border-b border-amber-200">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <!-- 2. BAGIAN HERO STATIS (Dengan Animasi Elegan & Kata-kata Sapa yang Menarik) -->
+    <section class="relative isolate overflow-hidden pt-20 pb-24 flex items-center min-h-[80vh] border-b border-amber-200 bg-gradient-to-b from-amber-50 to-amber-100/40">
+        <!-- Efek dekoratif background -->
+        <div class="absolute inset-0 -z-10 overflow-hidden">
+            <div class="absolute top-0 right-0 -mr-40 -mt-40 w-80 h-80 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-0 left-0 -ml-40 -mb-40 w-80 h-80 bg-amber-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
             <div class="mx-auto max-w-3xl text-center">
-                <!-- Elemen di dalam menggunakan delay agar muncul berurutan (Staggered) -->
-                <span data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-600/10 px-4 py-1.5 text-xs font-medium text-amber-800 ring-1 ring-inset ring-amber-600/20 mb-6">
-                    {{ $heroBadge }}
+                <!-- Badge dengan animasi bounce -->
+                <span data-aos="bounce-in" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-600/15 px-4 py-1.5 text-xs font-semibold text-amber-800 ring-1 ring-inset ring-amber-600/30 mb-6 backdrop-blur-sm hover:bg-amber-600/25 transition-all duration-300">
+                    ✨ Selamat Datang di Museum Talaga Manggung
                 </span>
 
-                <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="text-4xl md:text-6xl font-black tracking-tight text-stone-900 sm:text-7xl leading-[1.15]">
-                    {!! str_replace('Arsip Digital', '<span class="text-amber-700">Arsip Digital</span>', $heroTitle) !!}
+                <!-- Judul dengan efek zoom in -->
+                <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" class="text-5xl md:text-7xl font-black tracking-tight text-stone-900 sm:text-8xl leading-[1.1] mb-2">
+                    Jelajahi <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-500">Warisan Sejarah</span>
                 </h1>
 
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="mt-8 text-lg font-normal text-stone-600 sm:text-xl/8">
-                    {{ $heroDescription }}
+                <!-- Subtitle dengan typing effect -->
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="mt-8 text-xl md:text-2xl font-semibold text-stone-700">
+                    Lengkapi perjalanan budaya Anda bersama kami
                 </p>
 
-                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800" class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#pameran" class="rounded-lg bg-amber-700 px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-amber-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">{{ $heroPrimaryButton }}</a>
-                    <a href="#tentang" class="text-base font-semibold text-stone-700 hover:text-amber-700 transition">{{ $heroSecondaryButton }} <span aria-hidden="true">→</span></a>
+                <!-- Deskripsi dengan fade -->
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700" class="mt-6 text-lg font-normal text-stone-600 sm:text-xl/8 max-w-2xl mx-auto leading-relaxed">
+                    Rasakan keajaiban koleksi pameran eksklusif kami, dari artefak bersejarah hingga dokumentasi digital interaktif yang menceritakan kisah-kisah berharga peradaban kita.
+                </p>
+
+                <!-- CTA Buttons dengan animasi -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="900" class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="#pameran" class="group inline-flex items-center rounded-xl bg-gradient-to-r from-amber-700 to-amber-600 px-8 py-4 text-lg font-bold text-white shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300">
+                        <span>Jelajahi Koleksi</span>
+                        <svg class="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                    <a href="#tentang" class="group inline-flex items-center px-8 py-4 text-lg font-semibold text-stone-700 border-2 border-amber-700 rounded-xl hover:bg-amber-700 hover:text-white transition-all duration-300">
+                        <span>Tentang Museum</span>
+                        <svg class="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Scroll indicator dengan animasi -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100" class="mt-16 flex justify-center">
+                    <div class="inline-flex flex-col items-center">
+                        <span class="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-2">Scroll untuk lanjut</span>
+                        <div class="animate-bounce">
+                            <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. BAGIAN TENTANG (Menggunakan Efek Zoom In saat di-scroll) -->
-    <section id="tentang" data-aos="zoom-in-up" data-aos-duration="1000" class="py-24 border-b border-amber-200 bg-amber-100/30 overflow-hidden">
+    <!-- 3. BAGIAN TENTANG MUSEUM STATIS (Dengan Animasi Elegan) -->
+    <section id="tentang" class="py-32 border-b border-amber-200 bg-gradient-to-b from-transparent to-amber-100/50 overflow-hidden">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
-                <!-- Konten teks bergeser sedikit -->
-                <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
-                    <h2 class="text-base font-semibold text-amber-700 tracking-wide uppercase">Sejarah Yayasan</h2>
-                    <p class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ $aboutTitle }}</p>
-                    <p class="mt-6 text-base text-stone-600 leading-7">{{ $aboutDescription }}</p>
+            <div class="grid grid-cols-1 gap-16 lg:grid-cols-2 items-center">
+                <!-- Konten Teks di Sisi Kiri dengan Animasi Fade Right -->
+                <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200" class="space-y-8">
+                    <!-- Badge Section -->
+                    <div>
+                        <span class="inline-block text-xs font-bold text-amber-700 uppercase tracking-[0.15em] mb-3">📚 Tentang Kami</span>
+                        <h2 class="text-5xl md:text-6xl font-black text-stone-900 leading-tight mb-6">
+                            Museum <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-amber-600">Talaga Manggung</span>
+                        </h2>
+                    </div>
+
+                    <!-- Deskripsi Utama -->
+                    <div class="space-y-6">
+                        <p class="text-lg text-stone-700 leading-relaxed">
+                            <strong>Museum Talaga Manggung</strong> adalah wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi yang penuh dengan makna mendalam.
+                        </p>
+                        
+                        <p class="text-lg text-stone-600 leading-relaxed">
+                            Kami berkomitmen untuk menyajikan koleksi pameran eksklusif yang tidak hanya menghibur, tetapi juga mendidik pengunjung tentang kekayaan budaya dan sejarah yang kami miliki.
+                        </p>
+
+                        <p class="text-lg text-stone-600 leading-relaxed">
+                            Setiap artefak, dokumen, dan karya seni di museum kami menceritakan kisah yang unik tentang perjalanan peradaban kita. Bergabunglah dengan kami dalam menjelajahi warisan budaya yang bernilai tinggi.
+                        </p>
+                    </div>
+
+                    <!-- Stats dengan Animasi -->
+                    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="grid grid-cols-3 gap-6 pt-8 border-t-2 border-amber-200">
+                        <div class="text-center hover:scale-105 transition-transform">
+                            <div class="text-3xl font-black text-amber-700">500+</div>
+                            <div class="text-sm text-stone-600 font-semibold mt-1">Koleksi Artefak</div>
+                        </div>
+                        <div class="text-center hover:scale-105 transition-transform">
+                            <div class="text-3xl font-black text-amber-700">50K+</div>
+                            <div class="text-sm text-stone-600 font-semibold mt-1">Pengunjung Tahunan</div>
+                        </div>
+                        <div class="text-center hover:scale-105 transition-transform">
+                            <div class="text-3xl font-black text-amber-700">100+</div>
+                            <div class="text-sm text-stone-600 font-semibold mt-1">Program Edukasi</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                        <a href="#pameran" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-amber-700 to-amber-600 text-white font-bold rounded-lg hover:shadow-lg hover:scale-105 transform transition-all duration-300">
+                            Jelajahi Lebih Lanjut
+                            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-                <!-- Gambar/Mockup masuk dari kanan -->
-                <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="500" class="bg-amber-100 border border-amber-200 rounded-2xl h-80 flex items-center justify-center text-amber-800/60 italic shadow-sm hover:shadow-md transition-shadow duration-300">
-                    [ Area Foto: Fasilitas Museum / Gedung Utama ]
+
+                <!-- Konten Visual di Sisi Kanan dengan Animasi Fade Left -->
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400" class="space-y-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl border-2 border-amber-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="text-4xl">🏛️</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-stone-900 mb-2">Arsitektur Bersejarah</h3>
+                                <p class="text-stone-600 text-sm">Bangunan utama museum menampilkan arsitektur tradisional yang melestarikan identitas budaya lokal.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl border-2 border-amber-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="text-4xl">📚</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-stone-900 mb-2">Koleksi Lengkap</h3>
+                                <p class="text-stone-600 text-sm">Ribuan manuskrip, artefak, dan dokumen bersejarah terawat dengan teknologi modern terkini.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl border-2 border-amber-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="text-4xl">👥</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-stone-900 mb-2">Program Komunitas</h3>
+                                <p class="text-stone-600 text-sm">Kami mengadakan berbagai workshop, seminar, dan acara pendidikan untuk masyarakat umum.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -228,40 +341,59 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-                <!-- 3. KAKI HALAMAN (FOOTER) RESPONSIF -->
-<!-- Menambahkan w-full dan overflow-hidden untuk mencegah kebocoran layar kanan -->
-<footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-        <div class="flex flex-col justify-between space-y-2">
-            <div>
-                <h3 class="text-white font-serif font-black text-sm tracking-tight mb-2">{{ $footerCol1Title }}</h3>
-                <p class="text-stone-500 leading-relaxed text-[11px]">{{ $footerCol1Text }}</p>
+<!-- 3. KAKI HALAMAN (FOOTER) RESPONSIF DENGAN GOOGLE MAP -->
+<!-- FOOTER STATIS DENGAN TIGA KOLOM DAN GOOGLE MAP -->
+<footer class="bg-[#1c1917] text-stone-400 text-xs border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
+    <!-- BAGIAN KONTEN TIGA KOLOM -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <!-- KOLOM 1: INFORMASI MUSEUM -->
+            <div class="flex flex-col justify-between space-y-2">
+                <div>
+                    <h3 class="text-white font-serif font-black text-sm tracking-tight mb-2">Museum Talaga Manggung</h3>
+                    <p class="text-stone-500 leading-relaxed text-[11px]">Wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi.</p>
+                </div>
+                <p class="text-stone-600 pt-4 md:pt-0">© 2026 Hak Cipta Dilindungi.</p>
             </div>
-            <p class="text-stone-600 pt-4 md:pt-0">{{ $footerCol1Copyright }}</p>
-        </div>
 
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">{{ $footerCol2Title }}</h4>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                @foreach(explode("\n", $footerCol2Links) as $item)
-                    @php($parts = array_map('trim', explode('|', $item, 2)))
-                    @if(count($parts) === 2 && $parts[0] !== '')
-                        <a href="{{ $parts[1] }}" class="hover:text-white hover:underline transition">{{ $parts[0] }}</a>
-                    @endif
-                @endforeach
+            <!-- KOLOM 2: AKSES CEPAT -->
+            <div class="flex flex-col space-y-2.5">
+                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Cepat</h4>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
+                    <a href="/" class="hover:text-white hover:underline transition">Beranda</a>
+                    <a href="/berita" class="hover:text-white hover:underline transition">Berita</a>
+                    <a href="/galeri" class="hover:text-white hover:underline transition">Galeri</a>
+                    <a href="/gosali" class="hover:text-white hover:underline transition">Gosali</a>
+                </div>
+            </div>
+
+            <!-- KOLOM 3: INFORMASI HUKUM -->
+            <div class="flex flex-col space-y-2.5">
+                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Informasi Hukum</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="hover:text-white transition">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:text-white transition">Bantuan & Kontak</a></li>
+                </ul>
             </div>
         </div>
+    </div>
 
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">{{ $footerCol3Title }}</h4>
-            <ul class="space-y-2">
-                @foreach(explode("\n", $footerCol3Links) as $item)
-                    @php($parts = array_map('trim', explode('|', $item, 2)))
-                    @if(count($parts) === 2 && $parts[0] !== '')
-                        <li><a href="{{ $parts[1] }}" class="hover:text-white transition">{{ $parts[0] }}</a></li>
-                    @endif
-                @endforeach
-            </ul>
+    <!-- BAGIAN GOOGLE MAP -->
+    <div class="bg-[#2d2520] border-t border-stone-800 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-4 text-center md:text-left">Lokasi Museum</h4>
+            <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8271234567890!2d107.5!3d-7.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMuseum%20Talaga%20Manggung!5e0!3m2!1sid!2sid!4v1626000000000" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
     </div>
 </footer>

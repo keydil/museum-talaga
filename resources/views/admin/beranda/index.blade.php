@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="mb-8">
                 <h1 class="text-3xl font-black text-amber-700">Kelola Konten Beranda</h1>
-                <p class="text-sm text-stone-500 mt-2">Ubah teks hero, bagian tentang, dan judul/desk kartu pada halaman depan website.</p>
+                <p class="text-sm text-stone-500 mt-2">Kelola daftar item kartu navigasi dan section koleksi unggulan pada halaman beranda. (Hero dan Tentang Museum sudah menjadi statis)</p>
             </div>
 
             @if(session('success'))
@@ -12,48 +12,19 @@
                 </div>
             @endif
 
+            <!-- INFO BOX: Hero & About Section Sudah Statis -->
+            <div class="rounded-2xl border-2 border-blue-200 bg-blue-50 p-6 mb-8 shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="text-2xl">ℹ️</div>
+                    <div>
+                        <h3 class="font-bold text-blue-900 mb-2">Hero Section & Tentang Museum Sudah Statis</h3>
+                        <p class="text-sm text-blue-800">Kedua bagian ini telah diubah menjadi konten statis dengan animasi indah. Untuk mengubahnya, silakan edit langsung di file: <code class="bg-white px-2 py-1 rounded text-xs font-mono">resources/views/welcome.blade.php</code></p>
+                    </div>
+                </div>
+            </div>
+
             <form action="{{ route('admin.beranda.update') }}" method="POST" class="space-y-6">
                 @csrf
-
-                <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                    <h2 class="text-lg font-bold text-stone-800">Hero Section</h2>
-                    <div class="mt-4 grid gap-4 md:grid-cols-2">
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Badge</label>
-                            <input type="text" name="hero_badge" value="{{ old('hero_badge', $sections['hero_badge']->content ?? 'Sistem Profil Museum V1.0') }}" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">
-                        </div>
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Judul</label>
-                            <input type="text" name="hero_title" value="{{ old('hero_title', $sections['hero_title']->content ?? 'Melestarikan Sejarah Lewat Arsip Digital') }}" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Deskripsi</label>
-                            <textarea name="hero_description" rows="3" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">{{ old('hero_description', $sections['hero_description']->content ?? 'Selamat datang di konsep portal digital museum kami.') }}</textarea>
-                        </div>
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Teks Tombol Utama</label>
-                            <input type="text" name="hero_primary_button" value="{{ old('hero_primary_button', $sections['hero_primary_button']->content ?? 'Jelajahi Galeri') }}" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">
-                        </div>
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Teks Tombol Sekunder</label>
-                            <input type="text" name="hero_secondary_button" value="{{ old('hero_secondary_button', $sections['hero_secondary_button']->content ?? 'Latar Belakang Instansi') }}" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                    <h2 class="text-lg font-bold text-stone-800">Tentang Museum</h2>
-                    <div class="mt-4 space-y-4">
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Judul</label>
-                            <input type="text" name="about_title" value="{{ old('about_title', $sections['about_title']->content ?? 'Tentang Lembaga Kami') }}" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">
-                        </div>
-                        <div>
-                            <label class="mb-1 block text-sm font-semibold text-stone-700">Deskripsi</label>
-                            <textarea name="about_description" rows="5" class="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm">{{ old('about_description', $sections['about_description']->content ?? 'Portal web ini berfungsi sebagai wadah visual untuk menyajikan koleksi pameran.') }}</textarea>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm mb-6">
     <h2 class="text-lg font-bold text-stone-800">Section Kartu</h2>

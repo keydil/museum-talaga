@@ -160,32 +160,61 @@
         <div class="h-0.5 w-16 bg-amber-600 rounded-full mt-6"></div>
     </div> --}}
 
-    <!-- Wadah Artikel Narasi Panjang -->
-    <div class="bg-white border border-amber-200/60 rounded-2xl p-8 md:p-10 shadow-sm text-stone-700 text-sm leading-relaxed tracking-wide text-justify space-y-6" 
+    <!-- Wadah Artikel Narasi Panjang dengan Animasi -->
+    <div class="bg-white border border-amber-200/60 rounded-2xl p-8 md:p-12 shadow-sm text-stone-700 leading-relaxed tracking-wide text-justify space-y-8" 
          data-aos="fade-up" 
          data-aos-duration="1000" 
          data-aos-delay="200">
         
-        <!-- Gambar Utama Sejarah (Ditambahkan secara kondisional) -->
-        @if(!empty($sejarahData['sejarah_image']))
-            <div class="w-full mb-8 overflow-hidden rounded-xl border border-amber-200/40 shadow-sm">
-                <img src="{{ asset('storage/' . $sejarahData['sejarah_image']) }}" 
-                     alt="{{ $sejarahData['sejarah_title'] ?? 'Gambar Sejarah' }}" 
-                     class="w-full h-auto max-h-[450px] object-cover transition-transform duration-700 hover:scale-105">
-            </div>
-        @endif
-        
-        <!-- Paragraf Utama / Pembuka -->
-        <p class="whitespace-pre-line first-letter:text-4xl first-letter:font-black first-letter:text-amber-700 first-letter:mr-2 first-letter:float-left">
-            {{ $sejarahData['sejarah_body_1'] ?? 'Narasi teks dokumen sejarah utama belum diisi oleh pengelola admin museum. Silakan masuk ke panel dashboard admin untuk memperbarui isi catatan sejarah Kerajaan Talaga Manggung secara berkala.' }}
-        </p>
-
-        <!-- Paragraf Lanjutan -->
-        @if(!empty($sejarahData['sejarah_body_2']))
-            <p class="whitespace-pre-line pt-4 border-t border-stone-100">
-                {{ $sejarahData['sejarah_body_2'] }}
+        <!-- Bagian Pengantar dengan Drop Cap -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="space-y-6">
+            <p class="text-lg first-letter:text-5xl first-letter:font-black first-letter:text-amber-700 first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                Museum Talaga Manggung berdiri sebagai simbol komitmen kami dalam pelestarian warisan budaya dan sejarah peradaban yang berharga. Institusi ini didirikan dengan visi untuk menjadi pusat pembelajaran dan apresiasi terhadap kekayaan intelektual serta materi budaya yang telah terbentuk melalui berbagai generasi.
             </p>
-        @endif
+            <p>
+                Setiap koleksi yang kami miliki, mulai dari artefak bersejarah hingga dokumen arsip kuno, menceritakan kisah-kisah mendalam tentang perjalanan masyarakat, nilai-nilai budaya, dan pencapaian intelektual yang telah membentuk identitas kita. Kami percaya bahwa memahami masa lalu adalah kunci untuk membangun masa depan yang lebih baik dan berkelanjutan.
+            </p>
+        </div>
+
+        <!-- Divider dengan Animasi -->
+        <div class="flex items-center gap-4 py-4">
+            <div class="flex-grow h-0.5 bg-gradient-to-r from-amber-600 to-transparent rounded-full"></div>
+            <span class="text-amber-700 font-semibold text-sm">✦</span>
+            <div class="flex-grow h-0.5 bg-gradient-to-l from-amber-600 to-transparent rounded-full"></div>
+        </div>
+
+        <!-- Section Perkembangan Institusi -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="bg-gradient-to-br from-amber-50 to-transparent rounded-xl p-6 border border-amber-200/40 space-y-4">
+            <h3 class="text-lg font-bold text-amber-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 6H6.28l-.31-1.243A1 1 0 005 4H3z"></path>
+                </svg>
+                Perjalanan Institusi
+            </h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+                Sejak didirikan, Museum Talaga Manggung telah berkembang menjadi institusi yang tidak hanya menyimpan koleksi berharga, tetapi juga aktif dalam menjalankan berbagai program edukasi dan konservasi. Kami terus melakukan penelitian dan dokumentasi terhadap cagar budaya untuk memastikan bahwa warisan ini dapat diwariskan dengan utuh kepada generasi mendatang.
+            </p>
+        </div>
+
+        <!-- Section Misi Pelestarian -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="bg-gradient-to-br from-stone-50 to-transparent rounded-xl p-6 border border-stone-200/40 space-y-4">
+            <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 000-2H6V3a1 1 0 01-1 1H3a1 1 0 010-2h2V2a1 1 0 011-1zm0 4a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h2V7a1 1 0 011-1zm6-4a1 1 0 011 1v1h1a1 1 0 000-2h-1V3a1 1 0 01-1 1h-2a1 1 0 010-2h2V2a1 1 0 011-1zm0 4a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1V7a1 1 0 011-1z" clip-rule="evenodd"></path>
+                </svg>
+                Komitmen Konservasi
+            </h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+                Melalui teknologi konservasi modern dan tim ahli yang berdedikasi, kami melakukan perawatan terhadap setiap artefak dengan standar internasional. Pencegahan kerusakan, restorasi cerdas, dan pendokumentasian digital adalah bagian integral dari upaya kami untuk melindungi warisan budaya dari ancaman waktu dan kondisi lingkungan.
+            </p>
+        </div>
+
+        <!-- Penutup dengan Impact Statement -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="border-l-4 border-amber-700 pl-6 py-2 italic text-stone-700 bg-amber-50/50 rounded-r-lg">
+            <p>
+                "Museum Talaga Manggung bukan sekadar tempat menyimpan benda-benda tua, tetapi rumah bagi cerita-cerita yang menginspirasi, mendidik, dan memperkaya pemahaman kita tentang kemanusiaan dan peradaban yang telah berlalu."
+            </p>
+        </div>
     </div>
 
 </main>

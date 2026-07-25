@@ -17,13 +17,6 @@ class HomeSectionController extends Controller
     public function update(Request $request)
     {
         $data = $request->validate([
-            'hero_badge' => 'nullable|string|max:255',
-            'hero_title' => 'nullable|string|max:255',
-            'hero_description' => 'nullable|string|max:1000',
-            'hero_primary_button' => 'nullable|string|max:255',
-            'hero_secondary_button' => 'nullable|string|max:255',
-            'about_title' => 'nullable|string|max:255',
-            'about_description' => 'nullable|string|max:2000',
             'cards_section_title' => 'nullable|string|max:255',
             'cards_section_description' => 'nullable|string|max:1000',
         ]);

@@ -160,43 +160,90 @@
         <div class="h-0.5 w-16 bg-amber-600 rounded-full mt-6"></div>
     </div> --}}
 
-    <!-- Wadah Konten Utama -->
+    <!-- Wadah Konten Utama dengan Animasi -->
     <div class="space-y-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
         
-        <!-- Gambar Utama (Kondisional) -->
-        @if(!empty($visimisiData['visimisi_image']))
-            <div class="w-full mb-8 overflow-hidden rounded-xl border border-amber-200/40 shadow-sm bg-white p-2">
-                <img src="{{ asset('storage/' . $visimisiData['visimisi_image']) }}" 
-                     alt="{{ $visimisiData['visimisi_title'] }}" 
-                     class="w-full h-auto max-h-[380px] object-cover rounded-lg transition-transform duration-700 hover:scale-105">
-            </div>
-        @endif
-        
         <!-- Grid Pemisah Visi & Misi -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             
-            <!-- Kotak Visi -->
-            <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm flex flex-col">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">V</span>
-                    <h2 class="text-xl font-black text-amber-800 tracking-tight">Visi Kami</h2>
+            <!-- Kotak Visi dengan Animasi -->
+            <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" class="bg-gradient-to-br from-white to-amber-50/30 border-2 border-amber-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-amber-700 text-white font-black text-lg">V</div>
+                    <h2 class="text-2xl font-black text-amber-900 tracking-tight">Visi</h2>
                 </div>
-                <p class="text-stone-700 text-sm leading-relaxed text-justify whitespace-pre-line flex-grow">
-                    {{ $visimisiData['visimisi_visi'] ?? 'Pernyataan visi utama belum dikonfigurasi oleh pihak manajemen admin melalui panel kontrol dashboard.' }}
-                </p>
+                
+                <div class="space-y-4">
+                    <p class="text-stone-700 text-base leading-relaxed font-medium">
+                        Pelestarian aset budaya baik itu benda atau tak benda yang bernilai sejarah, sehingga dikemudian hari masih bisa dinikmati dan diketahui keberadaannya oleh generasi yang akan datang.
+                    </p>
+                    
+                    <!-- Dekoratif visual -->
+                    <div class="pt-4 mt-4 border-t border-amber-200">
+                        <div class="flex gap-2">
+                            <div class="w-1 h-8 bg-gradient-to-b from-amber-600 to-transparent rounded-full"></div>
+                            <p class="text-xs text-amber-700 italic font-semibold leading-relaxed">
+                                Menjaga warisan masa lalu untuk pencerahan masa depan
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Kotak Misi -->
-            <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm flex flex-col">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">M</span>
-                    <h2 class="text-xl font-black text-amber-800 tracking-tight">Misi Kami</h2>
+            <!-- Kotak Misi dengan Animasi -->
+            <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400" class="bg-gradient-to-br from-white to-stone-50/30 border-2 border-stone-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-stone-600 to-stone-700 text-white font-black text-lg">M</div>
+                    <h2 class="text-2xl font-black text-stone-900 tracking-tight">Misi</h2>
                 </div>
-                <div class="text-stone-700 text-sm leading-relaxed text-justify whitespace-pre-line flex-grow bullet-list-fix">
-                    {{ $visimisiData['visimisi_misi'] ?? 'Butir-butir penunjang misi utama belum dikonfigurasi oleh pihak manajemen admin melalui panel kontrol dashboard.' }}
-                </div>
+                
+                <ol class="space-y-4 text-stone-700 text-base leading-relaxed">
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">1</span>
+                        <span>Mengoptimalkan pemanfaatan potensi sumber daya dan wawasan kebudayaan</span>
+                    </li>
+                    
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">2</span>
+                        <span>Meningkatkan manajemen Museum Talaga Manggung sebagai sarana edukasi sejarah dan budaya serta ruang pamer artefak sejarah</span>
+                    </li>
+                    
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">3</span>
+                        <span>Pendataan dan konservasi cagar budaya</span>
+                    </li>
+                    
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">4</span>
+                        <span>Penguatan kelembagaan dan masyarakat adat</span>
+                    </li>
+                </ol>
             </div>
 
+        </div>
+
+        <!-- Bagian Inspirasi dengan Animasi Tambahan -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl border border-amber-200 p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="text-3xl mb-3">📚</div>
+                <h3 class="font-bold text-stone-900 mb-2">Edukasi Berkelanjutan</h3>
+                <p class="text-xs text-stone-600 leading-relaxed">Kami berkomitmen menjadi pusat pembelajaran bagi semua kalangan masyarakat tentang kekayaan budaya lokal.</p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl border border-amber-200 p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="text-3xl mb-3">🛡️</div>
+                <h3 class="font-bold text-stone-900 mb-2">Konservasi Aktif</h3>
+                <p class="text-xs text-stone-600 leading-relaxed">Perlindungan dan perawatan sistematis terhadap setiap aset budaya dengan standar internasional.</p>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl border border-amber-200 p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="text-3xl mb-3">🤝</div>
+                <h3 class="font-bold text-stone-900 mb-2">Pemberdayaan Komunitas</h3>
+                <p class="text-xs text-stone-600 leading-relaxed">Kolaborasi dengan masyarakat adat dan stakeholder dalam melestarikan warisan budaya bersama.</p>
+            </div>
         </div>
     </div>
 

@@ -185,17 +185,112 @@
             @endif
         </div>
 
-        <!-- Bagian 2: Teks Deskripsi di Bawah Gambar -->
-        @if(isset($struktur) && isset($struktur->description))
-            <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
-                <h2 class="text-lg font-bold text-stone-900 border-b border-stone-100 pb-3 mb-4 flex items-center gap-2">
-                    <span>📝 Detail & Penjelasan Struktur</span>
+        <!-- Bagian 2: Teks Deskripsi Statis dengan Animasi -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="space-y-8">
+            
+            <!-- Pengantar Struktur -->
+            <div class="rounded-2xl border border-amber-200 bg-gradient-to-br from-white to-amber-50/30 p-8 shadow-sm">
+                <h2 class="text-2xl font-black text-amber-900 mb-4 flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                    Struktur Organisasi Museum
                 </h2>
-                <div class="text-stone-700 text-sm leading-7 space-y-4 whitespace-pre-line">
-                    {!! e($struktur->description) !!}
+                <p class="text-stone-700 leading-relaxed text-base">
+                    Museum Talaga Manggung memiliki struktur organisasi yang dirancang untuk mendukung visi dan misi institusi dalam pelestarian dan edukasi budaya. Setiap divisi memiliki peran strategis dalam menjalankan operasional museum secara efektif dan profesional.
+                </p>
+            </div>
+
+            <!-- Divider dengan Animasi -->
+            <div class="flex items-center gap-4">
+                <div class="flex-grow h-0.5 bg-gradient-to-r from-amber-600 to-transparent rounded-full"></div>
+                <span class="text-amber-700 font-semibold text-sm">✦</span>
+                <div class="flex-grow h-0.5 bg-gradient-to-l from-amber-600 to-transparent rounded-full"></div>
+            </div>
+
+            <!-- Grid Divisi Organisasi -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Divisi 1 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="rounded-xl border border-amber-200 bg-white p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">🎯</div>
+                        <h3 class="font-bold text-stone-900">Divisi Pameran & Koleksi</h3>
+                    </div>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        Bertanggung jawab dalam pengelolaan koleksi museum, kurasi pameran, dan presentasi artefak bersejarah kepada publik dengan standar konservasi internasional.
+                    </p>
+                </div>
+
+                <!-- Divisi 2 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="rounded-xl border border-amber-200 bg-white p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">📚</div>
+                        <h3 class="font-bold text-stone-900">Divisi Riset & Dokumentasi</h3>
+                    </div>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        Melaksanakan penelitian mendalam terhadap cagar budaya, pengarsipan digital, dan pendokumentasian komprehensif untuk kelestarian pengetahuan budaya.
+                    </p>
+                </div>
+
+                <!-- Divisi 3 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="rounded-xl border border-amber-200 bg-white p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">🎓</div>
+                        <h3 class="font-bold text-stone-900">Divisi Edukasi & Komunitas</h3>
+                    </div>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        Menyelenggarakan program edukasi, workshop, seminar, dan kegiatan komunitas untuk meningkatkan literasi budaya masyarakat luas.
+                    </p>
+                </div>
+
+                <!-- Divisi 4 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700" class="rounded-xl border border-amber-200 bg-white p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">🛠️</div>
+                        <h3 class="font-bold text-stone-900">Divisi Operasional & Teknis</h3>
+                    </div>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        Mengelola infrastruktur museum, sistem keamanan, teknologi, dan logistik untuk menjamin kelancaran operasional institusi.
+                    </p>
                 </div>
             </div>
-        @endif
+
+            <!-- Divider kedua -->
+            <div class="flex items-center gap-4">
+                <div class="flex-grow h-0.5 bg-gradient-to-r from-amber-600 to-transparent rounded-full"></div>
+                <span class="text-amber-700 font-semibold text-sm">✦</span>
+                <div class="flex-grow h-0.5 bg-gradient-to-l from-amber-600 to-transparent rounded-full"></div>
+            </div>
+
+            <!-- Prinsip Kerja -->
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800" class="rounded-2xl border-2 border-stone-300 bg-gradient-to-br from-stone-50 to-transparent p-8">
+                <h3 class="text-xl font-black text-stone-900 mb-5 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    Prinsip Kerja Tim
+                </h3>
+                <ul class="space-y-3 text-stone-600 text-sm">
+                    <li class="flex gap-3">
+                        <span class="text-amber-700 font-bold">•</span>
+                        <span><strong>Kolaboratif:</strong> Setiap divisi bekerja bersama dengan tujuan bersama dalam melestarikan warisan budaya.</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-amber-700 font-bold">•</span>
+                        <span><strong>Profesional:</strong> Menjalankan tugas dengan standar internasional dan etika kerja yang tinggi.</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-amber-700 font-bold">•</span>
+                        <span><strong>Inovatif:</strong> Terus mengembangkan metode baru dalam konservasi, edukasi, dan pengelolaan koleksi.</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-amber-700 font-bold">•</span>
+                        <span><strong>Transparan:</strong> Terbuka dalam komunikasi dan akuntabilitas terhadap stakeholder dan masyarakat.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
 </main>

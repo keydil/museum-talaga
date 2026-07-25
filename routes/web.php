@@ -69,13 +69,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ])
         ->middleware(['auth', 'verified']);
 
-    Route::get('footer', [FooterController::class, 'index'])
-        ->middleware(['verified'])
-        ->name('admin.footer.index');
+    // ROUTES FOOTER DINONAKTIFKAN - Footer sekarang statis tanpa admin management
+    // Route::get('footer', [FooterController::class, 'index'])
+    //     ->middleware(['verified'])
+    //     ->name('admin.footer.index');
 
-    Route::post('footer/update', [FooterController::class, 'update'])
-        ->middleware(['verified'])
-        ->name('admin.footer.update');
+    // Route::post('footer/update', [FooterController::class, 'update'])
+    //     ->middleware(['verified'])
+    //     ->name('admin.footer.update');
 
     Route::middleware(['auth', 'verified'])->name('admin.')->group(function () {
         Route::get('sejarah', [SejarahAdminController::class, 'index'])->name('sejarah.index');

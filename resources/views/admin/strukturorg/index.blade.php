@@ -71,18 +71,26 @@
         </div>
     </div>
 
-        <!-- Form Utama Kelola Struktur Organisasi -->
-        <!-- Pastikan atribut 'enctype' dan 'method' tertulis persis seperti ini -->
-<!-- KOREKSI: Tambahkan atribut wire:submit.default untuk memecah interupsi JavaScript Livewire -->
-<form action="{{ route('admin.strukturorg.update') }}" 
-      method="POST" 
-      enctype="multipart/form-data" 
-      wire:submit.default 
-      class="space-y-6">
-      
-    @csrf
-    @method('PUT')
+        <!-- Info Box: Konten Sudah Statis -->
+        <div class="mb-8 p-4 bg-blue-50 border border-blue-300 rounded-xl text-blue-800 text-sm font-medium flex items-start gap-3">
+            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+                <strong>Konten Struktur Organisasi Sudah Statis</strong>
+                <p class="text-xs mt-1">Konten teks halaman struktur organisasi telah diubah menjadi statis (hardcoded) dengan animasi menarik dan layout grid divisi. Hanya banner header dan gambar bagan yang masih bisa diedit. Untuk mengubah konten teks deskripsi, silakan hubungi developer atau ubah di file: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-[11px] font-mono">resources/views/strukturorg.blade.php</code></p>
+            </div>
+        </div>
 
+        <!-- Form: Hanya untuk Upload Gambar Bagan (Deskripsi dihapus) -->
+        <form action="{{ route('admin.strukturorg.update') }}" 
+              method="POST" 
+              enctype="multipart/form-data" 
+              wire:submit.default 
+              class="space-y-6">
+              
+            @csrf
+            @method('PUT')
 
             <!-- Bagian 1: Edit & Upload Gambar Struktur -->
             <div class="p-6 bg-white border border-stone-200/80 rounded-2xl shadow-sm">
@@ -96,25 +104,22 @@
                     <div class="lg:col-span-1 flex flex-col items-center justify-center p-4 bg-stone-50 rounded-xl border border-stone-200 min-h-[200px]">
                         <span class="text-xs font-semibold text-stone-500 mb-3 block text-center">Pratinjau Bagan Saat Ini</span>
                         
-                        <!-- Cari bagian pratinjau gambar di file admin index.blade.php Anda -->
-<div class="relative group w-full flex justify-center">
-    @if(isset($struktur) && isset($struktur->image))
-        <!-- KOREKSI: Gunakan $struktur->image -->
-        <img id="bagan_preview" src="{{ asset('storage/' . $struktur->image) }}" 
-             alt="Bagan Struktur Organisasi" 
-             class="max-h-48 object-contain rounded-xl border border-stone-200 shadow-sm bg-white">
-    @else
-        <img id="bagan_preview" src="#" alt="Pratinjau Baru" 
-             class="hidden max-h-48 object-contain rounded-xl border border-stone-200 shadow-sm bg-white">
-        <div id="bagan_placeholder" class="w-full h-40 bg-stone-100 rounded-xl border border-dashed border-stone-300 flex flex-col items-center justify-center text-center p-4">
-            <svg class="h-8 w-8 text-stone-400 mb-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H2.25A1.5 1.5 0 00.75 6v12.75a1.5 1.5 0 001.5 1.5z" />
-            </svg>
-            <span class="text-xs font-medium text-stone-400">Belum ada bagan diunggah</span>
-        </div>
-    @endif
-</div>
-
+                        <div class="relative group w-full flex justify-center">
+                            @if(isset($struktur) && isset($struktur->image))
+                                <img id="bagan_preview" src="{{ asset('storage/' . $struktur->image) }}" 
+                                     alt="Bagan Struktur Organisasi" 
+                                     class="max-h-48 object-contain rounded-xl border border-stone-200 shadow-sm bg-white">
+                            @else
+                                <img id="bagan_preview" src="#" alt="Pratinjau Baru" 
+                                     class="hidden max-h-48 object-contain rounded-xl border border-stone-200 shadow-sm bg-white">
+                                <div id="bagan_placeholder" class="w-full h-40 bg-stone-100 rounded-xl border border-dashed border-stone-300 flex flex-col items-center justify-center text-center p-4">
+                                    <svg class="h-8 w-8 text-stone-400 mb-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H2.25A1.5 1.5 0 00.75 6v12.75a1.5 1.5 0 001.5 1.5z" />
+                                    </svg>
+                                    <span class="text-xs font-medium text-stone-400">Belum ada bagan diunggah</span>
+                                </div>
+                            @endif
+                        </div>
                     </div>
 
                     <!-- Kolom Unggah File (Kanan) -->
@@ -134,32 +139,13 @@
                 </div>
             </div>
 
-            <!-- Bagian 2: Deskripsi Struktur Organisasi -->
-            <div class="p-6 bg-white border border-stone-200/80 rounded-2xl shadow-sm">
-                <h3 class="text-sm font-bold text-stone-800 flex items-center gap-1.5 mb-3">
-                    <span>📝 Teks Deskripsi Struktur</span>
-                </h3>
-                <p class="text-xs text-stone-500 mb-4 leading-relaxed">
-                    Tuliskan penjelasan detail, visi misi kepengurusan, atau informasi peran dari masing-hari jabatan struktural di bawah ini.
-                </p>
-
-                <div class="relative">
-                    <textarea name="deskripsi" id="deskripsi" rows="6" required ...>{{ old('deskripsi', $struktur->description ?? '') }}</textarea>
-
-                </div>
-
-                @error('deskripsi')
-                    <span class="text-red-600 text-[11px] font-semibold bg-red-50 px-2.5 py-1 rounded-md border border-red-200 mt-2 inline-block">{{ $message }}</span>
-                @enderror
-            </div>
-
             <!-- Bagian Info Notifikasi & Tombol Aksi Utama -->
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-stone-50 rounded-2xl border border-stone-200">
                 <div>
                     @if(session('success'))
                         <span class="text-emerald-600 text-xs font-semibold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 inline-block">{{ session('success') }}</span>
                     @else
-                        <span class="text-stone-400 text-xs">Pastikan seluruh data perubahaan telah diperiksa sebelum menekan tombol simpan.</span>
+                        <span class="text-stone-400 text-xs">Pastikan gambar bagan telah diperiksa sebelum menekan tombol simpan.</span>
                     @endif
                 </div>
 
@@ -171,7 +157,7 @@
                         <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
-                        <span>Simpan Semua Perubahan</span>
+                        <span>Simpan Gambar Bagan</span>
                     </button>
                 </div>
             </div>

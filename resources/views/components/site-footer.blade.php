@@ -7,30 +7,38 @@
             <div class="flex flex-col justify-between space-y-2">
                 <div>
                     <h3 class="text-white font-serif font-black text-sm tracking-tight mb-2">Museum Talaga Manggung</h3>
-                    <p class="text-stone-500 leading-relaxed text-[11px]">Wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi.</p>
+                    <div class="flex items-start gap-2 text-stone-500 leading-relaxed text-[11px]">
+                        <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05A7 7 0 1114.95 14.95L10 19.9l-4.95-4.95A7 7 0 015.05 4.05zM10 6a2 2 0 100 4 2 2 0 000-4z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="text-stone-500 leading-relaxed text-[11px]">Jl. Talaga - Majalengka No. 09, Blok BabakanDesa Talaga Kulon, Kec. Talaga, Kab. Majalengka</p>
+                    </div>
                 </div>
                 <p class="text-stone-600 pt-4 md:pt-0">© 2026 Hak Cipta Dilindungi.</p>
             </div>
 
-            <!-- KOLOM 2: AKSES CEPAT -->
+            <!-- KOLOM 2: INFORMASI KONTAK -->
             <div class="flex flex-col space-y-2.5">
-                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Cepat</h4>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                    <a href="/" class="hover:text-white hover:underline transition">Beranda</a>
-                    <a href="/berita" class="hover:text-white hover:underline transition">Berita</a>
-                    <a href="/galeri" class="hover:text-white hover:underline transition">Galeri</a>
-                    <a href="/gosali" class="hover:text-white hover:underline transition">Gosali</a>
+                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Informasi Kontak</h4>
+                <div class="space-y-2 text-left text-[11px] text-stone-500">
+                    <p class="leading-relaxed">WhatsApp: 0857-7021-5723 / 0896-9837-1616</p>
+                    <p class="leading-relaxed">Email: karatuantalaga@gmail.com</p>
                 </div>
             </div>
 
-            <!-- KOLOM 3: INFORMASI HUKUM -->
+            <!-- KOLOM 3: MEDIA SOSIAL -->
             <div class="flex flex-col space-y-2.5">
-                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Informasi Hukum</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
-                    <li><a href="#" class="hover:text-white transition">Syarat & Ketentuan</a></li>
-                    <li><a href="#" class="hover:text-white transition">Bantuan & Kontak</a></li>
-                </ul>
+                <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Media Sosial</h4>
+                <div class="space-y-3 text-left text-[11px]">
+                    <a href="https://www.youtube.com/channel/UCS1FmYR3TTqWEh3lRGnE2jQ/featured" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-stone-500 hover:text-white transition">
+                        <img src="{{ Vite::asset('resources/images/youtube.svg') }}" alt="YouTube" class="w-4 h-4">
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/pranatabudaya.talagamanggung.7" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-stone-500 hover:text-white transition">
+                        <img src="{{ Vite::asset('resources/images/facebook.svg') }}" alt="Facebook" class="w-4 h-4">
+                        <span>Facebook</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

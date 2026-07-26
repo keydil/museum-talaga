@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog - Museum & Arsip Sejarah</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
+    <title>Profil Museum & Arsip Sejarah</title>
     <!-- Menghubungkan aset CSS & JS lokal Laravel (Tailwind) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -161,58 +163,113 @@
     </div> --}}
 
     <!-- Wadah Artikel Narasi Panjang dengan Animasi -->
-    <div class="bg-white border border-amber-200/60 rounded-2xl p-8 md:p-12 shadow-sm text-stone-700 leading-relaxed tracking-wide text-justify space-y-8" 
-         data-aos="fade-up" 
-         data-aos-duration="1000" 
+    <div class="bg-white border border-amber-200/60 rounded-2xl p-8 md:p-12 shadow-sm text-stone-700 leading-relaxed tracking-wide text-justify space-y-8"
+         data-aos="fade-up"
+         data-aos-duration="1000"
          data-aos-delay="200">
-        
-        <!-- Bagian Pengantar dengan Drop Cap -->
+
+        <!-- Prolog -->
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="space-y-6">
-            <p class="text-lg first-letter:text-5xl first-letter:font-black first-letter:text-amber-700 first-letter:mr-3 first-letter:float-left first-letter:leading-none">
-                Museum Talaga Manggung berdiri sebagai simbol komitmen kami dalam pelestarian warisan budaya dan sejarah peradaban yang berharga. Institusi ini didirikan dengan visi untuk menjadi pusat pembelajaran dan apresiasi terhadap kekayaan intelektual serta materi budaya yang telah terbentuk melalui berbagai generasi.
-            </p>
-            <p>
-                Setiap koleksi yang kami miliki, mulai dari artefak bersejarah hingga dokumen arsip kuno, menceritakan kisah-kisah mendalam tentang perjalanan masyarakat, nilai-nilai budaya, dan pencapaian intelektual yang telah membentuk identitas kita. Kami percaya bahwa memahami masa lalu adalah kunci untuk membangun masa depan yang lebih baik dan berkelanjutan.
-            </p>
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="md:w-2/5 w-full overflow-hidden rounded-2xl border border-amber-200 shadow-sm">
+                    <img src="{{ Vite::asset('resources/images/museumtalagamanggung.png') }}" alt="Museum Talaga Manggung" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-3/5 space-y-4">
+                    <p class="inline-block rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-800">Prolog</p>
+                    <p class="text-lg leading-relaxed first-letter:text-5xl first-letter:font-black first-letter:text-amber-700 first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                        Terletak di sebuah hutan kecil di Desa Talagawetan, Kecamatan Talaga, Kabupaten Majalengka, Museum Talaga Manggung merupakan tempat penyimpanan benda-benda peninggalan masa kejayaan Kerajaan Talaga.
+                    </p>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        Pada masa Raja ke-IX Kerajaan Talaga, Raja Talaga Manggung yang kala itu bernama Rd. Apun Surawidjaja, mendirikan satu tempat untuk melaksanakan tatanan pemerintahan di Talaga. Tempat itu kemudian disebut Bhumi Ageung, yang sekarang menjadi rumah peninggalan kebudayaan Talaga Manggung, dan kini menjadi rumah pribadi para keturunan Raja dan Ratu Talaga.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <!-- Divider dengan Animasi -->
-        <div class="flex items-center gap-4 py-4">
+        <div class="flex items-center gap-4 py-2">
             <div class="flex-grow h-0.5 bg-gradient-to-r from-amber-600 to-transparent rounded-full"></div>
             <span class="text-amber-700 font-semibold text-sm">✦</span>
             <div class="flex-grow h-0.5 bg-gradient-to-l from-amber-600 to-transparent rounded-full"></div>
         </div>
 
-        <!-- Section Perkembangan Institusi -->
-        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="bg-gradient-to-br from-amber-50 to-transparent rounded-xl p-6 border border-amber-200/40 space-y-4">
-            <h3 class="text-lg font-bold text-amber-900 flex items-center gap-2">
-                <svg class="w-5 h-5 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 6H6.28l-.31-1.243A1 1 0 005 4H3z"></path>
-                </svg>
-                Perjalanan Institusi
-            </h3>
+        <!-- Bhumi Ageung -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="space-y-6">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="md:w-3/5 space-y-4">
+                    <h3 class="text-xl font-black text-amber-900">Bhumi Ageung Talaga</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        Bhumi Ageung Talaga merupakan bekas pusat tata kelola pemerintahan Kerajaan Talaga Manggung. Tepat di sebelahnya, beliau mendirikan sebuah bangunan kecil yang berfungsi sebagai gudang penyimpanan senjata dan barang-barang penting kerajaan, yang disebut Bhumi Alit.
+                    </p>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        Sepeninggal Rd. Apun Surawidjaja, muncul berbagai konflik akibat politik adu domba kaum kolonial. Pada suatu masa, Kerajaan Talaga Manggung tidak lagi menjadi bentuk pemerintahan sebuah negara, melainkan berubah menjadi pemerintahan tradisional Ka-Tumenggungan atau Ka-Adipatian di bawah administrasi kolonial. Nama wilayah Kerajaan Talaga Manggung pun berubah menjadi Ka-Adipatian atau Ka-Tumenggungan Talaga.
+                    </p>
+                </div>
+                <div class="md:w-2/5 w-full overflow-hidden rounded-2xl border border-stone-200 shadow-sm">
+                    <img src="{{ Vite::asset('resources/images/Bhumi_Ageung_Talaga.png') }}" alt="Bhumi Ageung Talaga" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Perpecahan dan penyatuan -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-6 border border-amber-200/50">
+            <h3 class="text-lg font-bold text-stone-900 mb-4">Jejak Sejarah yang Terpecah, Lalu Dipersatukan</h3>
             <p class="text-stone-600 text-sm leading-relaxed">
-                Sejak didirikan, Museum Talaga Manggung telah berkembang menjadi institusi yang tidak hanya menyimpan koleksi berharga, tetapi juga aktif dalam menjalankan berbagai program edukasi dan konservasi. Kami terus melakukan penelitian dan dokumentasi terhadap cagar budaya untuk memastikan bahwa warisan ini dapat diwariskan dengan utuh kepada generasi mendatang.
+                Pada tahun 1715 M, Adipati Wiranata yang merupakan keturunan Rd. Apun Surawidjaja, hendak dinobatkan sebagai pemimpin Talaga. Namun, muncul protes dari putra Pangeran Kusumayuda yang bernama Pangeran Natadilaga. Kondisi ini lalu dimanfaatkan oleh kaum kolonial untuk memecah belah Wangsa Talaga melalui Ordonansi Staatsblad, dengan keputusan bahwa Talaga dibagi menjadi dua, yakni Kesultanan Talagakidul dipimpin oleh Adipati Wiranata dan Kesultanan Talagakaler dipimpin oleh Pangeran Natadilaga.
+            </p>
+            <p class="mt-3 text-stone-600 text-sm leading-relaxed">
+                Gelombang pergolakan pun semakin kuat. Talaga kemudian dibagi menjadi empat kabupaten: Talagakidul, Talagakaler, Talagawetan, dan Talagakulon. Pada awal abad ke-19, Pangeran Arya Sacanata II (Rd. Regasari) berinisiatif menyatukan kembali Talaga. Namun, sesuai rencana Hindia Belanda, Talaga digabung dengan wilayah lain dan ibukota dipindahkan ke Sindangkasih. Pangeran Sacanata II menolak, akhirnya diberhentikan dari jabatannya dan mendapat julukan Bupati Panungtung Talaga.
             </p>
         </div>
 
-        <!-- Section Misi Pelestarian -->
-        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="bg-gradient-to-br from-stone-50 to-transparent rounded-xl p-6 border border-stone-200/40 space-y-4">
-            <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
-                <svg class="w-5 h-5 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 000-2H6V3a1 1 0 01-1 1H3a1 1 0 010-2h2V2a1 1 0 011-1zm0 4a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h2V7a1 1 0 011-1zm6-4a1 1 0 011 1v1h1a1 1 0 000-2h-1V3a1 1 0 01-1 1h-2a1 1 0 010-2h2V2a1 1 0 011-1zm0 4a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1V7a1 1 0 011-1z" clip-rule="evenodd"></path>
-                </svg>
-                Komitmen Konservasi
-            </h3>
+        <!-- Para sesepuh -->
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="space-y-4">
+            <h3 class="text-lg font-bold text-stone-900">Para Sesepuh Penjaga Benda Pusaka Karuhun</h3>
             <p class="text-stone-600 text-sm leading-relaxed">
-                Melalui teknologi konservasi modern dan tim ahli yang berdedikasi, kami melakukan perawatan terhadap setiap artefak dengan standar internasional. Pencegahan kerusakan, restorasi cerdas, dan pendokumentasian digital adalah bagian integral dari upaya kami untuk melindungi warisan budaya dari ancaman waktu dan kondisi lingkungan.
+                Karena sejak pasca penggabungan antara Kabupaten Talaga dan Sindangkasih tidak ada yang memegang kekuasaan secara politik, para sesepuh Talaga bermusyawarah untuk menentukan orang yang akan mengurus benda-benda pusaka karuhun. Disepakati bahwa yang berhak mengurus benda-benda itu adalah keturunan yang memiliki hubungan langsung dari Pangeran Sacanata II dari pihak anak laki-laki; jika anak laki-laki tidak ada, pihak perempuan diperbolehkan asal memiliki anak laki-laki yang kemudian kembali memegang pengurusan benda pusaka.
             </p>
+            <div class="grid gap-3 md:grid-cols-2">
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">1. Pangeran Sumanagara (1820-1840)</p>
+                    <p class="mt-1">Putra sulung Pangeran Arya Sacanata II.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">2. Nyi Raden Anggrek (1840-1865)</p>
+                    <p class="mt-1">Putri Pangeran Sumanagara.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">3. Raden Natakusumah (1865-1895)</p>
+                    <p class="mt-1">Putra Nyi Raden Anggrek.</p>
+        				</div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">4. Raden Natadiputra (1895-1925)</p>
+                    <p class="mt-1">Putra Raden Natakusumah.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">5. Nyi Raden Masri’ah (1925-1948)</p>
+                    <p class="mt-1">Putri Raden Natadiputra.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">6. Raden Acap Kartadilaga (1948-1970)</p>
+                    <p class="mt-1">Suami Nyi Raden Masri’ah.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">7. Nyi Raden Madinah (1970-1993)</p>
+                    <p class="mt-1">Putri Raden Acap Kartadilaga.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+                    <p class="font-semibold text-stone-900">8. Nyi Raden Padnalarag (1993-2014)</p>
+                    <p class="mt-1">Putri Nyi Raden Madinah.</p>
+                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700 md:col-span-2">
+                    <p class="font-semibold text-stone-900">9. Raden Apun Tjahya Hendraningrat (2014-sekarang)</p>
+                    <p class="mt-1">Putra Nyi Raden Padnalarang.</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Penutup dengan Impact Statement -->
-        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="border-l-4 border-amber-700 pl-6 py-2 italic text-stone-700 bg-amber-50/50 rounded-r-lg">
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700" class="border-l-4 border-amber-700 pl-6 py-2 italic text-stone-700 bg-amber-50/50 rounded-r-lg">
             <p>
-                "Museum Talaga Manggung bukan sekadar tempat menyimpan benda-benda tua, tetapi rumah bagi cerita-cerita yang menginspirasi, mendidik, dan memperkaya pemahaman kita tentang kemanusiaan dan peradaban yang telah berlalu."
+                Sejak saat itulah, Bhumi Alit berubah fungsi menjadi Museum Talaga Manggung — rumah ingatan, rumah pusaka, dan rumah sejarah yang terus dijaga oleh para keturunan Talaga.
             </p>
         </div>
     </div>

@@ -30,8 +30,7 @@ class StrukturOrgController extends Controller
         $isExist = Position::where('title', 'Global')->exists();
         
         $request->validate([
-            'struktur_image' => $isExist ? 'nullable|image|mimes:jpeg,png,jpg|max:2048' : 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'deskripsi'      => 'required|string',
+            'struktur_image' => $isExist ? 'nullable|image|mimes:jpeg,png,jpg,jpeg,webp|max:2048' : 'required|image|mimes:jpeg,png,jpg,jpeg,webp|max:2048',
         ]);
 
         // 2. Ambil data dengan pencarian kriteria spesifik 'Global'
@@ -54,8 +53,10 @@ class StrukturOrgController extends Controller
             $struktur->image = $path; 
         }
 
-        // 4. Masukkan data teks deskripsi langsung ke properti kolom description database
-        $struktur->description = $request->deskripsi;
+        // 4. Masukkan data teks deskripsi langsung ke properti kolom description database jika ada
+        if ($request->filled('deskripsi')) {
+            $struktur->description = $request->deskripsi;
+        }
         
         // 5. Eksekusi penyimpanan final database
         $struktur->save();

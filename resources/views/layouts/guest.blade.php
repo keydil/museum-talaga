@@ -5,8 +5,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
 
-        <title>{{ config('app.name', 'Laravel') }} - Portal Admin</title>
+        <title>Profil Museum & Arsip Sejarah - Portal Admin</title>
 
         <!-- Fonts (Bisa disesuaikan jika ingin menggunakan font lain) -->
         <link rel="preconnect" href="https://fonts.bunny.net">

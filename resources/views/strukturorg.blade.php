@@ -96,6 +96,73 @@
                 <div class="flex-grow h-0.5 bg-gradient-to-l from-amber-600 to-transparent rounded-full"></div>
             </div>
 
+            <!-- Bagian Silsilah Historis 9 Pengurus Pusaka Museum -->
+            <div data-aos="fade-up" data-aos-duration="1000" class="rounded-2xl border border-amber-200 bg-white p-8 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-stone-100">
+                    <div>
+                        <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-800 mb-2">
+                            Rekam Jejak Historis
+                        </span>
+                        <h3 class="text-2xl font-black text-stone-900">Silsilah 9 Sesepuh Pengurus Pusaka & Museum</h3>
+                        <p class="text-xs text-stone-500 mt-1">
+                            Berdasarkan hasil musyawarah para sesepuh keturunan Raja Kerajaan Talaga Manggung (1820 – Sekarang).
+                        </p>
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-900 text-xs font-semibold self-start md:self-auto">
+                        📍 Pemegang Amanah Aktif: <span class="font-bold text-amber-800">Raden Apun Tjahya Hendraningrat</span>
+                    </div>
+                </div>
+
+                <!-- Timeline 9 Pengurus -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1820 – 1840 (Generasi 1)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Pangeran Sumanagara</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Sesepuh Pengurus Pusaka Perdana pasca penyatuan wilayah Talaga & Sindangkasih.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1840 – 1865 (Generasi 2)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Nyi Raden Anggrek</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Putri Pangeran Sumanagara, merawat dan memelihara koleksi pusaka Bhumi Alit.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1865 – 1895 (Generasi 3)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Raden Natakusumah</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Putra Nyi Raden Anggrek, memimpin pelestarian warisan tradisi budaya.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1895 – 1925 (Generasi 4)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Raden Natadiputra</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Putra Raden Natakusumah, pemegang inventarisasi cagar budaya Talaga.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1925 – 1948 (Generasi 5)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Nyi Raden Masri’ah</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Mempertahankan keutuhan pusaka kerajaan melewati era pergerakan & kemerdekaan.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1948 – 1970 (Generasi 6)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Raden Acap Kartadilaga</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Menginisiasi penataan museum publik modern di area Bhumi Alit Talaga.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1970 – 1993 (Generasi 7)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Nyi Raden Madinah</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Pengampu tradisi Nyiramkeun dan perawatan rutin benda bersejarah.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-400 transition-all">
+                        <div class="text-[11px] font-bold text-amber-700">1993 – 2014 (Generasi 8)</div>
+                        <div class="font-bold text-stone-900 text-sm mt-0.5">Nyi Raden Padnalarang</div>
+                        <div class="text-[11px] text-stone-500 mt-1">Menjaga eksistensi museum dan memperluas hubungan dengan suaka sejarah.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-amber-500/10 border-2 border-amber-500/40 hover:border-amber-600 transition-all">
+                        <div class="text-[11px] font-bold text-amber-800">2014 – SEKARANG (Generasi 9)</div>
+                        <div class="font-black text-amber-950 text-sm mt-0.5">Raden Apun Tjahya Hendraningrat</div>
+                        <div class="text-[11px] text-stone-700 font-medium mt-1">Ketua Pengelola Museum & Pemegang Amanah Pusaka Karuhun Talaga.</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Grid Divisi Organisasi -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 

@@ -107,7 +107,7 @@
                 <div class="h-48 bg-stone-200 relative">
                     @if($item->foto)
                         <!-- Menampilkan Foto dari Storage -->
-                        <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover">
+                        <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover">
                     @else
                         <!-- Fallback jika tidak ada foto -->
                         <div class="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs">Tidak Ada Foto</div>

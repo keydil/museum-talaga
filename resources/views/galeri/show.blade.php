@@ -22,7 +22,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
             <div class="bg-white rounded-3xl shadow-sm border border-stone-200/70 overflow-hidden">
-                <img src="{{ asset('storage/' . $galeri->foto) }}" alt="{{ $galeri->judul }}" class="w-full h-[420px] object-cover">
+                <img src="{{ \Illuminate\Support\Str::startsWith($galeri->foto, 'http') ? $galeri->foto : (\Illuminate\Support\Str::startsWith($galeri->foto, 'images/') ? asset($galeri->foto) : asset('storage/' . $galeri->foto)) }}" alt="{{ $galeri->judul }}" class="w-full h-[420px] object-cover">
             </div>
 
             <div class="space-y-6">

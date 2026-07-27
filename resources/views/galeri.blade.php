@@ -62,7 +62,7 @@
                 
                 <!-- Pembungkus Gambar Thumbnail -->
                 <div class="overflow-hidden aspect-[4/3] bg-stone-100 relative">
-                    <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
                     
                     <!-- Badge Indikator Konten 3D di Atas Gambar -->
                     @if($item->link_3d)

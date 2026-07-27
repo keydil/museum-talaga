@@ -130,7 +130,7 @@
                                         <td class="px-6 py-4">
                                             <div class="flex items-center space-x-3">
                                                 @if($item->foto)
-                                                    <img src="{{ asset('storage/' . $item->foto) }}" 
+                                                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" 
                                                          alt="{{ $item->judul }}" 
                                                          class="h-10 w-10 object-cover rounded">
                                                 @else

@@ -55,7 +55,7 @@
             <!-- Gambar/Foto Berita -->
             @if($berita->foto)
                 <div class="my-12 rounded-xl overflow-hidden shadow-md border border-amber-200/50">
-                    <img src="{{ asset('storage/' . $berita->foto) }}" 
+                    <img src="{{ \Illuminate\Support\Str::startsWith($berita->foto, 'http') ? $berita->foto : (\Illuminate\Support\Str::startsWith($berita->foto, 'images/') ? asset($berita->foto) : asset('storage/' . $berita->foto)) }}" 
                          alt="{{ $berita->judul }}" 
                          class="w-full h-auto object-cover max-h-96">
                 </div>

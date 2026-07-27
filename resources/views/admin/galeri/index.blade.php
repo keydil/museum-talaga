@@ -122,7 +122,7 @@
                             @forelse($galeris as $item)
                             <tr class="hover:bg-stone-50/50 transition">
                                 <td class="px-6 py-4">
-                                    <img src="{{ asset('storage/' . $item->foto) }}" alt="Foto" class="w-16 h-16 object-cover rounded-lg border border-amber-100">
+                                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" alt="{{ $item->judul }}" class="w-16 h-16 object-cover rounded-lg border border-amber-100">
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="font-bold text-stone-800 line-clamp-1">{{ $item->judul }}</div>

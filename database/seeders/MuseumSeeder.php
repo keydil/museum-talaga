@@ -285,6 +285,8 @@ class MuseumSeeder extends Seeder
                 'duration' => '05:40',
                 'sort_order' => 2,
                 'video_url' => 'https://www.youtube.com/watch?v=fM-mR9Gv9oQ',
+                'video_file_path' => null,
+                'thumbnail_path' => 'images/artefak/bhumi_ageung.jpg',
                 'description' => 'Dokumentasi penampakan udara lanskap sejarah Bhumi Ageung, Bhumi Alit, dan lingkungan situs Museum Talaga Manggung.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),

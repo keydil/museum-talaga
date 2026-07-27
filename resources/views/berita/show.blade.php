@@ -22,7 +22,7 @@
         <div class="mb-8 flex items-center space-x-2 text-xs text-stone-500 font-medium">
             <a href="{{ url('/') }}" class="hover:text-amber-700 transition">Beranda</a>
             <span>/</span>
-            <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
+            <a href="{{ route('berita') }}" class="hover:text-amber-700 transition">Berita</a>
             <span>/</span>
             <span class="text-stone-700">{{ $berita->judul }}</span>
         </div>
@@ -78,7 +78,7 @@
                 <div class="text-xs text-stone-500">
                     Dipublikasikan: {{ \Carbon\Carbon::parse($berita->created_at)->translatedFormat('d F Y \p\u\k\u\l H:i') }}
                 </div>
-                <a href="{{ route('berita.index') }}" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">
+                <a href="{{ route('berita') }}" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">
                     ← Kembali ke Berita
                 </a>
             </div>

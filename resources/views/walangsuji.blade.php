@@ -27,8 +27,8 @@
              alt="Header Banner Walang Suji" 
              class="w-full h-full object-cover">
     @else
-        <!-- Gambar Default bertema ornamen tradisional, alam, atau kain/budaya hijau jika admin belum unggah kustom -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema Walang Suji / ritual -->
+        <img src="{{ asset('images/artefak/genta_singha.jpg') }}" 
              alt="Default Banner Walang Suji" 
              class="w-full h-full object-cover opacity-80">
     @endif

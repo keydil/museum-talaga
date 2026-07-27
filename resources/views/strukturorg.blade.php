@@ -26,10 +26,10 @@
              alt="Header Banner Struktur Organisasi" 
              class="w-full h-full object-cover">
     @else
-        <!-- Perbaikan: URL Gambar Default spesifik agar tidak terblokir CORB browser -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus Struktur Organisasi -->
+        <img src="{{ asset('images/artefak/bhumi_ageung.jpg') }}" 
              alt="Default Banner Struktur Organisasi" 
-             class="w-full h-full object-cover opacity-50">
+             class="w-full h-full object-cover opacity-80">
     @endif
 </div>
 

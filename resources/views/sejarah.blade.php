@@ -27,8 +27,8 @@
              alt="Header Banner Sejarah" 
              class="w-full h-full object-cover">
     @else
-        <!-- Gambar Default bertema teks/manuskrip/arsip sejarah lama jika admin belum upload -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khas Museum Talaga Manggung -->
+        <img src="{{ asset('images/artefak/bhumi_ageung.jpg') }}" 
              alt="Default Banner Sejarah" 
              class="w-full h-full object-cover opacity-80">
     @endif

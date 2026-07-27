@@ -27,8 +27,8 @@
              alt="Header Banner Visi Misi" 
              class="w-full h-full object-cover">
     @else
-        <!-- Gambar Default bertema arsitektur/gedung museum/ruang formal jika admin belum unggah gambar kustom -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus Visi Misi -->
+        <img src="{{ asset('images/artefak/bhumi_ageung.jpg') }}" 
              alt="Default Banner Visi Misi" 
              class="w-full h-full object-cover opacity-80">
     @endif

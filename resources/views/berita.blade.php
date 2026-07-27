@@ -29,7 +29,7 @@
              class="w-full h-full object-cover">
     @else
         <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema berita/koran/media -->
-        <img src="https://unsplash.com" 
+        <img src="{{ asset('images/artefak/ruang_pamer.jpg') }}" 
              alt="Default Banner Berita" 
              class="w-full h-full object-cover opacity-80">
     @endif

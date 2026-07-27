@@ -29,8 +29,8 @@
              alt="Header Banner Gosali" 
              class="w-full h-full object-cover">
     @else
-        <!-- Gambar Default bertema tempaan logam, api, kerajinan senjata tradisional besi/baja jika admin belum unggah kustom -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema Gosali / senjata perang -->
+        <img src="{{ asset('images/artefak/baju_zirah.jpg') }}" 
              alt="Default Banner Gosali" 
              class="w-full h-full object-cover opacity-80">
     @endif

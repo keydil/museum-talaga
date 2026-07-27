@@ -28,8 +28,8 @@
              alt="Header Banner Galeri" 
              class="w-full h-full object-cover">
     @else
-        <!-- KOREKSI: Menggunakan berkas gambar asli (.jpg) bertema museum/artefak bersejarah -->
-        <img src="https://unsplash.com" 
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema museum/galeri -->
+        <img src="{{ asset('images/artefak/ruang_pamer.jpg') }}" 
              alt="Default Banner Galeri" 
              class="w-full h-full object-cover opacity-80">
     @endif

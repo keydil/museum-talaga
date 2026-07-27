@@ -6,8 +6,9 @@ echo "🔧 Menjalankan setup aplikasi Museum Talaga..."
 echo "1. Discover packages..."
 php artisan package:discover --ansi
 
-echo "3. Menjalankan Database Migrations..."
+echo "3. Menjalankan Database Migrations & Seeding..."
 php artisan migrate --force
+php artisan db:seed --force
 
 echo "4. Membersihkan dan rebuild cache..."
 php artisan optimize:clear

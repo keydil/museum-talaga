@@ -29,6 +29,7 @@ echo "🔧 Running artisan setup..."
 php artisan package:discover --ansi
 php artisan key:generate --no-interaction
 php artisan migrate --force --no-interaction
+php artisan db:seed --force --no-interaction
 php artisan storage:link --no-interaction
 php artisan config:cache
 php artisan route:cache

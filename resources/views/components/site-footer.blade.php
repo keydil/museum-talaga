@@ -79,7 +79,7 @@
             <!-- Kontainer Map Interaktif -->
             <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-xl border border-stone-700/50">
                 <iframe 
-                    src="https://maps.google.com/maps?q=-6.9851409,108.3111701+(Museum%20Talaga%20Manggung)&t=&z=16&ie=UTF8&iwloc=B&output=embed" 
+                    src="https://maps.google.com/maps?q=Museum%20Talaga%20Manggung%20Majalengka&t=&z=16&ie=UTF8&iwloc=B&output=embed" 
                     width="100%" 
                     height="100%" 
                     style="border:0;" 

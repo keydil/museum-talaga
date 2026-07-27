@@ -140,10 +140,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function initDashboardCharts() {
             // 1. Grafik Pengunjung Real-Time (Line Chart)
             const elPengunjung = document.getElementById('chartPengunjung');
             if (elPengunjung) {
+                const existingChart = Chart.getChart(elPengunjung);
+                if (existingChart) {
+                    existingChart.destroy();
+                }
+
                 const ctxPengunjung = elPengunjung.getContext('2d');
                 const daysLabel = {!! json_encode($days) !!};
                 const realVisitorCounts = {!! json_encode($visitorCounts) !!};
@@ -193,6 +198,11 @@
             // 2. Grafik Distribusi Konten Museum Real (Doughnut Chart)
             const elBerita = document.getElementById('chartBerita');
             if (elBerita) {
+                const existingChartBerita = Chart.getChart(elBerita);
+                if (existingChartBerita) {
+                    existingChartBerita.destroy();
+                }
+
                 const ctxBerita = elBerita.getContext('2d');
                 const contentDist = {!! json_encode($contentDistribution) !!};
 
@@ -220,6 +230,13 @@
                     }
                 });
             }
-        });
+        }
+
+        // Jalankan saat load biasa maupun saat navigasi Livewire (wire:navigate)
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initDashboardCharts, 50);
+        }
+        document.addEventListener('DOMContentLoaded', initDashboardCharts);
+        document.addEventListener('livewire:navigated', initDashboardCharts);
     </script>
 </x-app-layout>

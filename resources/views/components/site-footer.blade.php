@@ -82,7 +82,7 @@
                rel="noopener noreferrer"
                class="block w-full h-60 md:h-72 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group relative border border-stone-700/50">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0384992520696!2d108.30859517499719!3d-6.985140893015809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f395fa55e192b%3A0xee866e083162a0e5!2sMuseum%20Talaga%20Manggung!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.547167732296!2d108.28312527500588!3d-6.828588566736468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f2c733f5d5069%3A0x6a0a03070624a480!2sMuseum%20Talaga%20Manggung!5e0!3m2!1sid!2sid!4v1722053600000!5m2!1sid!2sid" 
                     width="100%" 
                     height="100%" 
                     style="border:0;" 

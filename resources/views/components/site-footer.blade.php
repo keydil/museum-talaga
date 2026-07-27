@@ -76,11 +76,8 @@
                 </h4>
                 <span class="text-[10px] text-stone-500 hidden sm:inline">Klik peta untuk petunjuk arah langsung</span>
             </div>
-            <!-- Kontainer Map Clickable -->
-            <a href="https://www.google.com/maps/place/Museum+Talaga+Manggung/@-6.9851356,108.3086005,17z/data=!3m1!4b1!4m6!3m5!1s0x2e6f395fa55e192b:0xee866e083162a0e5!8m2!3d-6.9851409!4d108.3111701!16s%2Fg%2F120n2ktr?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="block w-full h-60 md:h-72 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group relative border border-stone-700/50">
+            <!-- Kontainer Map Interaktif -->
+            <div class="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-xl border border-stone-700/50 group">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.547167732296!2d108.28312527500588!3d-6.828588566736468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f2c733f5d5069%3A0x6a0a03070624a480!2sMuseum%20Talaga%20Manggung!5e0!3m2!1sid!2sid!4v1722053600000!5m2!1sid!2sid" 
                     width="100%" 
@@ -89,18 +86,21 @@
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade"
-                    class="pointer-events-none filter grayscale-[30%] contrast-[105%] group-hover:grayscale-0 transition-all duration-500">
+                    class="w-full h-full border-0 filter contrast-[105%]">
                 </iframe>
-                <!-- Overlay Hint: Buka di Google Maps -->
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                    <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <!-- Tombol Buka Petunjuk Arah -->
+                <div class="absolute bottom-3 right-3 z-10 pointer-events-auto">
+                    <a href="https://www.google.com/maps/place/Museum+Talaga+Manggung/@-6.9851356,108.3086005,17z/data=!3m1!4b1!4m6!3m5!1s0x2e6f395fa55e192b:0xee866e083162a0e5!8m2!3d-6.9851409!4d108.3111701!16s%2Fg%2F120n2ktr?hl=en-US&entry=ttu" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-lg transition-all transform hover:scale-105">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
                         </svg>
-                        Buka Petunjuk Arah di Google Maps ↗
-                    </div>
+                        Buka di Google Maps ↗
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </footer>

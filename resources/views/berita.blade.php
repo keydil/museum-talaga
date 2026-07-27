@@ -28,10 +28,10 @@
              alt="Header Banner Berita" 
              class="w-full h-full object-cover">
     @else
-        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema berita/koran/media -->
-        <img src="{{ asset('images/artefak/ruang_pamer.jpg') }}" 
+        <!-- Header Banner Cinematic 8K Ultra High Res -->
+        <img src="{{ asset('images/banners/berita_banner.jpg') }}" 
              alt="Default Banner Berita" 
-             class="w-full h-full object-cover opacity-80">
+             class="w-full h-full object-cover opacity-90">
     @endif
 
 </div>

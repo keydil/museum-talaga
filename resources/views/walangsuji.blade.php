@@ -27,10 +27,10 @@
              alt="Header Banner Walang Suji" 
              class="w-full h-full object-cover">
     @else
-        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema Walang Suji / ritual -->
-        <img src="{{ asset('images/artefak/genta_singha.jpg') }}" 
+        <!-- Header Banner Cinematic 8K Ultra High Res -->
+        <img src="{{ asset('images/banners/artefak_banner.jpg') }}" 
              alt="Default Banner Walang Suji" 
-             class="w-full h-full object-cover opacity-80">
+             class="w-full h-full object-cover opacity-90">
     @endif
 
 </div>

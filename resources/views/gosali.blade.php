@@ -29,10 +29,10 @@
              alt="Header Banner Gosali" 
              class="w-full h-full object-cover">
     @else
-        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema Gosali / senjata perang -->
-        <img src="{{ asset('images/artefak/baju_zirah.jpg') }}" 
+        <!-- Header Banner Cinematic 8K Ultra High Res -->
+        <img src="{{ asset('images/banners/gosali_banner.jpg') }}" 
              alt="Default Banner Gosali" 
-             class="w-full h-full object-cover opacity-80">
+             class="w-full h-full object-cover opacity-90">
     @endif
 
 </div>

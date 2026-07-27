@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeCardController;
 use App\Http\Controllers\WalangSujiController;
 use App\Http\Controllers\GosaliVideoController;
 use App\Http\Controllers\StrukturOrgController;
+use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     // Manajemen Beranda (Hero & Sections)
     Route::get('beranda', [HomeSectionController::class, 'index'])->name('admin.beranda.index');
     Route::post('beranda/update', [HomeSectionController::class, 'update'])->name('admin.beranda.update');
+
+    // Manajemen Footer Admin
+    Route::get('footer-admin', [FooterController::class, 'index'])->name('admin.footer.index');
+    Route::post('footer-admin/update', [FooterController::class, 'update'])->name('admin.footer.update');
 
     // Manajemen Home Cards (Kartu Koleksi Beranda)
     Route::resource('home-cards', HomeCardController::class)->names([

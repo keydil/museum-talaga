@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ Str::limit(strip_tags($galeri->deskripsi ?: 'Artefak bersejarah koleksi Museum Talaga Manggung Majalengka.'), 160) }}">
     <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
-    <title>{{ $galeri->judul }} - Profil Museum & Arsip Sejarah</title>
+    <title>{{ $galeri->judul }} | Museum Talaga Manggung</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-amber-50 text-stone-900 antialiased font-sans min-h-screen flex flex-col">

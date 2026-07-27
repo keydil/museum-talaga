@@ -12,6 +12,7 @@ use App\Http\Controllers\WalangSujiController;
 use App\Http\Controllers\GosaliVideoController;
 use App\Http\Controllers\StrukturOrgController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------

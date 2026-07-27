@@ -89,7 +89,7 @@
                     Profil 
                 </span>
                 <!-- Perbaikan xmlns: Menggunakan URL resmi w3 agar tampil di semua tipe HP -->
-                <svg xmlns="http://w3.org" class="h-4 w-4 text-stone-500 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-stone-500 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </summary>
@@ -111,7 +111,7 @@
                 <span class="flex items-center gap-1.5">
                     Living Museum 
                 </span>
-                <svg xmlns="http://w3.org" class="h-4 w-4 text-stone-500 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-stone-500 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </summary>
@@ -140,24 +140,24 @@
 
         <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
             <div class="mx-auto max-w-3xl text-center">
-                <!-- Badge dengan animasi bounce -->
-                <span data-aos="bounce-in" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-600/15 px-4 py-1.5 text-xs font-semibold text-amber-800 ring-1 ring-inset ring-amber-600/30 mb-6 backdrop-blur-sm hover:bg-amber-600/25 transition-all duration-300">
-                    ✨ Selamat Datang di Museum Talaga Manggung
+                <!-- Badge dengan style museum terpercaya -->
+                <span data-aos="bounce-in" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-700/10 px-4 py-1.5 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-700/30 mb-6 backdrop-blur-sm hover:bg-amber-700/20 transition-all duration-300">
+                    🏛️ Museum Sejarah & Kebudayaan Majalengka
                 </span>
 
-                <!-- Judul dengan efek zoom in -->
-                <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" class="text-5xl md:text-7xl font-black tracking-tight text-stone-900 sm:text-8xl leading-[1.1] mb-2">
-                    Jelajahi <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-500">Warisan Sejarah</span>
+                <!-- Judul Utama -->
+                <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" class="text-4xl md:text-6xl font-black tracking-tight text-stone-900 leading-[1.15] mb-4">
+                    Melestarikan Warisan & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-800 via-amber-700 to-amber-600">Jejak Sejarah</span>
                 </h1>
 
-                <!-- Subtitle dengan typing effect -->
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="mt-8 text-xl md:text-2xl font-semibold text-stone-700">
-                    Lengkapi perjalanan budaya Anda bersama kami
+                <!-- Subtitle -->
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="mt-4 text-lg md:text-xl font-semibold text-stone-700">
+                    Menelusuri Peradaban, Manuskrip, & Artefak Kerajaan Talaga Manggung
                 </p>
 
-                <!-- Deskripsi dengan fade -->
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700" class="mt-6 text-lg font-normal text-stone-600 sm:text-xl/8 max-w-2xl mx-auto leading-relaxed">
-                    Rasakan keajaiban koleksi pameran eksklusif kami, dari artefak bersejarah hingga dokumentasi digital interaktif yang menceritakan kisah-kisah berharga peradaban kita.
+                <!-- Deskripsi Utama -->
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700" class="mt-6 text-base font-normal text-stone-600 sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                    Menyimpan dan merawat koleksi benda pusaka bersejarah, dokumen kuno, serta peninggalan budaya sebagai saksi bisu perjalanan peradaban Sunda di Tatar Majalengka.
                 </p>
 
                 <!-- CTA Buttons dengan animasi -->

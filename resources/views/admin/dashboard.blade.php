@@ -32,8 +32,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Pengunjung Hari Ini</h3>
-                            <p class="text-xl font-black text-amber-900">{{ number_format($todayViews ?? 0) }} <span class="text-xs font-normal text-stone-500">kunjungan</span></p>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Pengunjung Unik Hari Ini</h3>
+                            <p class="text-xl font-black text-amber-900">{{ number_format($todayViews ?? 0) }} <span class="text-xs font-normal text-stone-500">perangkat</span></p>
                         </div>
                     </div>
 
@@ -44,8 +44,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Akumulasi Total Hits</h3>
-                            <p class="text-xl font-black text-emerald-900">{{ number_format($totalViews ?? 0) }} <span class="text-xs font-normal text-stone-500">total views</span></p>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Akumulasi Pengunjung Unik</h3>
+                            <p class="text-xl font-black text-emerald-900">{{ number_format($totalViews ?? 0) }} <span class="text-xs font-normal text-stone-500">total orang</span></p>
                         </div>
                     </div>
 
@@ -56,9 +56,9 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Status Tracker</h3>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500">Status Anti-Spam Tracker</h3>
                             <p class="text-xs font-bold text-blue-900 flex items-center gap-1 mt-1">
-                                <span class="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span> Tracker Real-Time Aktif
+                                <span class="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span> Unique IP Filter Aktif
                             </p>
                         </div>
                     </div>

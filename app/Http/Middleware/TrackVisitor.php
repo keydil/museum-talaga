@@ -29,12 +29,13 @@ class TrackVisitor
                     $sessionId = session()->getId();
                     $today = now()->toDateString();
 
-                    // Optional deduplication per IP & session per day if desired, or record page hit
-                    PageView::create([
+                    // Anti-Spam / Deduplikasi: 1 IP hanya dicatat 1x Pengunjung Unik per hari
+                    PageView::firstOrCreate([
                         'ip_address' => $ip,
+                        'view_date'  => $today,
+                    ], [
                         'url'        => substr($request->fullUrl(), 0, 250),
                         'session_id' => $sessionId,
-                        'view_date'  => $today,
                     ]);
                 }
             } catch (Exception $e) {

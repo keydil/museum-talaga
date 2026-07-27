@@ -35,10 +35,10 @@
     @endif
 
 </div>
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 bg-[#fffbeb]">
+<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 bg-[#fffbeb]" x-data="galeriFilter()">
 
     <!-- Header Judul Katalog & Form Pencarian -->
-    <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-amber-200/70">
+    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-amber-200/70">
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2">
                 🏛️ Koleksi Resmi Museum
@@ -49,70 +49,80 @@
             </p>
         </div>
 
-        <!-- Form Input Search Bar -->
-        <form action="{{ route('galeri') }}" method="GET" class="w-full md:w-80 shrink-0">
-            @if($kategoriTerpilih)
-                <input type="hidden" name="kategori" value="{{ $kategoriTerpilih }}">
-            @endif
+        <!-- Form Input Search Bar (Instant Filter Client-Side) -->
+        <div class="w-full md:w-80 shrink-0">
             <div class="relative">
                 <input type="text" 
-                       name="search" 
-                       value="{{ $kataKunci }}" 
+                       x-model="searchQuery" 
+                       @input="filterItems()"
                        placeholder="Cari nama artefak, keris, arca..." 
                        class="w-full bg-white border border-stone-300 rounded-full pl-10 pr-10 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm transition">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     🔍
                 </div>
-                @if($kataKunci)
-                    <a href="{{ route('galeri', array_filter(['kategori' => $kategoriTerpilih])) }}" 
-                       class="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-700 text-xs font-bold">
-                        ✕
-                    </a>
-                @endif
+                <button x-show="searchQuery" 
+                        @click="searchQuery = ''; filterItems()" 
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-700 text-xs font-bold">
+                    ✕
+                </button>
             </div>
-        </form>
-    </div>
-
-    <!-- Bilah Filter Kategori Dinamis -->
-    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-6 scrollbar-none whitespace-nowrap">
-        <!-- Tombol Semua Kategori -->
-        <a href="{{ route('galeri', array_filter(['search' => $kataKunci])) }}" 
-           class="px-5 py-2 text-xs font-bold rounded-full transition-all duration-200 {{ !$kategoriTerpilih ? 'bg-amber-700 text-white shadow-md shadow-amber-700/20' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-700' }}">
-            Semua Katalog
-        </a>
-
-        @foreach($kategoriList as $kat)
-            <a href="{{ route('galeri', array_filter(['kategori' => $kat, 'search' => $kataKunci])) }}" 
-               class="px-5 py-2 text-xs font-bold rounded-full transition-all duration-200 {{ $kategoriTerpilih == $kat ? 'bg-amber-700 text-white shadow-md shadow-amber-700/20' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50' }}">
-                {{ $kat }}
-            </a>
-        @endforeach
-    </div>
-
-    <!-- Status Hasil Filter & Pencarian -->
-    @if($kataKunci || $kategoriTerpilih)
-        <div class="mb-8 p-4 bg-amber-100/60 border border-amber-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-amber-900">
-            <div class="flex items-center gap-2">
-                <span>Menampilkan <strong>{{ $galeri->count() }}</strong> artefak</span>
-                @if($kategoriTerpilih)
-                    <span class="bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold">Kategori: {{ $kategoriTerpilih }}</span>
-                @endif
-                @if($kataKunci)
-                    <span class="bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold">Cari: "{{ $kataKunci }}"</span>
-                @endif
-            </div>
-            <a href="{{ route('galeri') }}" class="font-bold text-amber-800 hover:text-amber-950 underline text-xs">
-                Reset Filter & Pencarian ↺
-            </a>
         </div>
-    @endif
+    </div>
 
-    <!-- Grid Foto (Dinamis Berdasarkan Data Controller) -->
+    <!-- Bilah Filter Kategori Standar Profesional (Flex Wrap di Desktop & Smooth Scroll di Mobile) -->
+    <div class="mb-6">
+        <div class="flex flex-wrap items-center gap-2">
+            <!-- Tombol Semua Kategori -->
+            <button @click="setCategory('')" 
+                    :class="selectedCategory === '' ? 'bg-amber-800 text-white shadow-md shadow-amber-900/20 ring-2 ring-amber-800/30' : 'bg-white text-stone-700 border border-stone-200/80 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50'"
+                    class="px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer">
+                Semua Katalog (17)
+            </button>
+
+            @foreach($kategoriList as $kat)
+                <button @click="setCategory('{{ $kat }}')" 
+                        :class="selectedCategory === '{{ $kat }}' ? 'bg-amber-800 text-white shadow-md shadow-amber-900/20 ring-2 ring-amber-800/30' : 'bg-white text-stone-700 border border-stone-200/80 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50'"
+                        class="px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer">
+                    {{ $kat }}
+                </button>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Status Hasil Filter & Pencarian Instant -->
+    <div x-show="searchQuery || selectedCategory" 
+         x-transition
+         class="mb-8 p-4 bg-amber-100/70 border border-amber-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-amber-900">
+        <div class="flex flex-wrap items-center gap-2">
+            <span>Menampilkan <strong x-text="visibleCount">17</strong> artefak</span>
+            <template x-if="selectedCategory">
+                <span class="bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                    Kategori: <span x-text="selectedCategory"></span>
+                    <button @click="setCategory('')" class="hover:text-red-700 font-bold ml-1">✕</button>
+                </span>
+            </template>
+            <template x-if="searchQuery">
+                <span class="bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                    Cari: "<span x-text="searchQuery"></span>"
+                    <button @click="searchQuery = ''; filterItems()" class="hover:text-red-700 font-bold ml-1">✕</button>
+                </span>
+            </template>
+        </div>
+        <button @click="resetAll()" class="font-bold text-amber-800 hover:text-amber-950 underline text-xs cursor-pointer">
+            Reset Semua Filter ↺
+        </button>
+    </div>
+
+    <!-- Grid Foto (Filter Client-Side Instan) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-        @forelse($galeri as $item)
+        @foreach($galeri as $item)
             <!-- Item Foto / Artefak -->
-            <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div x-show="isItemVisible('{{ addslashes($item->kategori) }}', '{{ addslashes(strtolower($item->judul)) }}', '{{ addslashes(strtolower($item->deskripsi ?? '')) }}')"
+                 x-transition:enter="transition ease-out duration-300 transform"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 
                 <!-- Pembungkus Gambar Thumbnail -->
                 <div class="overflow-hidden aspect-[4/3] bg-stone-100 relative">
@@ -153,25 +163,82 @@
                     </div>
                 </div>
             </div>
-        @empty
-            <!-- State Jika Data Kosong -->
-            <div class="col-span-full py-16 px-4 text-center bg-white border border-dashed border-amber-200 rounded-3xl">
-                <div class="text-4xl mb-3">🔍</div>
-                <h3 class="text-base font-bold text-stone-800">Tidak ada artefak yang ditemukan</h3>
-                <p class="text-xs text-stone-500 mt-1">Coba gunakan kata kunci pencarian lain atau ganti kategori filter.</p>
-                <a href="{{ route('galeri') }}" class="mt-4 inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition">
-                    Lihat Semua Katalog Artefak
-                </a>
-            </div>
-        @endforelse
+        @endforeach
+
+        <!-- State Jika Hasil Pencarian Kosong -->
+        <div x-show="visibleCount === 0" 
+             x-transition
+             class="col-span-full py-16 px-4 text-center bg-white border border-dashed border-amber-200 rounded-3xl">
+            <div class="text-4xl mb-3">🔍</div>
+            <h3 class="text-base font-bold text-stone-800">Tidak ada artefak yang ditemukan</h3>
+            <p class="text-xs text-stone-500 mt-1">Coba gunakan kata kunci pencarian lain atau ganti kategori filter.</p>
+            <button @click="resetAll()" class="mt-4 inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition cursor-pointer">
+                Lihat Semua Katalog Artefak
+            </button>
+        </div>
 
     </div>
 </main>
 
+<script>
+    function galeriFilter() {
+        return {
+            searchQuery: '{{ addslashes($kataKunci ?? "") }}',
+            selectedCategory: '{{ addslashes($kategoriTerpilih ?? "") }}',
+            visibleCount: 17,
 
+            init() {
+                this.updateCount();
+            },
 
+            setCategory(cat) {
+                this.selectedCategory = cat;
+                this.filterItems();
+            },
 
+            isItemVisible(kategori, judul, deskripsi) {
+                const matchCategory = !this.selectedCategory || kategori === this.selectedCategory;
+                const query = this.searchQuery.toLowerCase().trim();
+                const matchSearch = !query || judul.includes(query) || deskripsi.includes(query) || kategori.toLowerCase().includes(query);
+                
+                return matchCategory && matchSearch;
+            },
 
+            filterItems() {
+                this.$nextTick(() => {
+                    this.updateCount();
+                    this.updateURL();
+                });
+            },
+
+            updateCount() {
+                const items = document.querySelectorAll('[x-show^="isItemVisible"]');
+                let count = 0;
+                items.forEach(el => {
+                    if (el.style.display !== 'none') {
+                        count++;
+                    }
+                });
+                this.visibleCount = count;
+            },
+
+            updateURL() {
+                const params = new URLSearchParams();
+                if (this.selectedCategory) params.set('kategori', this.selectedCategory);
+                if (this.searchQuery) params.set('search', this.searchQuery);
+                
+                const newURL = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+                window.history.replaceState({}, '', newURL);
+            },
+
+            resetAll() {
+                this.searchQuery = '';
+                this.selectedCategory = '';
+                this.filterItems();
+            }
+        }
+    }
+</script>
 
 <x-site-footer />
 

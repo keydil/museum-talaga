@@ -98,7 +98,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Dashboard') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.beranda*'); @endphp
+            @php $active = request()->routeIs(['admin.beranda.*', 'admin.home-cards.*']) || request()->is('admin/beranda*', 'admin/home-cards*'); @endphp
             <a href="{{ route('admin.beranda.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -106,7 +106,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Beranda') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.sejarah*'); @endphp
+            @php $active = request()->routeIs(['admin.sejarah.*', 'admin.sejarah']) || request()->is('admin/sejarah*'); @endphp
             <a href="{{ route('admin.sejarah.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
@@ -114,7 +114,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Sejarah') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.visimisi*'); @endphp
+            @php $active = request()->routeIs(['admin.visimisi.*', 'admin.visimisi']) || request()->is('admin/visimisi*'); @endphp
             <a href="{{ route('admin.visimisi.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -122,7 +122,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Visi & Misi') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.strukturorg*'); @endphp
+            @php $active = request()->routeIs(['admin.strukturorg.*', 'admin.strukturorg']) || request()->is('admin/strukturorg*'); @endphp
             <a href="{{ route('admin.strukturorg.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
@@ -130,7 +130,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Struktur Organisasi') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.galeri.index*'); @endphp
+            @php $active = request()->routeIs(['admin.galeri.*', 'admin.setting.*']) || request()->is('admin/galeri*', 'admin/galeri-admin*'); @endphp
             <a href="{{ route('admin.galeri.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -138,7 +138,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Katalog Galeri') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.berita.index*'); @endphp
+            @php $active = request()->routeIs(['admin.berita.*']) || request()->is('admin/berita*', 'admin/berita-admin*'); @endphp
             <a href="{{ route('admin.berita.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375a1.125 1.125 0 0 1-1.125-1.125V5.625c0-.621.504-1.125 1.125-1.125H15.75m-3-1.5h.008v.008H12.75V3Zm0 3h.008v.008H12.75V6Zm0 6h.008v.008H12.75v-.008Zm0 3h.008v.008H12.75V15Z" />
@@ -146,7 +146,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Berita') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.walangsuji*'); @endphp
+            @php $active = request()->routeIs(['admin.walangsuji.*']) || request()->is('admin/walangsuji*'); @endphp
             <a href="{{ route('admin.walangsuji.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Zm3 2.25h7.5m-7.5 4.5h7.5m-7.5 4.5h4.5" />
@@ -154,7 +154,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Walangsuji') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.gosali*'); @endphp
+            @php $active = request()->routeIs(['admin.gosali.*']) || request()->is('admin/gosali*'); @endphp
             <a href="{{ route('admin.gosali.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Zm3 2.25h7.5m-7.5 4.5h7.5m-7.5 4.5h4.5" />
@@ -162,7 +162,7 @@ $logout = function (Logout $logout) {
                 <span class="truncate">{{ __('Gosali') }}</span>
             </a>
 
-            @php $active = request()->routeIs('admin.footer*'); @endphp
+            @php $active = request()->routeIs(['admin.footer.*']) || request()->is('admin/footer*'); @endphp
             <a href="{{ route('admin.footer.index') }}" wire:navigate class="{{ $navLink($active) }}">
                 <svg class="{{ $iconClass($active) }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

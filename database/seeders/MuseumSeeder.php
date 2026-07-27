@@ -14,6 +14,7 @@ class MuseumSeeder extends Seeder
      * 1. KATALOG MTM PDF (Semua 17 Artefak Pusaka & Foto Asli PDF)
      * 2. PROFIL YAYASAN Talaga manggung sk PDF
      * 3. Portofolio Talaga Manggung (Final) PDF
+     * 4. Link Dokumenter Youtube Asli Tradisi Nyiramkeun & Museum Talaga Manggung
      */
     public function run(): void
     {
@@ -229,64 +230,62 @@ class MuseumSeeder extends Seeder
             ]
         ]);
 
-        // 4. SEED DOKUMENTER WALANG SUJI (Tabel: walang_suji_videos)
+        // 4. SEED DOKUMENTER WALANG SUJI (Tabel: walang_suji_videos - Dokumenter Asli YouTube Talaga Manggung)
         DB::table('walang_suji_videos')->truncate();
         DB::table('walang_suji_videos')->insert([
             [
                 'title' => 'Prosesi Adat Ritual Nyiramkeun Pusaka Talaga Manggung',
                 'duration' => '12:45',
                 'sort_order' => 1,
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'description' => 'Dokumentasi lengkap ritual pembersihan air suci benda-benda pusaka leluhur Kerajaan Talaga Manggung yang dilaksanakan setiap bulan Syafar di Bhumi Alit.',
+                'video_url' => 'https://www.youtube.com/watch?v=115Z-w1-t4M',
+                'description' => 'Dokumentasi sakral ritual pembersihan air suci benda-benda pusaka leluhur Kerajaan Talaga Manggung yang dilaksanakan setiap bulan Syafar di Bhumi Alit.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Rekonstruksi Sejarah Tata Pemerintahan Bhumi Ageung',
+                'title' => 'Cleansing The Royal Heirlooms of Talaga Manggung',
                 'duration' => '08:30',
                 'sort_order' => 2,
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'description' => 'Narasinya mengulas kembali sejarah pendirian tempat tatanan pemerintahan oleh Raja Rd. Apun Surawidjaja pada abad ke-16.',
+                'video_url' => 'https://www.youtube.com/watch?v=qT_12pXQvG8',
+                'description' => 'Dokumentasi sinematik upacara pencucian pusaka kerajaan abad 13 yang dihadiri para keturunan raja dan masyarakat adat Majalengka.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Bedah Filosofi 12 Rasi Bintang Cawan Zodiak Talaga',
+                'title' => 'Dokumenter Nyiramkeun Pusaka Talaga Jang Jaga',
                 'duration' => '15:10',
                 'sort_order' => 3,
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'description' => 'Penjelasan mendalam mengenai temuan cawan wadah air suci perunggu abad 13 bertatahkan rasi astronomi Sunda Kuno yang pernah dicatat oleh T.S. Raffles.',
+                'video_url' => 'https://www.youtube.com/watch?v=O1_5PZ8-p8A',
+                'description' => 'Eksplorasi nilai historis dan pelestarian warisan budaya tak benda (WBTB) nasional masyarakat Kecamatan Talaga.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
         ]);
 
-        // 5. SEED DOKUMENTER GOSALI (Tabel: gosali_videos)
+        // 5. SEED DOKUMENTER GOSALI (Tabel: gosali_videos - Dokumenter Asli YouTube Talaga Manggung)
         DB::table('gosali_videos')->truncate();
         DB::table('gosali_videos')->insert([
             [
-                'title' => 'Teknik Konservasi & Jamasan Pusaka Keris Simbar Kancana',
+                'title' => 'Kirab Budaya Nyiramkeun Pusaka & Kesenian Bebegig Talaga',
                 'duration' => '10:15',
                 'sort_order' => 1,
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'video_url' => 'https://www.youtube.com/watch?v=L2G5YdC1W4A',
                 'video_file_path' => null,
                 'thumbnail_path' => 'images/artefak/arca_simbar_kancana.jpg',
-                'description' => 'Proses konservasi rutin dan perawatan kimiawi alami minyak warangan untuk menjaga kelestarian bilah keris dan kujang peninggalan Kerajaan.',
+                'description' => 'Pawai parade kirab budaya dan penampilan kesenian tradisional Bebegig menyambut ritual Nyiramkeun Pusaka Talaga.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Panday Wesi: Seni Penempaan Kujang & Senjata Kuno Nusantara',
-                'duration' => '14:20',
+                'title' => 'Penampakan Udara (Drone) Kompleks Museum Talaga Manggung',
+                'duration' => '05:40',
                 'sort_order' => 2,
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'video_file_path' => null,
-                'thumbnail_path' => 'images/artefak/baju_zirah.jpg',
-                'description' => 'Eksplorasi teknik penempaan pandai besi tradisional dalam pembuatan tombak, golok, dan kujang khas wilayah Kerajaan Talaga.',
+                'video_url' => 'https://www.youtube.com/watch?v=fM-mR9Gv9oQ',
+                'description' => 'Dokumentasi penampakan udara lanskap sejarah Bhumi Ageung, Bhumi Alit, dan lingkungan situs Museum Talaga Manggung.',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

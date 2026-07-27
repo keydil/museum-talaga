@@ -145,8 +145,8 @@
             const elPengunjung = document.getElementById('chartPengunjung');
             if (elPengunjung) {
                 const ctxPengunjung = elPengunjung.getContext('2d');
-                const daysLabel = @json($days ?? ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
-                const realVisitorCounts = @json($visitorCounts ?? [0, 0, 0, 0, 0, 0, 0]);
+                const daysLabel = {!! json_encode($days) !!};
+                const realVisitorCounts = {!! json_encode($visitorCounts) !!};
 
                 new Chart(ctxPengunjung, {
                     type: 'line',
@@ -194,7 +194,7 @@
             const elBerita = document.getElementById('chartBerita');
             if (elBerita) {
                 const ctxBerita = elBerita.getContext('2d');
-                const contentDist = @json($contentDistribution ?? ['berita' => 0, 'galeri' => 0, 'video' => 0]);
+                const contentDist = {!! json_encode($contentDistribution) !!};
 
                 new Chart(ctxBerita, {
                     type: 'doughnut',

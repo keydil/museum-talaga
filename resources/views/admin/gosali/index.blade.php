@@ -252,8 +252,13 @@
                 </div>
 
                 <div>
-                    <label class="mb-1 block font-bold uppercase tracking-wider text-stone-600">Video YouTube</label>
+                    <label class="mb-1 block font-bold uppercase tracking-wider text-stone-600">Option 1: Link Video YouTube</label>
                     <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." class="w-full rounded-lg border border-stone-200 bg-stone-50/50 px-3 py-2 focus:border-amber-600 focus:outline-none" />
+                </div>
+
+                <div>
+                    <label class="mb-1 block font-bold uppercase tracking-wider text-stone-600">Option 2: Upload File MP4 Sendiri (Maks 50MB)</label>
+                    <input type="file" name="video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full text-stone-500 file:mr-4 file:rounded-md file:border-0 file:bg-amber-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-amber-800 hover:file:bg-amber-100" />
                 </div>
 
                 <div>

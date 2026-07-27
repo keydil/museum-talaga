@@ -28,8 +28,21 @@
                     </div>
 
                     <div>
-                        <label class="mb-1 block font-semibold text-stone-700">URL Video</label>
-                        <input type="url" name="video_url" value="{{ old('video_url', $video->video_url) }}" class="w-full rounded-lg border border-stone-200 px-3 py-2" required>
+                        <label class="mb-1 block font-semibold text-stone-700">Option 1: URL Video YouTube</label>
+                        <input type="url" name="video_url" value="{{ old('video_url', $video->video_url) }}" class="w-full rounded-lg border border-stone-200 px-3 py-2">
+                    </div>
+
+                    <div>
+                        <label class="mb-1 block font-semibold text-stone-700">Option 2: Upload File Video MP4 (Ganti File MP4)</label>
+                        <input type="file" name="video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full rounded-lg border border-stone-200 px-3 py-2 text-xs">
+                        @if($video->video_file_path)
+                            <p class="mt-1 text-xs text-stone-500">File MP4 saat ini: <span class="font-mono text-amber-800">{{ $video->video_file_path }}</span></p>
+                        @endif
+                    </div>
+
+                    <div>
+                        <label class="mb-1 block font-semibold text-stone-700">Thumbnail Video (opsional)</label>
+                        <input type="file" name="thumbnail" accept="image/*" class="w-full rounded-lg border border-stone-200 px-3 py-2 text-xs">
                     </div>
 
                     <div>

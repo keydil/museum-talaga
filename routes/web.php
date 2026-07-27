@@ -11,7 +11,7 @@ use App\Http\Controllers\HomeCardController;
 use App\Http\Controllers\WalangSujiController;
 use App\Http\Controllers\GosaliVideoController;
 use App\Http\Controllers\StrukturOrgController;
-use App\Http\Controllers\FooterController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ Route::get('/gosali', [HalamanController::class, 'gosali'])->name('gosali');
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard & Profil
-    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::view('profile', 'admin.profile')->name('profile');
 
     // Manajemen Beranda (Hero & Sections)

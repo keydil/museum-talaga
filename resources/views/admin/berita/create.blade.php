@@ -12,7 +12,7 @@
             </div>
 
             <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm">
-                <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
 
                     <!-- Judul Berita -->
@@ -39,7 +39,7 @@
                         <!-- Tanggal Publikasi -->
                         <div>
                             <label for="tanggal_publikasi" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Tanggal Publikasi</label>
-                            <input type="date" name="tanggal_publikasi" id="tanggal_publikasi" value="{{ old('tanggal_publikasi', date('Y-m-day')) }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
+                            <input type="date" name="tanggal_publikasi" id="tanggal_publikasi" value="{{ old('tanggal_publikasi', date('Y-m-d')) }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
                             @error('tanggal_publikasi') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                         </div>
                     </div>

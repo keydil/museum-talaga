@@ -12,7 +12,7 @@
             </div>
 
             <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm">
-                <form action="{{ route('berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
 

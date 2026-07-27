@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="mt-6 md:mt-0">
-                    <a href="{{ route('berita.create') }}" class="inline-flex items-center space-x-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition">
+                    <a href="{{ route('admin.berita.create') }}" class="inline-flex items-center space-x-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -164,7 +164,7 @@
                                                 </a>
 
                                                 <!-- Tombol Edit -->
-                                                <a href="{{ route('berita.edit', $item->id) }}" 
+                                                <a href="{{ route('admin.berita.edit', $item->id) }}" 
                                                    class="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-600 transition"
                                                    title="Edit">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -173,7 +173,7 @@
                                                 </a>
 
                                                 <!-- Tombol Delete -->
-                                                <form action="{{ route('berita.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus berita ini?');">
+                                                <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus berita ini?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
@@ -201,7 +201,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-stone-800 mb-2">Belum Ada Berita</h3>
                         <p class="text-sm text-stone-500 mb-6">Mulai dengan membuat berita pertama Anda.</p>
-                        <a href="{{ route('berita.create') }}" class="inline-flex items-center space-x-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition">
+                        <a href="{{ route('admin.berita.create') }}" class="inline-flex items-center space-x-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>

@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal resmi Museum Talaga Manggung Majalengka. Jelajahi arsip sejarah peninggalan Kerajaan Talaga, katalog artefak 3D interaktif, serta galeri kebudayaan.">
+    <meta property="og:title" content="Museum Talaga Manggung | Portal Resmi Kebudayaan & Sejarah Majalengka">
+    <meta property="og:description" content="Jelajahi keagungan sejarah Kerajaan Talaga Manggung dan warisan kebudayaan di Majalengka secara interaktif.">
+    <meta property="og:image" content="{{ asset('images/webicon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
-    <title>Profil Museum & Arsip Sejarah</title>
+    <title>Museum Talaga Manggung | Portal Resmi Kebudayaan & Sejarah Majalengka</title>
     <!-- Menghubungkan aset CSS & JS lokal Laravel (Tailwind) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

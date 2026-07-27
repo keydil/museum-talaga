@@ -7,18 +7,14 @@
         <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
 
-        <title>Profil Museum & Arsip Sejarah</title>
+        <title>{{ $title ?? 'Panel Kontrol Admin' }} | Museum Talaga Manggung</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://bunny.net" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Tambahkan baris ini di dalam tag head aplikasi Anda jika belum ada -->
-    <script defer src="https://jsdelivr.net"></script>
-    <script defer src="https://jsdelivr.net"></script>
 
     <style>
         /* CSS tambahan untuk mencegah menu berkedip saat pertama dimuat */

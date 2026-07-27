@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Koleksi arsip video dokumenter kebudayaan dan prosesi adat Walang Suji di Museum Talaga Manggung.">
     <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
-    <title>Profil Museum & Arsip Sejarah</title>
+    <title>Walang Suji - Living Museum | Museum Talaga Manggung</title>
     <!-- Menghubungkan aset CSS & JS lokal Laravel (Tailwind) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

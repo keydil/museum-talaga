@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -8,11 +7,11 @@
         <link rel="icon" type="image/png" href="{{ asset('images/webicon.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('images/webicon.png') }}">
 
-        <title>Profil Museum & Arsip Sejarah - Portal Admin</title>
+        <title>Masuk Admin | Museum Talaga Manggung</title>
 
-        <!-- Fonts (Bisa disesuaikan jika ingin menggunakan font lain) -->
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://bunny.net" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

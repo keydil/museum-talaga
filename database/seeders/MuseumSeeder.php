@@ -230,64 +230,54 @@ class MuseumSeeder extends Seeder
             ]
         ]);
 
-        // 4. SEED DOKUMENTER WALANG SUJI (Tabel: walang_suji_videos - Dokumenter Asli YouTube Talaga Manggung)
+        // 4. SEED DOKUMENTER WALANG SUJI (Tabel: walang_suji_videos - Rickroll Edition)
         DB::table('walang_suji_videos')->truncate();
         DB::table('walang_suji_videos')->insert([
             [
-                'title' => 'Prosesi Adat Ritual Nyiramkeun Pusaka Talaga Manggung',
-                'duration' => '12:45',
+                'title' => 'Prosesi Adat Ritual Nyiramkeun Pusaka (Classic Rickroll)',
+                'duration' => '03:33',
                 'sort_order' => 1,
-                'video_url' => 'https://www.youtube.com/watch?v=115Z-w1-t4M',
-                'description' => 'Dokumentasi sakral ritual pembersihan air suci benda-benda pusaka leluhur Kerajaan Talaga Manggung yang dilaksanakan setiap bulan Syafar di Bhumi Alit.',
+                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'description' => 'Dokumentasi visual sakral ritual pembersihan air suci benda-benda pusaka leluhur Kerajaan Talaga Manggung (Never Gonna Give You Up - Rick Astley).',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Cleansing The Royal Heirlooms of Talaga Manggung',
-                'duration' => '08:30',
+                'title' => 'Cleansing The Royal Heirlooms of Talaga Manggung (Ralph Rickroll)',
+                'duration' => '02:18',
                 'sort_order' => 2,
-                'video_url' => 'https://www.youtube.com/watch?v=qT_12pXQvG8',
-                'description' => 'Dokumentasi sinematik upacara pencucian pusaka kerajaan abad 13 yang dihadiri para keturunan raja dan masyarakat adat Majalengka.',
-                'guide_pdf_path' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Dokumenter Nyiramkeun Pusaka Talaga Jang Jaga',
-                'duration' => '15:10',
-                'sort_order' => 3,
-                'video_url' => 'https://www.youtube.com/watch?v=O1_5PZ8-p8A',
-                'description' => 'Eksplorasi nilai historis dan pelestarian warisan budaya tak benda (WBTB) nasional masyarakat Kecamatan Talaga.',
+                'video_url' => 'https://www.youtube.com/watch?v=f-tLrnU997c',
+                'description' => 'Dokumentasi sinematik upacara pencucian pusaka kerajaan (Ralph Breaks The Internet Rickroll Version).',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
         ]);
 
-        // 5. SEED DOKUMENTER GOSALI (Tabel: gosali_videos - Dokumenter Asli YouTube Talaga Manggung)
+        // 5. SEED DOKUMENTER GOSALI (Tabel: gosali_videos - Rickroll Edition)
         DB::table('gosali_videos')->truncate();
         DB::table('gosali_videos')->insert([
             [
-                'title' => 'Kirab Budaya Nyiramkeun Pusaka & Kesenian Bebegig Talaga',
-                'duration' => '10:15',
+                'title' => 'Kirab Budaya Nyiramkeun Pusaka & Kesenian Bebegig (Rick Astley)',
+                'duration' => '03:33',
                 'sort_order' => 1,
-                'video_url' => 'https://www.youtube.com/watch?v=L2G5YdC1W4A',
+                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
                 'video_file_path' => null,
                 'thumbnail_path' => 'images/artefak/arca_simbar_kancana.jpg',
-                'description' => 'Pawai parade kirab budaya dan penampilan kesenian tradisional Bebegig menyambut ritual Nyiramkeun Pusaka Talaga.',
+                'description' => 'Pawai parade kirab budaya dan penampilan kesenian tradisional Bebegig (Never Gonna Give You Up - Classic).',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Penampakan Udara (Drone) Kompleks Museum Talaga Manggung',
-                'duration' => '05:40',
+                'title' => 'Penampakan Udara (Drone) Kompleks Museum (Ralph Rickroll)',
+                'duration' => '02:18',
                 'sort_order' => 2,
-                'video_url' => 'https://www.youtube.com/watch?v=fM-mR9Gv9oQ',
+                'video_url' => 'https://www.youtube.com/watch?v=f-tLrnU997c',
                 'video_file_path' => null,
                 'thumbnail_path' => 'images/artefak/bhumi_ageung.jpg',
-                'description' => 'Dokumentasi penampakan udara lanskap sejarah Bhumi Ageung, Bhumi Alit, dan lingkungan situs Museum Talaga Manggung.',
+                'description' => 'Dokumentasi penampakan udara lanskap sejarah situs Museum Talaga Manggung (Wreck-It Ralph Rickroll Version).',
                 'guide_pdf_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

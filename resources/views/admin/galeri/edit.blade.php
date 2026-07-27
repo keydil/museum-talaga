@@ -52,11 +52,20 @@
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Pratinjau Gambar Saat Ini</label>
                         <div class="mb-4">
-                            <img src="{{ asset('storage/' . $galeri->foto) }}" alt="Preview" class="w-32 h-32 object-cover rounded-xl border border-stone-200 shadow-sm">
+                            @php
+                                $imgSrc = \Illuminate\Support\Str::startsWith($galeri->foto, 'http') 
+                                    ? $galeri->foto 
+                                    : (\Illuminate\Support\Str::startsWith($galeri->foto, 'images/') 
+                                        ? asset($galeri->foto) 
+                                        : (\Illuminate\Support\Str::startsWith($galeri->foto, 'storage/') 
+                                            ? asset($galeri->foto) 
+                                            : asset('storage/' . $galeri->foto)));
+                            @endphp
+                            <img id="image_preview" src="{{ $imgSrc }}" alt="Preview" class="w-40 h-40 object-cover rounded-xl border border-stone-200 shadow-sm bg-stone-50">
                         </div>
 
                         <label for="foto" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Ganti Gambar Baru (Opsional)</label>
-                        <input type="file" name="foto" id="foto" class="w-full text-xs text-stone-500 border border-stone-200 rounded-xl bg-stone-50/40 file:mr-4 file:py-2.5 file:px-4 file:rounded-l-xl file:border-0 file:text-xs file:font-bold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200">
+                        <input type="file" name="foto" id="foto" accept="image/*" class="w-full text-xs text-stone-500 border border-stone-200 rounded-xl bg-stone-50/40 file:mr-4 file:py-2.5 file:px-4 file:rounded-l-xl file:border-0 file:text-xs file:font-bold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200 cursor-pointer">
                         @error('foto') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 
@@ -74,4 +83,18 @@
 
         </div>
     </div>
+
+    <script>
+        document.getElementById('foto')?.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('image_preview');
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </x-app-layout>

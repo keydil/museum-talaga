@@ -88,12 +88,12 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
 
         $validated = $request->validate([
-    'judul' => 'required|string|max:255',
-    'deskripsi' => 'nullable|string|max:1000',
-    'kategori' => 'required|string|max:100',
-    'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:3048',
-    'link_3d' => 'nullable|url', // <-- Validasi wajib berupa format link URL valid
-]);
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
+            'kategori' => 'required|string|max:100',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'link_3d' => 'nullable|url',
+        ]);
 
 
         if ($request->hasFile('foto')) {

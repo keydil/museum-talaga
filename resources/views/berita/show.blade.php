@@ -94,7 +94,7 @@
                         <article class="bg-white border border-amber-100 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300">
                             <div class="h-40 bg-stone-200 relative">
                                 @if($item->foto)
-                                    <img src="{{ asset('storage/' . $item->foto) }}" 
+                                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" 
                                          alt="{{ $item->judul }}" 
                                          class="w-full h-full object-cover">
                                 @else

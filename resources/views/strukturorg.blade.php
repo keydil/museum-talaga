@@ -51,8 +51,17 @@
         <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm flex flex-col items-center">
             <!-- PERBAIKAN: Mengubah $struktur->image_path menjadi $struktur->image sesuai kolom DB -->
             @if(isset($struktur) && isset($struktur->image))
+                @php
+                    $imgSrcPubBagan = \Illuminate\Support\Str::startsWith($struktur->image, 'http') 
+                        ? $struktur->image 
+                        : (\Illuminate\Support\Str::startsWith($struktur->image, 'images/') 
+                            ? asset($struktur->image) 
+                            : (\Illuminate\Support\Str::startsWith($struktur->image, 'storage/') 
+                                ? asset($struktur->image) 
+                                : asset('storage/' . $struktur->image)));
+                @endphp
                 <div class="w-full bg-stone-50 rounded-2xl p-4 border border-stone-100 flex justify-center overflow-hidden">
-                    <img src="{{ asset('storage/' . $struktur->image) }}" 
+                    <img src="{{ $imgSrcPubBagan }}" 
                          alt="Bagan Struktur Organisasi Museum" 
                          onclick="openImageModal(this.src)"
                          class="max-w-full h-auto rounded-xl shadow-sm hover:scale-[1.01] transition-transform duration-300 cursor-zoom-in">

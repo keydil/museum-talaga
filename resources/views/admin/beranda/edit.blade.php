@@ -48,7 +48,16 @@
                     @if($card->icon_or_image)
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Pratinjau Foto Saat Ini</label>
-                            <img src="{{ asset('storage/' . $card->icon_or_image) }}" class="w-40 h-24 object-cover rounded-xl border border-stone-200">
+                            @php
+                                $imgSrcCard = \Illuminate\Support\Str::startsWith($card->icon_or_image, 'http') 
+                                    ? $card->icon_or_image 
+                                    : (\Illuminate\Support\Str::startsWith($card->icon_or_image, 'images/') 
+                                        ? asset($card->icon_or_image) 
+                                        : (\Illuminate\Support\Str::startsWith($card->icon_or_image, 'storage/') 
+                                            ? asset($card->icon_or_image) 
+                                            : asset('storage/' . $card->icon_or_image)));
+                            @endphp
+                            <img id="image_preview_card" src="{{ $imgSrcCard }}" class="w-40 h-24 object-cover rounded-xl border border-stone-200 shadow-sm bg-stone-50">
                         </div>
                     @endif
 
@@ -71,4 +80,18 @@
 
         </div>
     </div>
+
+    <script>
+        document.getElementById('icon_or_image')?.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('image_preview_card');
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </x-app-layout>

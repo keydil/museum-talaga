@@ -71,7 +71,16 @@
                 <tr class="hover:bg-stone-50/50 transition">
                     <td class="py-3">
                         @if($hCard->icon_or_image)
-                            <img src="{{ asset('storage/' . $hCard->icon_or_image) }}" class="w-10 h-10 object-cover rounded-lg border border-amber-100">
+                            @php
+                                $imgSrcListCard = \Illuminate\Support\Str::startsWith($hCard->icon_or_image, 'http') 
+                                    ? $hCard->icon_or_image 
+                                    : (\Illuminate\Support\Str::startsWith($hCard->icon_or_image, 'images/') 
+                                        ? asset($hCard->icon_or_image) 
+                                        : (\Illuminate\Support\Str::startsWith($hCard->icon_or_image, 'storage/') 
+                                            ? asset($hCard->icon_or_image) 
+                                            : asset('storage/' . $hCard->icon_or_image)));
+                            @endphp
+                            <img src="{{ $imgSrcListCard }}" class="w-10 h-10 object-cover rounded-lg border border-amber-100 bg-stone-50">
                         @else
                             <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center text-stone-400 text-xs">No Img</div>
                         @endif

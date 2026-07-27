@@ -80,7 +80,7 @@ class BeritaController extends Controller
             'konten_lengkap' => 'required|string',
             'kategori' => 'required|string|max:100',
             'tanggal_publikasi' => 'required|date',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         // Handle file upload
@@ -114,7 +114,7 @@ class BeritaController extends Controller
             'konten_lengkap' => 'required|string',
             'kategori' => 'required|string|max:100',
             'tanggal_publikasi' => 'required|date',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         // Handle file upload

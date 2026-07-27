@@ -196,7 +196,16 @@
                     <!-- Pratinjau Foto atau Icon Gambar Kartu dari Storage -->
                     <div class="mb-6 flex h-44 items-center justify-center rounded-lg bg-amber-50 overflow-hidden border border-amber-100/60">
                         @if($card->icon_or_image)
-                            <img src="{{ asset('storage/' . $card->icon_or_image) }}" alt="{{ $card->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            @php
+                                $imgSrcWelcome = \Illuminate\Support\Str::startsWith($card->icon_or_image, 'http') 
+                                    ? $card->icon_or_image 
+                                    : (\Illuminate\Support\Str::startsWith($card->icon_or_image, 'images/') 
+                                        ? asset($card->icon_or_image) 
+                                        : (\Illuminate\Support\Str::startsWith($card->icon_or_image, 'storage/') 
+                                            ? asset($card->icon_or_image) 
+                                            : asset('storage/' . $card->icon_or_image)));
+                            @endphp
+                            <img src="{{ $imgSrcWelcome }}" alt="{{ $card->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <!-- Placeholder jika admin tidak mengunggah gambar -->
                             <svg class="h-12 w-12 text-amber-800/30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

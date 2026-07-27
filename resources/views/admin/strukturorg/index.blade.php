@@ -106,7 +106,16 @@
                         
                         <div class="relative group w-full flex justify-center">
                             @if(isset($struktur) && isset($struktur->image))
-                                <img id="bagan_preview" src="{{ asset('storage/' . $struktur->image) }}" 
+                                @php
+                                    $imgSrcBagan = \Illuminate\Support\Str::startsWith($struktur->image, 'http') 
+                                        ? $struktur->image 
+                                        : (\Illuminate\Support\Str::startsWith($struktur->image, 'images/') 
+                                            ? asset($struktur->image) 
+                                            : (\Illuminate\Support\Str::startsWith($struktur->image, 'storage/') 
+                                                ? asset($struktur->image) 
+                                                : asset('storage/' . $struktur->image)));
+                                @endphp
+                                <img id="bagan_preview" src="{{ $imgSrcBagan }}" 
                                      alt="Bagan Struktur Organisasi" 
                                      class="max-h-48 object-contain rounded-xl border border-stone-200 shadow-sm bg-white">
                             @else

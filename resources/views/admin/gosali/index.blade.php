@@ -170,8 +170,12 @@
                         <div id="playlistList" class="max-h-[520px] divide-y divide-stone-100 overflow-y-auto">
                             @forelse($videos as $video)
                                 @php
-                                    $videoSource = $video->video_file_path ? asset('storage/' . $video->video_file_path) : ($video->video_url ?? '');
-                                    $posterSource = $video->thumbnail_path ? asset('storage/' . $video->thumbnail_path) : '';
+                                    $videoSource = $video->video_file_path 
+                                        ? (\Illuminate\Support\Str::startsWith($video->video_file_path, 'http') ? $video->video_file_path : (\Illuminate\Support\Str::startsWith($video->video_file_path, 'storage/') ? asset($video->video_file_path) : asset('storage/' . $video->video_file_path))) 
+                                        : ($video->video_url ?? '');
+                                    $posterSource = $video->thumbnail_path 
+                                        ? (\Illuminate\Support\Str::startsWith($video->thumbnail_path, 'http') ? $video->thumbnail_path : (\Illuminate\Support\Str::startsWith($video->thumbnail_path, 'images/') ? asset($video->thumbnail_path) : (\Illuminate\Support\Str::startsWith($video->thumbnail_path, 'storage/') ? asset($video->thumbnail_path) : asset('storage/' . $video->thumbnail_path)))) 
+                                        : '';
                                     $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
                                     $youtubeEmbedUrl = '';
                                     if ($isYoutube) {
@@ -189,7 +193,7 @@
                                 >
                                     <div class="h-20 w-24 shrink-0 overflow-hidden rounded bg-stone-800">
                                         @if($video->thumbnail_path)
-                                            <img src="{{ asset('storage/' . $video->thumbnail_path) }}" alt="{{ $video->title }}" class="h-full w-full object-cover">
+                                            <img src="{{ $posterSource }}" alt="{{ $video->title }}" class="h-full w-full object-cover">
                                         @else
                                             <div class="flex h-full items-center justify-center bg-black/30 text-[10px] font-semibold uppercase tracking-wide text-amber-200">
                                                 VIDEO

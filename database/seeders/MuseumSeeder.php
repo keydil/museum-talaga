@@ -10,8 +10,8 @@ use App\Models\User;
 class MuseumSeeder extends Seeder
 {
     /**
-     * Seed data resmi dari 3 PDF Asli Museum Talaga Manggung:
-     * 1. KATALOG MTM PDF (Beserta Foto Artefak Asli yang Diekstrak dari PDF)
+     * Seed data komplit dari 3 PDF Asli Museum Talaga Manggung:
+     * 1. KATALOG MTM PDF (Semua 17 Artefak Pusaka & Foto Asli PDF)
      * 2. PROFIL YAYASAN Talaga manggung sk PDF
      * 3. Portofolio Talaga Manggung (Final) PDF
      */
@@ -71,7 +71,7 @@ class MuseumSeeder extends Seeder
             ]
         ]);
 
-        // 3. SEED KOLEKSI ARTEFAK GALERI (Tabel: galeris dengan foto asli PDF)
+        // 3. SEED KOLEKSI ARTEFAK GALERI (Tabel: galeris - Total 17 Artefak Lengkap)
         DB::table('galeris')->truncate();
         DB::table('galeris')->insert([
             [
@@ -88,6 +88,51 @@ class MuseumSeeder extends Seeder
                 'deskripsi' => 'Arca perunggu berlapis (croom) emas abad ke-13 (Tinggi 36,8 Cm). Arca berbentuk Buddha berdiri tegak dengan sikap Abhaya Mudra (telapak tangan kanan lurus ke depan), dipercaya merupakan gambaran wujud Nyi Ratu Dewi Simbarkancana, Ratu Kerajaan Talaga Manggung.',
                 'kategori' => 'Arca Perunggu',
                 'foto' => 'images/artefak/arca_simbar_kancana.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Keris Pusaka Karuhun Talaga',
+                'deskripsi' => 'Senjata pusaka berbilah keris warisan para Raja dan Sesepuh Kerajaan Talaga Manggung yang disucikan dan dibersihkan setiap upacara adat Nyiramkeun.',
+                'kategori' => 'Senjata Pusaka',
+                'foto' => 'images/artefak/keris_pusaka.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Kujang Pusaka Sunda Kuno',
+                'deskripsi' => 'Senjata pusaka tradisional khas Pasundan peninggalan Kerajaan Talaga Manggung bermaterialkan logam perunggu dan besi pilihan.',
+                'kategori' => 'Senjata Pusaka',
+                'foto' => 'images/artefak/kujang_pusaka.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Tombak Pusaka Kerajaan',
+                'deskripsi' => 'Senjata tombak kuno peninggalan para pengawal dan kesatria Kerajaan Talaga Manggung.',
+                'kategori' => 'Senjata Pusaka',
+                'foto' => 'images/artefak/tombak_pusaka.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Baju Kere (Zirah Baja Kuno)',
+                'deskripsi' => 'Rompi zirah perang yang terbuat dari baja kuno peninggalan prajurit Kerajaan Talaga Manggung.',
+                'kategori' => 'Senjata & Zirah',
+                'foto' => 'images/artefak/baju_zirah.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Golok Pusaka Kerajaan',
+                'deskripsi' => 'Senjata landepan golok kuno koleksi Museum Talaga Manggung peninggalan masa pertahanan Kerajaan.',
+                'kategori' => 'Senjata Pusaka',
+                'foto' => 'images/artefak/golok_pusaka.jpg',
                 'link_3d' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -120,19 +165,28 @@ class MuseumSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'judul' => 'Batu Palungguhan / Batu Pentasbih',
-                'deskripsi' => 'Batu situs tempat penobatan Raja dan Putra Mahkota Kerajaan Talaga Manggung yang terletak di pelataran halaman Museum Talaga Manggung.',
-                'kategori' => 'Prasasti & Batu Site',
-                'foto' => 'images/artefak/batu_palungguhan.jpg',
+                'judul' => 'Koleksi Terracotta & Keramik Kuno',
+                'deskripsi' => 'Ornamen terakota dan pecahan keramik antik peninggalan eksterior bangunan serta perkakas rumah tangga Kerajaan Talaga Manggung.',
+                'kategori' => 'Benda Bersejarah',
+                'foto' => 'images/artefak/terracotta.jpg',
                 'link_3d' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'judul' => 'Baju Kere (Zirah Baja Kuno)',
-                'deskripsi' => 'Rompi zirah perang yang terbuat dari baja kuno peninggalan prajurit Kerajaan Talaga Manggung.',
-                'kategori' => 'Senjata & Zirah',
-                'foto' => 'images/artefak/baju_zirah.jpg',
+                'judul' => 'Mata Uang Gobog Kuno',
+                'deskripsi' => 'Koleksi uang logam kuno (Mata Uang Gobog) yang dipergunakan sebagai alat transaksi perdagangan era Kerajaan Talaga.',
+                'kategori' => 'Uang Kuno & Komoditas',
+                'foto' => 'images/artefak/uang_gobog.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Perangkat Goong Renteng & Kenong',
+                'deskripsi' => 'Perangkat gamelan perunggu kuno khas Sunda peninggalan seni budaya istana Kerajaan Talaga Manggung.',
+                'kategori' => 'Karya Seni Budaya',
+                'foto' => 'images/artefak/goong_renteng.jpg',
                 'link_3d' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -151,6 +205,24 @@ class MuseumSeeder extends Seeder
                 'deskripsi' => 'Koleksi 14 unit senapan api sulut kuno milik Kerajaan Talaga Manggung yang tersimpan rapi di Museum.',
                 'kategori' => 'Senjata Berpeledak',
                 'foto' => 'images/artefak/senapan_sulut.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Batu Lingga Yoni',
+                'deskripsi' => 'Situs batu Lingga Yoni peninggalan peradaban masa Hindu-Buddha yang terletak di halaman depan Museum Talaga Manggung.',
+                'kategori' => 'Prasasti & Batu Site',
+                'foto' => 'images/artefak/batu_lingga.jpg',
+                'link_3d' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Batu Palungguhan / Batu Pentasbih',
+                'deskripsi' => 'Batu situs tempat penobatan Raja dan Putra Mahkota Kerajaan Talaga Manggung yang terletak di pelataran halaman Museum Talaga Manggung.',
+                'kategori' => 'Prasasti & Batu Site',
+                'foto' => 'images/artefak/batu_palungguhan.jpg',
                 'link_3d' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

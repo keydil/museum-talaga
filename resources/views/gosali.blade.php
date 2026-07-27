@@ -131,7 +131,7 @@
                     @forelse($videos as $video)
                         @php
                             $videoSource = $video->video_file_path ? asset('storage/' . $video->video_file_path) : ($video->video_url ?? '');
-                            $posterSource = $video->thumbnail_path ? asset('storage/' . $video->thumbnail_path) : '';
+                            $posterSource = $video->thumbnail_path ? (\Illuminate\Support\Str::startsWith($video->thumbnail_path, 'http') ? $video->thumbnail_path : (\Illuminate\Support\Str::startsWith($video->thumbnail_path, 'images/') ? asset($video->thumbnail_path) : asset('storage/' . $video->thumbnail_path))) : '';
                             $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
                             $youtubeEmbedUrl = '';
                             if ($isYoutube) {

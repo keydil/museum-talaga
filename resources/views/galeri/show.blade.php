@@ -53,7 +53,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($related as $item)
                         <a href="{{ route('galeri.show', $item) }}" class="group bg-white rounded-2xl border border-stone-200/70 overflow-hidden shadow-sm hover:shadow-md transition">
-                            <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-40 object-cover group-hover:scale-105 transition duration-300">
+                            <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" alt="{{ $item->judul }}" class="w-full h-40 object-cover group-hover:scale-105 transition duration-300">
                             <div class="p-4">
                                 <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-600">{{ $item->kategori }}</p>
                                 <h3 class="mt-1 text-sm font-semibold text-stone-800">{{ $item->judul }}</h3>

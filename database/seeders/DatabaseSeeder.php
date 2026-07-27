@@ -15,12 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'admin@museum.com'],
-            [
-                'name' => 'Administrator Museum',
-                'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
-            ]
-        );
+        $this->call(MuseumSeeder::class);
     }
 }

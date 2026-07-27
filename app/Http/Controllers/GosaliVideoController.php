@@ -91,12 +91,8 @@ class GosaliVideoController extends Controller
             $validated['guide_pdf_path'] = $request->file('guide_pdf')->store('gosali', 'public');
         }
 
-        if (empty($validated['video_url']) && empty($validated['video_file_path']) && !empty($video->video_file_path)) {
-            $validated['video_file_path'] = $video->video_file_path;
-        }
-
-        if (empty($validated['video_url']) && empty($validated['video_file_path'])) {
-            $validated['video_url'] = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        if (empty($validated['video_url'])) {
+            $validated['video_url'] = $video->video_url;
         }
 
         $video->update($validated);

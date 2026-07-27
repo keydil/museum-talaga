@@ -96,12 +96,8 @@ class WalangSujiController extends Controller
             $validated['guide_pdf_path'] = $request->file('guide_pdf')->store('walangsuji', 'public');
         }
 
-        if (empty($validated['video_url']) && empty($validated['video_file_path']) && !empty($video->video_file_path)) {
-            $validated['video_file_path'] = $video->video_file_path;
-        }
-
-        if (empty($validated['video_url']) && empty($validated['video_file_path'])) {
-            $validated['video_url'] = 'https://www.w3schools.com/html/mov_bbb.mp4';
+        if (empty($validated['video_url'])) {
+            $validated['video_url'] = $video->video_url;
         }
 
         $video->update($validated);

@@ -27,17 +27,42 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label class="mb-1 block font-semibold text-stone-700">Option 1: URL Video YouTube</label>
-                        <input type="url" name="video_url" value="{{ old('video_url', $video->video_url) }}" class="w-full rounded-lg border border-stone-200 px-3 py-2">
-                    </div>
+                    <div class="rounded-xl border border-stone-200 bg-stone-50/70 p-4">
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-stone-600">Pilih Sumber Video Utama:</label>
+                        
+                        <!-- Segmented Tab Switcher -->
+                        @php
+                            $isFileType = old('source_type', ($video->video_file_path ? 'file' : 'youtube')) === 'file';
+                        @endphp
+                        <div class="flex rounded-lg bg-stone-200/80 p-1 mb-4 text-xs font-bold">
+                            <button type="button" id="tab_youtube" onclick="switchVideoSource('youtube')" class="flex-1 rounded-md py-2 text-center transition {{ !$isFileType ? 'shadow-sm bg-white text-amber-900 font-bold' : 'text-stone-600 hover:text-stone-900 font-medium' }}">
+                                ▶️ Link YouTube
+                            </button>
+                            <button type="button" id="tab_file" onclick="switchVideoSource('file')" class="flex-1 rounded-md py-2 text-center transition {{ $isFileType ? 'shadow-sm bg-white text-amber-900 font-bold' : 'text-stone-600 hover:text-stone-900 font-medium' }}">
+                                📁 Upload MP4 Laptop
+                            </button>
+                        </div>
 
-                    <div>
-                        <label class="mb-1 block font-semibold text-stone-700">Option 2: Upload File Video MP4 (Ganti File MP4)</label>
-                        <input type="file" name="video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full rounded-lg border border-stone-200 px-3 py-2 text-xs">
-                        @if($video->video_file_path)
-                            <p class="mt-1 text-xs text-stone-500">File MP4 saat ini: <span class="font-mono text-amber-800">{{ $video->video_file_path }}</span></p>
-                        @endif
+                        <!-- Mode 1: YouTube -->
+                        <div id="wrapper_youtube" class="{{ $isFileType ? 'hidden' : '' }}">
+                            <label class="mb-1 block font-semibold text-stone-700 text-xs">URL Video YouTube</label>
+                            <input type="url" name="video_url" id="input_video_url" value="{{ old('video_url', $video->video_url) }}" placeholder="https://www.youtube.com/watch?v=..." class="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs focus:border-amber-600 focus:outline-none">
+                            <p class="mt-1 text-[11px] text-stone-400">Masukkan link YouTube yang ingin diputar di player publik.</p>
+                        </div>
+
+                        <!-- Mode 2: MP4 File Upload -->
+                        <div id="wrapper_file" class="{{ !$isFileType ? 'hidden' : '' }}">
+                            <label class="mb-1 block font-semibold text-stone-700 text-xs">Pilih File Video MP4 (Max 100MB)</label>
+                            <input type="file" name="video_file" id="input_video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs">
+                            @if($video->video_file_path)
+                                <p class="mt-1.5 text-[11px] text-emerald-700 flex items-center gap-1 font-semibold">
+                                    ✓ File MP4 Aktif Saat Ini: <span class="font-mono bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded text-emerald-800">{{ $video->video_file_path }}</span>
+                                </p>
+                            @endif
+                            <p class="mt-1 text-[11px] text-stone-400">Upload video MP4 baru dari laptop untuk menggantikan video YouTube.</p>
+                        </div>
+
+                        <input type="hidden" name="source_type" id="input_source_type" value="{{ $isFileType ? 'file' : 'youtube' }}">
                     </div>
 
                     <div>
@@ -67,6 +92,28 @@
     </div>
 
     <script>
+        function switchVideoSource(type) {
+            const tabYt = document.getElementById('tab_youtube');
+            const tabFile = document.getElementById('tab_file');
+            const wrapYt = document.getElementById('wrapper_youtube');
+            const wrapFile = document.getElementById('wrapper_file');
+            const sourceType = document.getElementById('input_source_type');
+
+            if (sourceType) sourceType.value = type;
+
+            if (type === 'youtube') {
+                if (tabYt) tabYt.className = 'flex-1 rounded-md py-2 text-center transition shadow-sm bg-white text-amber-900 font-bold';
+                if (tabFile) tabFile.className = 'flex-1 rounded-md py-2 text-center transition text-stone-600 hover:text-stone-900 font-medium';
+                if (wrapYt) wrapYt.classList.remove('hidden');
+                if (wrapFile) wrapFile.classList.add('hidden');
+            } else {
+                if (tabFile) tabFile.className = 'flex-1 rounded-md py-2 text-center transition shadow-sm bg-white text-amber-900 font-bold';
+                if (tabYt) tabYt.className = 'flex-1 rounded-md py-2 text-center transition text-stone-600 hover:text-stone-900 font-medium';
+                if (wrapFile) wrapFile.classList.remove('hidden');
+                if (wrapYt) wrapYt.classList.add('hidden');
+            }
+        }
+
         function handleFormSubmit(form) {
             const btn = document.getElementById('btnSubmit');
             if (btn) {

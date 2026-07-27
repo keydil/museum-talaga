@@ -251,14 +251,33 @@
                     </div>
                 </div>
 
-                <div>
-                    <label class="mb-1 block font-bold uppercase tracking-wider text-stone-600">Option 1: Link Video YouTube</label>
-                    <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." class="w-full rounded-lg border border-stone-200 bg-stone-50/50 px-3 py-2 focus:border-amber-600 focus:outline-none" />
-                </div>
+                <div class="rounded-xl border border-stone-200 bg-stone-50/70 p-4">
+                    <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-stone-600">Pilih Sumber Video Utama:</label>
+                    
+                    <div class="flex rounded-lg bg-stone-200/80 p-1 mb-4 text-xs font-bold">
+                        <button type="button" id="modal_tab_youtube" onclick="switchModalVideoSource('youtube')" class="flex-1 rounded-md py-2 text-center transition shadow-sm bg-white text-amber-900 font-bold">
+                            ▶️ Link YouTube
+                        </button>
+                        <button type="button" id="modal_tab_file" onclick="switchModalVideoSource('file')" class="flex-1 rounded-md py-2 text-center transition text-stone-600 hover:text-stone-900 font-medium">
+                            📁 Upload MP4 Laptop
+                        </button>
+                    </div>
 
-                <div>
-                    <label class="mb-1 block font-bold uppercase tracking-wider text-stone-600">Option 2: Upload File MP4 Sendiri (Maks 50MB)</label>
-                    <input type="file" name="video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full text-stone-500 file:mr-4 file:rounded-md file:border-0 file:bg-amber-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-amber-800 hover:file:bg-amber-100" />
+                    <!-- Mode 1: YouTube -->
+                    <div id="modal_wrapper_youtube">
+                        <label class="mb-1 block font-semibold text-stone-700 text-xs">URL Video YouTube</label>
+                        <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." class="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs focus:border-amber-600 focus:outline-none" />
+                        <p class="mt-1 text-[11px] text-stone-400">Masukkan link YouTube yang ingin diputar di player publik.</p>
+                    </div>
+
+                    <!-- Mode 2: MP4 File Upload -->
+                    <div id="modal_wrapper_file" class="hidden">
+                        <label class="mb-1 block font-semibold text-stone-700 text-xs">Pilih File Video MP4 (Max 100MB)</label>
+                        <input type="file" name="video_file" accept="video/mp4,video/webm,video/quicktime" class="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs" />
+                        <p class="mt-1 text-[11px] text-stone-400">File MP4 akan langsung diunggah dan dijadikan video utama.</p>
+                    </div>
+
+                    <input type="hidden" name="source_type" id="modal_input_source_type" value="youtube" />
                 </div>
 
                 <div>
@@ -285,6 +304,28 @@
     </div>
 
     <script>
+        function switchModalVideoSource(type) {
+            const tabYt = document.getElementById('modal_tab_youtube');
+            const tabFile = document.getElementById('modal_tab_file');
+            const wrapYt = document.getElementById('modal_wrapper_youtube');
+            const wrapFile = document.getElementById('modal_wrapper_file');
+            const sourceType = document.getElementById('modal_input_source_type');
+
+            if (sourceType) sourceType.value = type;
+
+            if (type === 'youtube') {
+                if (tabYt) tabYt.className = 'flex-1 rounded-md py-2 text-center transition shadow-sm bg-white text-amber-900 font-bold';
+                if (tabFile) tabFile.className = 'flex-1 rounded-md py-2 text-center transition text-stone-600 hover:text-stone-900 font-medium';
+                if (wrapYt) wrapYt.classList.remove('hidden');
+                if (wrapFile) wrapFile.classList.add('hidden');
+            } else {
+                if (tabFile) tabFile.className = 'flex-1 rounded-md py-2 text-center transition shadow-sm bg-white text-amber-900 font-bold';
+                if (tabYt) tabYt.className = 'flex-1 rounded-md py-2 text-center transition text-stone-600 hover:text-stone-900 font-medium';
+                if (wrapFile) wrapFile.classList.remove('hidden');
+                if (wrapYt) wrapYt.classList.add('hidden');
+            }
+        }
+
         let draggedId = null;
 
         function openAdminModal(modalId) {

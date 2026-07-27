@@ -21,15 +21,21 @@ class WalangSujiController extends Controller
             'title' => 'required|string|max:255',
             'duration' => 'required|string|max:20',
             'sort_order' => 'required|integer',
+            'source_type' => 'nullable|string|in:youtube,file',
             'video_url' => 'nullable|url',
-            'video_file' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:51200',
+            'video_file' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:102400',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'required|string',
             'guide_pdf' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
-        if ($request->hasFile('video_file')) {
+        $sourceType = $request->input('source_type', 'youtube');
+
+        if ($sourceType === 'file' && $request->hasFile('video_file')) {
             $validated['video_file_path'] = $request->file('video_file')->store('walangsuji/videos', 'public');
+            $validated['video_url'] = null;
+        } else {
+            $validated['video_file_path'] = null;
         }
 
         if ($request->hasFile('thumbnail')) {
@@ -65,19 +71,32 @@ class WalangSujiController extends Controller
             'title' => 'required|string|max:255',
             'duration' => 'required|string|max:20',
             'sort_order' => 'required|integer',
+            'source_type' => 'nullable|string|in:youtube,file',
             'video_url' => 'nullable|url',
-            'video_file' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:51200',
+            'video_file' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:102400',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'required|string',
             'guide_pdf' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
-        if ($request->hasFile('video_file')) {
+        $sourceType = $request->input('source_type', ($video->video_file_path ? 'file' : 'youtube'));
+
+        if ($sourceType === 'file') {
+            if ($request->hasFile('video_file')) {
+                if ($video->video_file_path && Storage::disk('public')->exists($video->video_file_path)) {
+                    Storage::disk('public')->delete($video->video_file_path);
+                }
+                $validated['video_file_path'] = $request->file('video_file')->store('walangsuji/videos', 'public');
+            } else {
+                $validated['video_file_path'] = $video->video_file_path;
+            }
+            $validated['video_url'] = null;
+        } else {
             if ($video->video_file_path && Storage::disk('public')->exists($video->video_file_path)) {
                 Storage::disk('public')->delete($video->video_file_path);
             }
-
-            $validated['video_file_path'] = $request->file('video_file')->store('walangsuji/videos', 'public');
+            $validated['video_file_path'] = null;
+            $validated['video_url'] = !empty($validated['video_url']) ? $validated['video_url'] : $video->video_url;
         }
 
         if ($request->hasFile('thumbnail')) {
@@ -94,10 +113,6 @@ class WalangSujiController extends Controller
             }
 
             $validated['guide_pdf_path'] = $request->file('guide_pdf')->store('walangsuji', 'public');
-        }
-
-        if (empty($validated['video_url'])) {
-            $validated['video_url'] = $video->video_url;
         }
 
         $video->update($validated);

@@ -146,11 +146,11 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <button type="button" class="rounded-lg bg-amber-100 px-3.5 py-2 text-xs font-semibold text-amber-900 transition hover:bg-amber-200">
-                                    📥 Unduh Panduan
-                                </button>
-                                <button type="button" onclick="openAdminModal('modalTambahVideo')" class="rounded-lg border border-stone-200 px-3.5 py-2 text-xs font-semibold text-stone-700 transition hover:bg-stone-50">
-                                    ✏️ Ubah Konten
+                                <a id="btnEditCurrentVideo" href="{{ optional($videos->first())->id ? route('admin.walangsuji.edit', optional($videos->first())->id) : '#' }}" class="rounded-lg border border-amber-300 bg-amber-50 px-3.5 py-2 text-xs font-bold text-amber-900 transition hover:bg-amber-100 flex items-center gap-1.5 shadow-sm">
+                                    ✏️ Edit Babak Ini
+                                </a>
+                                <button type="button" onclick="openAdminModal('modalTambahVideo')" class="rounded-lg bg-amber-700 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-amber-800 flex items-center gap-1.5 shadow-sm">
+                                    ➕ Tambah Babak Baru
                                 </button>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                                     ondragstart="dragStart(event, '{{ $video->id }}')"
                                     ondragover="dragOver(event)"
                                     ondrop="dropItem(event, '{{ $video->id }}')"
-                                    onclick="playVideo(this, '{{ $videoSource }}', {{ json_encode($video->title ?? '') }}, {{ json_encode($video->description ?? '') }}, {{ json_encode($video->duration ?? '') }}, '{{ $posterSource }}')"
+                                    onclick="playVideo(this, '{{ $videoSource }}', {{ json_encode($video->title ?? '') }}, {{ json_encode($video->description ?? '') }}, {{ json_encode($video->duration ?? '') }}, '{{ $posterSource }}', '{{ $video->id }}')"
                                     class="flex cursor-grab items-start gap-3 p-3.5 transition hover:bg-amber-50/60"
                                 >
                                     <div class="h-20 w-24 shrink-0 overflow-hidden rounded bg-stone-800">
@@ -208,7 +208,7 @@
                                         <div class="flex items-start justify-between gap-2">
                                             <h4 class="line-clamp-2 text-xs font-semibold text-stone-800">{{ $video->title }}</h4>
                                             <div class="flex items-center gap-2">
-                                                <a href="{{ route('admin.walangsuji.edit', $video->id) }}" class="text-[10px] font-semibold text-amber-700">✏️</a>
+                                                <a href="{{ route('admin.walangsuji.edit', $video->id) }}" title="Edit Babak Ini" class="text-[10px] font-semibold text-amber-700 hover:text-amber-900">✏️</a>
                                                 <form action="{{ route('admin.walangsuji.destroy', $video->id) }}" method="POST" onsubmit="return confirm('Hapus video ini?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -241,13 +241,13 @@
     </div>
 
     <div id="modalTambahVideo" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/60 p-4 opacity-0 invisible transition-all duration-300 backdrop-blur-sm">
-        <div class="w-full max-w-lg scale-95 rounded-xl border border-amber-200 bg-white shadow-2xl transition-all duration-300">
-            <div class="flex items-center justify-between bg-stone-900 px-6 py-4 text-amber-100">
-                <h3 class="text-sm font-bold tracking-wide">Formulir Tambah Video Dokumenter</h3>
+        <div class="w-full max-w-lg max-h-[85vh] flex flex-col scale-95 rounded-xl border border-amber-200 bg-white shadow-2xl transition-all duration-300 overflow-hidden">
+            <div class="flex items-center justify-between bg-stone-900 px-6 py-4 text-amber-100 flex-none">
+                <h3 class="text-sm font-bold tracking-wide">Formulir Tambah Video Dokumenter Baru</h3>
                 <button type="button" onclick="closeAdminModal('modalTambahVideo')" class="text-base text-stone-400 transition hover:text-white">✕</button>
             </div>
 
-            <form action="{{ route('admin.walangsuji.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 text-xs text-stone-700">
+            <form action="{{ route('admin.walangsuji.store') }}" method="POST" enctype="multipart/form-data" class="flex-1 overflow-y-auto space-y-4 p-6 text-xs text-stone-700">
                 @csrf
 
                 <div>
@@ -310,9 +310,9 @@
                     <input type="file" name="guide_pdf" accept="application/pdf" class="w-full text-stone-500 file:mr-4 file:rounded-md file:border-0 file:bg-amber-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-amber-800 hover:file:bg-amber-100" />
                 </div>
 
-                <div class="flex items-center justify-end gap-2 border-t border-stone-100 pt-3">
+                <div class="sticky bottom-0 bg-white pt-3 border-t border-stone-200 flex items-center justify-end gap-2 -mx-6 -mb-6 p-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
                     <button type="button" onclick="closeAdminModal('modalTambahVideo')" class="rounded-lg border border-stone-200 px-4 py-2 font-medium text-stone-500 transition hover:bg-stone-50">Batal</button>
-                    <button type="submit" class="rounded-lg bg-amber-700 px-4 py-2 font-bold text-white shadow-sm transition hover:bg-amber-800">Simpan Konten</button>
+                    <button type="submit" class="rounded-lg bg-amber-700 px-4 py-2 font-bold text-white shadow-sm transition hover:bg-amber-800">Simpan Konten Baru</button>
                 </div>
             </form>
         </div>
@@ -361,11 +361,12 @@
             modalBox.classList.add('scale-95');
         }
 
-        function playVideo(element, videoSrc, title, description, duration, posterSrc) {
+        function playVideo(element, videoSrc, title, description, duration, posterSrc, videoId) {
             const player = document.getElementById('mainMuseumPlayer');
             const titleElem = document.getElementById('currentVideoTitle');
             const descElem = document.getElementById('currentVideoDesc');
             const durationElem = document.getElementById('currentVideoDuration');
+            const btnEdit = document.getElementById('btnEditCurrentVideo');
 
             if (player) {
                 player.src = videoSrc || '';
@@ -379,6 +380,9 @@
             if (titleElem) titleElem.innerText = title || 'Judul belum tersedia';
             if (descElem) descElem.innerText = description || 'Deskripsi belum tersedia';
             if (durationElem) durationElem.innerText = duration || '00:00';
+            if (btnEdit && videoId) {
+                btnEdit.href = '/admin/walangsuji-admin/' + videoId + '/edit';
+            }
 
             const items = element.parentElement.children;
             Array.from(items).forEach((item) => {

@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             
             <!-- Bagian Judul Dashboard -->
-            <div data-aos="fade-down" data-aos-duration="800" class="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase inline-block">
                         Panel Galeri & Artefak

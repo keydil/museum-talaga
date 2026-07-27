@@ -1,13 +1,14 @@
 <x-app-layout>
     <!-- Tambahkan aset AOS jika layout utama (app-layout) Anda belum memuatnya -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <!-- Pembungkus Konten Utama dengan Latar Belakang Krem Khas Museum -->
     <div class="min-h-screen bg-[#fdfbf2] py-12 font-sans">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             
             <!-- Bagian Judul Dashboard -->
-            <div data-aos="fade-down" data-aos-duration="800" class="mb-10 flex flex-col items-start">
+            <div class="mb-10 flex flex-col items-start">
                 <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase">
                     Panel Manajemen Sistem
                 </span>
@@ -20,8 +21,7 @@
             </div>
 
             <!-- Konten Kartu Utama -->
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" 
-                 class="bg-white border border-amber-200/60 overflow-hidden shadow-sm rounded-2xl p-8 hover:shadow-md transition-shadow duration-300 mb-8">
+            <div class="bg-white border border-amber-200/60 overflow-hidden shadow-sm rounded-2xl p-8 hover:shadow-md transition-shadow duration-300 mb-8">
                 
                 <!-- Indikator Berhasil Masuk Bergaya Minimalis -->
                 <div class="flex items-center space-x-4 border-b border-stone-100 pb-6 mb-6">
@@ -63,7 +63,7 @@
             </div>
 
             <!-- KARTU PINTASAN AKSI KELOLA KONTEN -->
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Kartu 1: Berita -->
                 <a href="{{ route('admin.berita.index') }}" class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm hover:border-amber-500 hover:shadow-md transition group flex flex-col justify-between">
                     <div>

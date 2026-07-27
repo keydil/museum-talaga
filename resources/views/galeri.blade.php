@@ -35,23 +35,77 @@
     @endif
 
 </div>
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fffbeb]">
+<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 bg-[#fffbeb]">
+
+    <!-- Header Judul Katalog & Form Pencarian -->
+    <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-amber-200/70">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2">
+                🏛️ Koleksi Resmi Museum
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-stone-900 font-serif tracking-tight">Katalog Artefak & Pusaka</h1>
+            <p class="text-sm text-stone-600 mt-1 max-w-2xl">
+                Jelajahi 17 benda peninggalan bersejarah Kerajaan Talaga Manggung dari abad ke-13 hingga era Kabupaten Talaga.
+            </p>
+        </div>
+
+        <!-- Form Input Search Bar -->
+        <form action="{{ route('galeri') }}" method="GET" class="w-full md:w-80 shrink-0">
+            @if($kategoriTerpilih)
+                <input type="hidden" name="kategori" value="{{ $kategoriTerpilih }}">
+            @endif
+            <div class="relative">
+                <input type="text" 
+                       name="search" 
+                       value="{{ $kataKunci }}" 
+                       placeholder="Cari nama artefak, keris, arca..." 
+                       class="w-full bg-white border border-stone-300 rounded-full pl-10 pr-10 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm transition">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+                    🔍
+                </div>
+                @if($kataKunci)
+                    <a href="{{ route('galeri', array_filter(['kategori' => $kategoriTerpilih])) }}" 
+                       class="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-700 text-xs font-bold">
+                        ✕
+                    </a>
+                @endif
+            </div>
+        </form>
+    </div>
 
     <!-- Bilah Filter Kategori Dinamis -->
-    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none whitespace-nowrap">
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-6 scrollbar-none whitespace-nowrap">
         <!-- Tombol Semua Kategori -->
-        <a href="{{ route('galeri') }}" 
-           class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ !request('kategori') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600' }}">
+        <a href="{{ route('galeri', array_filter(['search' => $kataKunci])) }}" 
+           class="px-5 py-2 text-xs font-bold rounded-full transition-all duration-200 {{ !$kategoriTerpilih ? 'bg-amber-700 text-white shadow-md shadow-amber-700/20' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-700' }}">
             Semua Katalog
         </a>
 
-        @foreach(['Arca Perunggu', 'Terracotta', 'Perlengkapan Ritual', 'Senjata Tradisional', 'Senjata Berpeledak', 'Pakaian Perlengkapan Perang', 'Etnografika', 'Keramokologika', 'Numismatika'] as $kat)
-            <a href="{{ route('galeri', ['kategori' => $kat]) }}" 
-               class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ request('kategori') == $kat ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30' }}">
+        @foreach($kategoriList as $kat)
+            <a href="{{ route('galeri', array_filter(['kategori' => $kat, 'search' => $kataKunci])) }}" 
+               class="px-5 py-2 text-xs font-bold rounded-full transition-all duration-200 {{ $kategoriTerpilih == $kat ? 'bg-amber-700 text-white shadow-md shadow-amber-700/20' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50' }}">
                 {{ $kat }}
             </a>
         @endforeach
     </div>
+
+    <!-- Status Hasil Filter & Pencarian -->
+    @if($kataKunci || $kategoriTerpilih)
+        <div class="mb-8 p-4 bg-amber-100/60 border border-amber-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-amber-900">
+            <div class="flex items-center gap-2">
+                <span>Menampilkan <strong>{{ $galeri->count() }}</strong> artefak</span>
+                @if($kategoriTerpilih)
+                    <span class="bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold">Kategori: {{ $kategoriTerpilih }}</span>
+                @endif
+                @if($kataKunci)
+                    <span class="bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold">Cari: "{{ $kataKunci }}"</span>
+                @endif
+            </div>
+            <a href="{{ route('galeri') }}" class="font-bold text-amber-800 hover:text-amber-950 underline text-xs">
+                Reset Filter & Pencarian ↺
+            </a>
+        </div>
+    @endif
 
     <!-- Grid Foto (Dinamis Berdasarkan Data Controller) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -101,8 +155,13 @@
             </div>
         @empty
             <!-- State Jika Data Kosong -->
-            <div class="col-span-full py-16 text-center text-stone-400 text-sm italic">
-                Belum ada dokumentasi foto atau artefak untuk kategori ini.
+            <div class="col-span-full py-16 px-4 text-center bg-white border border-dashed border-amber-200 rounded-3xl">
+                <div class="text-4xl mb-3">🔍</div>
+                <h3 class="text-base font-bold text-stone-800">Tidak ada artefak yang ditemukan</h3>
+                <p class="text-xs text-stone-500 mt-1">Coba gunakan kata kunci pencarian lain atau ganti kategori filter.</p>
+                <a href="{{ route('galeri') }}" class="mt-4 inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition">
+                    Lihat Semua Katalog Artefak
+                </a>
             </div>
         @endforelse
 

@@ -14,9 +14,16 @@ class GaleriController extends Controller
         $kataKunci = $request->input('search');
         $kategoriTerpilih = $request->input('kategori');
 
+        // Ambil daftar kategori unik dari database secara dinamis
+        $kategoriList = Galeri::select('kategori')->distinct()->whereNotNull('kategori')->pluck('kategori');
+
         $galeri = Galeri::query()
             ->when($kataKunci, function ($query, $search) {
-                return $query->where('judul', 'like', '%' . $search . '%');
+                return $query->where(function ($q) use ($search) {
+                    $q->where('judul', 'like', '%' . $search . '%')
+                      ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                      ->orWhere('kategori', 'like', '%' . $search . '%');
+                });
             })
             ->when($kategoriTerpilih, function ($query, $kategori) {
                 return $query->where('kategori', $kategori);
@@ -24,7 +31,7 @@ class GaleriController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('galeri', compact('galeri', 'kataKunci', 'kategoriTerpilih'));
+        return view('galeri', compact('galeri', 'kataKunci', 'kategoriTerpilih', 'kategoriList'));
     }
 
     public function show(Galeri $galeri)

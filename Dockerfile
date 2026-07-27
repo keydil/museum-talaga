@@ -1,4 +1,4 @@
-FROM php:8.4-fpm
+FROM php:8.4-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,36 +18,35 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Install Composer
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Update Apache DocumentRoot to point to Laravel's public folder
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
-# Copy project files
-COPY . .
+# Copy application files
+COPY . /var/www/html
 
-# Install PHP dependencies
-# --no-scripts: skip artisan commands (package:discover, dll) yang butuh koneksi DB
-# --no-interaction: non-interactive mode
+# Install Composer dependencies (--no-scripts karena DB belum available saat build)
 RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
 
-# Dump autoload tanpa jalankan scripts (aman tanpa DB)
+# Dump autoload
 RUN composer dump-autoload --optimize --no-scripts
 
-# Install Node dependencies & build assets
+# Install Node & build assets
 RUN npm ci && npm run build
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage \
-    && chmod -R 755 /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod +x /var/www/html/docker-entrypoint.sh
 
-# Copy entrypoint script
-COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
-EXPOSE 9000
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+# Entrypoint: jalankan migrate + cache setelah container start (DB sudah available)
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]

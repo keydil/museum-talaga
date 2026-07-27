@@ -35,16 +35,28 @@
     @endif
 
 </div>
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 bg-[#fffbeb]" x-data="galeriFilter()">
+<style>
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+</style>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 md:py-8 bg-[#fffbeb]">
 
     <!-- Header Judul Katalog & Form Pencarian -->
-    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-amber-200/70">
+    <div class="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 pb-6 border-b border-amber-200/70">
         <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold uppercase tracking-wider mb-2">
                 🏛️ Koleksi Resmi Museum
             </div>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-stone-900 font-serif tracking-tight">Katalog Artefak & Pusaka</h1>
-            <p class="text-sm text-stone-600 mt-1 max-w-2xl">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-stone-900 font-serif tracking-tight">Katalog Artefak & Pusaka</h1>
+            <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-2xl leading-relaxed">
                 Jelajahi 17 benda peninggalan bersejarah Kerajaan Talaga Manggung dari abad ke-13 hingga era Kabupaten Talaga.
             </p>
         </div>
@@ -53,36 +65,33 @@
         <div class="w-full md:w-80 shrink-0">
             <div class="relative">
                 <input type="text" 
-                       x-model="searchQuery" 
-                       @input="filterItems()"
+                       id="galeri-search-input"
+                       value="{{ $kataKunci }}" 
                        placeholder="Cari nama artefak, keris, arca..." 
-                       class="w-full bg-white border border-stone-300 rounded-full pl-10 pr-10 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm transition">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+                       class="w-full bg-white border border-stone-300 rounded-full pl-10 pr-10 py-2.5 text-xs sm:text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600 shadow-sm transition">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 text-sm">
                     🔍
                 </div>
-                <button x-show="searchQuery" 
-                        @click="searchQuery = ''; filterItems()" 
-                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-700 text-xs font-bold">
+                <button id="galeri-search-clear" 
+                        class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-700 text-xs font-bold">
                     ✕
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Bilah Filter Kategori Standar Profesional (Flex Wrap di Desktop & Smooth Scroll di Mobile) -->
-    <div class="mb-6">
-        <div class="flex flex-wrap items-center gap-2">
+    <!-- Bilah Filter Kategori Responsive (Mobile Horizontal Swipe & Desktop Flex Wrap) -->
+    <div class="mb-6 overflow-hidden">
+        <div id="category-pills-container" class="flex overflow-x-auto items-center gap-2 pb-2 no-scrollbar whitespace-nowrap md:flex-wrap">
             <!-- Tombol Semua Kategori -->
-            <button @click="setCategory('')" 
-                    :class="selectedCategory === '' ? 'bg-amber-800 text-white shadow-md shadow-amber-900/20 ring-2 ring-amber-800/30' : 'bg-white text-stone-700 border border-stone-200/80 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50'"
-                    class="px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer">
+            <button data-kategori="" 
+                    class="kat-pill-btn px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer shrink-0 shadow-xs border {{ !$kategoriTerpilih ? 'bg-amber-800 text-white border-amber-800 shadow-md' : 'bg-white text-stone-700 border-stone-200/90 hover:border-amber-600 hover:text-amber-700 hover:bg-amber-50/50' }}">
                 Semua Katalog (17)
             </button>
 
             @foreach($kategoriList as $kat)
-                <button @click="setCategory('{{ $kat }}')" 
-                        :class="selectedCategory === '{{ $kat }}' ? 'bg-amber-800 text-white shadow-md shadow-amber-900/20 ring-2 ring-amber-800/30' : 'bg-white text-stone-700 border border-stone-200/80 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50/50'"
-                        class="px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer">
+                <button data-kategori="{{ $kat }}" 
+                        class="kat-pill-btn px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer shrink-0 shadow-xs border {{ $kategoriTerpilih == $kat ? 'bg-amber-800 text-white border-amber-800 shadow-md' : 'bg-white text-stone-700 border-stone-200/90 hover:border-amber-600 hover:text-amber-700 hover:bg-amber-50/50' }}">
                     {{ $kat }}
                 </button>
             @endforeach
@@ -90,43 +99,38 @@
     </div>
 
     <!-- Status Hasil Filter & Pencarian Instant -->
-    <div x-show="searchQuery || selectedCategory" 
-         x-transition
-         class="mb-8 p-4 bg-amber-100/70 border border-amber-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-amber-900">
+    <div id="filter-status-bar" 
+         class="{{ ($kataKunci || $kategoriTerpilih) ? 'flex' : 'hidden' }} mb-6 p-3.5 sm:p-4 bg-amber-100/70 border border-amber-200/80 rounded-2xl flex-wrap items-center justify-between gap-3 text-xs text-amber-900 shadow-xs">
         <div class="flex flex-wrap items-center gap-2">
-            <span>Menampilkan <strong x-text="visibleCount">17</strong> artefak</span>
-            <template x-if="selectedCategory">
-                <span class="bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                    Kategori: <span x-text="selectedCategory"></span>
-                    <button @click="setCategory('')" class="hover:text-red-700 font-bold ml-1">✕</button>
-                </span>
-            </template>
-            <template x-if="searchQuery">
-                <span class="bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                    Cari: "<span x-text="searchQuery"></span>"
-                    <button @click="searchQuery = ''; filterItems()" class="hover:text-red-700 font-bold ml-1">✕</button>
-                </span>
-            </template>
+            <span>Menampilkan <strong id="visible-count-text">17</strong> artefak</span>
+            <span id="badge-kategori" class="{{ $kategoriTerpilih ? 'inline-flex' : 'hidden' }} bg-amber-200/90 text-amber-950 px-2.5 py-0.5 rounded-full font-semibold items-center gap-1">
+                Kategori: <span id="badge-kategori-text">{{ $kategoriTerpilih }}</span>
+                <button id="btn-remove-kategori" class="hover:text-red-700 font-bold ml-1">✕</button>
+            </span>
+            <span id="badge-search" class="{{ $kataKunci ? 'inline-flex' : 'hidden' }} bg-amber-200/90 text-amber-950 px-2.5 py-0.5 rounded-full font-semibold items-center gap-1">
+                Cari: "<span id="badge-search-text">{{ $kataKunci }}</span>"
+                <button id="btn-remove-search" class="hover:text-red-700 font-bold ml-1">✕</button>
+            </span>
         </div>
-        <button @click="resetAll()" class="font-bold text-amber-800 hover:text-amber-950 underline text-xs cursor-pointer">
+        <button id="btn-reset-all" class="font-bold text-amber-800 hover:text-amber-950 underline text-xs cursor-pointer">
             Reset Semua Filter ↺
         </button>
     </div>
 
-    <!-- Grid Foto (Filter Client-Side Instan) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Grid Foto (Filter Client-Side Instan via Vanilla JS) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 
         @foreach($galeri as $item)
-            <!-- Item Foto / Artefak -->
-            <div x-show="isItemVisible('{{ addslashes($item->kategori) }}', '{{ addslashes(strtolower($item->judul)) }}', '{{ addslashes(strtolower($item->deskripsi ?? '')) }}')"
-                 x-transition:enter="transition ease-out duration-300 transform"
-                 x-transition:enter-start="opacity-0 scale-95"
-                 x-transition:enter-end="opacity-100 scale-100"
-                 class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <!-- Item Foto / Artefak Card -->
+            <div class="artefak-card flex flex-col relative group bg-white border border-stone-200/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                 data-kategori="{{ $item->kategori }}"
+                 data-search="{{ strtolower($item->judul . ' ' . ($item->deskripsi ?? '') . ' ' . $item->kategori) }}">
                 
                 <!-- Pembungkus Gambar Thumbnail -->
                 <div class="overflow-hidden aspect-[4/3] bg-stone-100 relative">
-                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <img src="{{ \Illuminate\Support\Str::startsWith($item->foto, 'http') ? $item->foto : (\Illuminate\Support\Str::startsWith($item->foto, 'images/') ? asset($item->foto) : asset('storage/' . $item->foto)) }}" 
+                         alt="{{ $item->judul }}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
                     
                     <!-- Badge Indikator Konten 3D di Atas Gambar -->
                     @if($item->link_3d)
@@ -140,9 +144,9 @@
                 <div class="p-4 bg-white flex-grow flex flex-col justify-between gap-4">
                     <div>
                         <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">{{ $item->kategori }}</p>
-                        <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">{{ $item->judul }}</h3>
+                        <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors leading-snug">{{ $item->judul }}</h3>
                         @if($item->deskripsi)
-                            <p class="text-xs text-stone-500 mt-1 line-clamp-2">{{ $item->deskripsi }}</p>
+                            <p class="text-xs text-stone-500 mt-1 line-clamp-2 leading-relaxed">{{ $item->deskripsi }}</p>
                         @endif
                     </div>
 
@@ -166,13 +170,11 @@
         @endforeach
 
         <!-- State Jika Hasil Pencarian Kosong -->
-        <div x-show="visibleCount === 0" 
-             x-transition
-             class="col-span-full py-16 px-4 text-center bg-white border border-dashed border-amber-200 rounded-3xl">
+        <div id="empty-state-box" class="hidden col-span-full py-16 px-4 text-center bg-white border border-dashed border-amber-300 rounded-3xl shadow-xs">
             <div class="text-4xl mb-3">🔍</div>
             <h3 class="text-base font-bold text-stone-800">Tidak ada artefak yang ditemukan</h3>
             <p class="text-xs text-stone-500 mt-1">Coba gunakan kata kunci pencarian lain atau ganti kategori filter.</p>
-            <button @click="resetAll()" class="mt-4 inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition cursor-pointer">
+            <button id="btn-empty-reset" class="mt-4 inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition cursor-pointer">
                 Lihat Semua Katalog Artefak
             </button>
         </div>
@@ -181,63 +183,162 @@
 </main>
 
 <script>
-    function galeriFilter() {
-        return {
-            searchQuery: '{{ addslashes($kataKunci ?? "") }}',
-            selectedCategory: '{{ addslashes($kategoriTerpilih ?? "") }}',
-            visibleCount: 17,
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('galeri-search-input');
+        const clearBtn = document.getElementById('galeri-search-clear');
+        const pillButtons = document.querySelectorAll('.kat-pill-btn');
+        const cards = document.querySelectorAll('.artefak-card');
+        const emptyState = document.getElementById('empty-state-box');
+        const statusBar = document.getElementById('filter-status-bar');
+        const visibleCountText = document.getElementById('visible-count-text');
+        
+        const badgeKat = document.getElementById('badge-kategori');
+        const badgeKatText = document.getElementById('badge-kategori-text');
+        const btnRemoveKat = document.getElementById('btn-remove-kategori');
 
-            init() {
-                this.updateCount();
-            },
+        const badgeSearch = document.getElementById('badge-search');
+        const badgeSearchText = document.getElementById('badge-search-text');
+        const btnRemoveSearch = document.getElementById('btn-remove-search');
+        
+        const btnResetAll = document.getElementById('btn-reset-all');
+        const btnEmptyReset = document.getElementById('btn-empty-reset');
 
-            setCategory(cat) {
-                this.selectedCategory = cat;
-                this.filterItems();
-            },
+        let currentCategory = "{{ $kategoriTerpilih ?? '' }}";
+        let currentQuery = "{{ $kataKunci ?? '' }}";
 
-            isItemVisible(kategori, judul, deskripsi) {
-                const matchCategory = !this.selectedCategory || kategori === this.selectedCategory;
-                const query = this.searchQuery.toLowerCase().trim();
-                const matchSearch = !query || judul.includes(query) || deskripsi.includes(query) || kategori.toLowerCase().includes(query);
-                
-                return matchCategory && matchSearch;
-            },
+        function applyFilter() {
+            let visibleCount = 0;
+            const query = currentQuery.toLowerCase().trim();
 
-            filterItems() {
-                this.$nextTick(() => {
-                    this.updateCount();
-                    this.updateURL();
-                });
-            },
+            cards.forEach(card => {
+                const cardKat = card.getAttribute('data-kategori');
+                const cardSearch = card.getAttribute('data-search');
 
-            updateCount() {
-                const items = document.querySelectorAll('[x-show^="isItemVisible"]');
-                let count = 0;
-                items.forEach(el => {
-                    if (el.style.display !== 'none') {
-                        count++;
-                    }
-                });
-                this.visibleCount = count;
-            },
+                const matchKat = !currentCategory || cardKat === currentCategory;
+                const matchSearch = !query || cardSearch.includes(query);
 
-            updateURL() {
-                const params = new URLSearchParams();
-                if (this.selectedCategory) params.set('kategori', this.selectedCategory);
-                if (this.searchQuery) params.set('search', this.searchQuery);
-                
-                const newURL = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
-                window.history.replaceState({}, '', newURL);
-            },
+                if (matchKat && matchSearch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
 
-            resetAll() {
-                this.searchQuery = '';
-                this.selectedCategory = '';
-                this.filterItems();
+            // Update visible counter
+            if (visibleCountText) visibleCountText.textContent = visibleCount;
+
+            // Empty state display
+            if (visibleCount === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
             }
+
+            // Update status bar & badges
+            if (currentCategory || query) {
+                statusBar.classList.remove('hidden');
+                statusBar.classList.add('flex');
+            } else {
+                statusBar.classList.add('hidden');
+                statusBar.classList.remove('flex');
+            }
+
+            if (currentCategory) {
+                badgeKat.classList.remove('hidden');
+                badgeKat.classList.add('inline-flex');
+                badgeKatText.textContent = currentCategory;
+            } else {
+                badgeKat.classList.add('hidden');
+                badgeKat.classList.remove('inline-flex');
+            }
+
+            if (query) {
+                badgeSearch.classList.remove('hidden');
+                badgeSearch.classList.add('inline-flex');
+                badgeSearchText.textContent = currentQuery;
+                if (clearBtn) clearBtn.classList.remove('hidden');
+            } else {
+                badgeSearch.classList.add('hidden');
+                badgeSearch.classList.remove('inline-flex');
+                if (clearBtn) clearBtn.classList.add('hidden');
+            }
+
+            // Update active pill styling
+            pillButtons.forEach(btn => {
+                const btnKat = btn.getAttribute('data-kategori');
+                if (btnKat === currentCategory) {
+                    btn.className = 'kat-pill-btn px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer shrink-0 shadow-md bg-amber-800 text-white border border-amber-800';
+                } else {
+                    btn.className = 'kat-pill-btn px-4 py-2 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer shrink-0 shadow-xs bg-white text-stone-700 border border-stone-200/90 hover:border-amber-600 hover:text-amber-700 hover:bg-amber-50/50';
+                }
+            });
+
+            // Update URL search parameters without page reload
+            const params = new URLSearchParams();
+            if (currentCategory) params.set('kategori', currentCategory);
+            if (query) params.set('search', currentQuery);
+            const newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            window.history.replaceState({}, '', newURL);
         }
-    }
+
+        // Attach category pill click listener
+        pillButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                currentCategory = this.getAttribute('data-kategori');
+                applyFilter();
+            });
+        });
+
+        // Search input keyup/input listener
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                currentQuery = this.value;
+                applyFilter();
+            });
+        }
+
+        // Clear search input button
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                currentQuery = '';
+                searchInput.value = '';
+                applyFilter();
+            });
+        }
+
+        // Remove category badge
+        if (btnRemoveKat) {
+            btnRemoveKat.addEventListener('click', function() {
+                currentCategory = '';
+                applyFilter();
+            });
+        }
+
+        // Remove search badge
+        if (btnRemoveSearch) {
+            btnRemoveSearch.addEventListener('click', function() {
+                currentQuery = '';
+                if (searchInput) searchInput.value = '';
+                applyFilter();
+            });
+        }
+
+        // Reset all buttons
+        [btnResetAll, btnEmptyReset].forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    currentCategory = '';
+                    currentQuery = '';
+                    if (searchInput) searchInput.value = '';
+                    applyFilter();
+                });
+            }
+        });
+
+        // Initial filter run on page load
+        applyFilter();
+    });
 </script>
 
 <x-site-footer />

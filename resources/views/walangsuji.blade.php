@@ -62,13 +62,21 @@
                 @if($videos->isNotEmpty())
                     @php
                         $firstVideo = $videos->first();
-                        $videoSource = $firstVideo->video_file_path ? asset('storage/' . $firstVideo->video_file_path) : ($firstVideo->video_url ?? '');
+                        $rawVideoPath = $firstVideo->video_file_path;
+                        $videoSource = $rawVideoPath 
+                            ? (\Illuminate\Support\Str::startsWith($rawVideoPath, 'http') ? $rawVideoPath : (\Illuminate\Support\Str::startsWith($rawVideoPath, 'storage/') ? asset($rawVideoPath) : asset('storage/' . $rawVideoPath))) 
+                            : ($firstVideo->video_url ?? '');
+
+                        $rawPosterPath = $firstVideo->thumbnail_path;
+                        $posterSource = $rawPosterPath 
+                            ? (\Illuminate\Support\Str::startsWith($rawPosterPath, 'http') ? $rawPosterPath : (\Illuminate\Support\Str::startsWith($rawPosterPath, 'images/') ? asset($rawPosterPath) : (\Illuminate\Support\Str::startsWith($rawPosterPath, 'storage/') ? asset($rawPosterPath) : asset('storage/' . $rawPosterPath)))) 
+                            : 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80';
+
                         $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
                         $youtubeEmbedUrl = '';
                         if ($isYoutube) {
                             $youtubeEmbedUrl = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $videoSource);
                         }
-                        $posterSource = $firstVideo->thumbnail_path ? asset('storage/' . $firstVideo->thumbnail_path) : 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80';
                     @endphp
                     @if($isYoutube)
                         <iframe id="mainMuseumPlayer" class="w-full h-full" src="{{ $youtubeEmbedUrl }}" title="{{ $firstVideo->title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -140,15 +148,23 @@
 <div class="divide-y divide-stone-100 max-h-[480px] overflow-y-auto">
     @forelse($videos as $video)
         @php
-            $videoSource = $video->video_file_path ? asset('storage/' . $video->video_file_path) : ($video->video_url ?? '');
-            $posterSource = $video->thumbnail_path ? asset('storage/' . $video->thumbnail_path) : '';
-            $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
-            $youtubeEmbedUrl = '';
-            if ($isYoutube) {
-                $youtubeEmbedUrl = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $videoSource);
+            $rawVPath = $video->video_file_path;
+            $vSource = $rawVPath 
+                ? (\Illuminate\Support\Str::startsWith($rawVPath, 'http') ? $rawVPath : (\Illuminate\Support\Str::startsWith($rawVPath, 'storage/') ? asset($rawVPath) : asset('storage/' . $rawVPath))) 
+                : ($video->video_url ?? '');
+
+            $rawPPath = $video->thumbnail_path;
+            $pSource = $rawPPath 
+                ? (\Illuminate\Support\Str::startsWith($rawPPath, 'http') ? $rawPPath : (\Illuminate\Support\Str::startsWith($rawPPath, 'images/') ? asset($rawPPath) : (\Illuminate\Support\Str::startsWith($rawPPath, 'storage/') ? asset($rawPPath) : asset('storage/' . $rawPPath)))) 
+                : '';
+
+            $isYt = $vSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $vSource);
+            $ytEmbed = '';
+            if ($isYt) {
+                $ytEmbed = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $vSource);
             }
         @endphp
-        <div onclick="playVideo(this, '{{ $videoSource }}', '{{ addslashes($video->title) }}', '{{ addslashes($video->description) }}', '{{ $video->duration }}', '{{ $posterSource }}', '{{ $youtubeEmbedUrl }}')"
+        <div onclick="playVideo(this, {{ json_encode($vSource) }}, {{ json_encode($video->title ?? '') }}, {{ json_encode($video->description ?? '') }}, {{ json_encode($video->duration ?? '00:00') }}, {{ json_encode($pSource) }}, {{ json_encode($ytEmbed) }})"
              class="w-full p-3.5 flex gap-3 cursor-pointer hover:bg-amber-50/50 transition items-start border-l-4 border-transparent group {{ $loop->first ? 'bg-amber-50/70 border-amber-600' : '' }}">
             <div class="w-24 aspect-video bg-stone-800 rounded relative shrink-0 overflow-hidden border border-amber-200">
                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -285,10 +301,10 @@
     // 3. TEATER LIGHTBOX & PLAYER INTERAKTIF
     // ==========================================
     let currentActiveVideo = {
-        videoSrc: '{{ $firstVideo->video_file_path ? asset("storage/" . $firstVideo->video_file_path) : ($firstVideo->video_url ?? "") }}',
-        title: '{{ addslashes($firstVideo->title ?? "Belum Ada Konten") }}',
-        posterSrc: '{{ $firstVideo->thumbnail_path ? asset("storage/" . $firstVideo->thumbnail_path) : "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80" }}',
-        youtubeEmbedUrl: '{{ $youtubeEmbedUrl ?? "" }}'
+        videoSrc: {{ json_encode($videoSource ?? '') }},
+        title: {{ json_encode($firstVideo->title ?? 'Belum Ada Konten') }},
+        posterSrc: {{ json_encode($posterSource ?? '') }},
+        youtubeEmbedUrl: {{ json_encode($youtubeEmbedUrl ?? '') }}
     };
 
     function playVideo(element, videoSrc, title, description, duration, posterSrc, youtubeEmbedUrl) {

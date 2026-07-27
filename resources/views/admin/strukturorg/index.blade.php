@@ -71,7 +71,16 @@
         </div>
     </div>
 
-
+        <!-- Info Box: Konten Sudah Statis -->
+        <div class="mb-8 p-4 bg-blue-50 border border-blue-300 rounded-xl text-blue-800 text-sm font-medium flex items-start gap-3">
+            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+                <strong>Konten Struktur Organisasi Sudah Statis</strong>
+                <p class="text-xs mt-1">Konten teks halaman struktur organisasi telah diubah menjadi statis (hardcoded) dengan animasi menarik dan layout grid divisi. Hanya banner header dan gambar bagan yang masih bisa diedit. Untuk mengubah konten teks deskripsi, silakan hubungi developer atau ubah di file: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-[11px] font-mono">resources/views/strukturorg.blade.php</code></p>
+            </div>
+        </div>
 
         <!-- Form: Hanya untuk Upload Gambar Bagan (Deskripsi dihapus) -->
         <form action="{{ route('admin.strukturorg.update') }}" 

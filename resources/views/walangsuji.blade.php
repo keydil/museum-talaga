@@ -102,8 +102,11 @@
                             <span class="flex items-center gap-1">👁️ 0 Dilihat</span>
                         </div>
                     </div>
-                    <!-- Tombol Interaksi Unduhan Dokumen -->
-                    <div class="flex items-center gap-2">
+                    <!-- Tombol Interaksi Unduhan & Mode Teater -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="openTheaterModal()" class="bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition inline-flex items-center gap-1.5 shadow-sm">
+                            🎬 Mode Teater Bioskop
+                        </button>
                         <button class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold px-4 py-2 rounded-lg transition">
                             📥 Unduh Brosur (PDF)
                         </button>
@@ -178,8 +181,24 @@
     </div>
 </main>
 
-
-
+<!-- MODAL TEATER LIGHTBOX CINEMATIC -->
+<div id="theaterModal" class="fixed inset-0 z-50 hidden bg-stone-950/95 backdrop-blur-md p-4 md:p-8 flex flex-col justify-center items-center">
+    <div class="w-full max-w-5xl flex items-center justify-between mb-4 text-white">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-0.5">🎬 Mode Teater Bioskop</span>
+            <h3 id="modalVideoTitle" class="text-lg md:text-xl font-bold font-serif text-white line-clamp-1"></h3>
+        </div>
+        <button onclick="closeTheaterModal()" class="h-10 w-10 rounded-full bg-stone-800 hover:bg-amber-600 text-white flex items-center justify-center transition font-bold text-lg shadow-lg border border-stone-700">
+            ✕
+        </button>
+    </div>
+    <div class="w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-stone-800 relative">
+        <div id="modalPlayerContainer" class="w-full h-full"></div>
+    </div>
+    <div class="w-full max-w-5xl mt-4 text-xs text-stone-400 text-center">
+        Tekan <kbd class="px-2 py-0.5 bg-stone-800 border border-stone-700 rounded text-stone-200 font-mono">ESC</kbd> atau klik tombol ✕ di kanan atas untuk kembali
+    </div>
+</div>
 
 <x-site-footer />
 
@@ -193,7 +212,6 @@
         const targetMenu = document.getElementById(menuId);
         const allMenus = document.querySelectorAll('.dropdown-list');
 
-        // Tutup semua dropdown deskop lain terlebih dahulu
         allMenus.forEach(menu => {
             if (menu !== targetMenu) {
                 menu.classList.add('opacity-0', 'invisible', '-translate-y-2');
@@ -201,7 +219,6 @@
             }
         });
 
-        // Toggle kelas dropdown desktop yang sedang diklik
         if (targetMenu) {
             targetMenu.classList.toggle('opacity-0');
             targetMenu.classList.toggle('invisible');
@@ -212,7 +229,6 @@
         }
     }
 
-    // Menutup semua dropdown desktop jika pengguna mengklik di area luar mana pun
     window.addEventListener('click', function() {
         const allMenus = document.querySelectorAll('.dropdown-list');
         allMenus.forEach(menu => {
@@ -220,7 +236,6 @@
             menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
         });
     });
-
 
     // ==========================================
     // 2. FUNGSI NAVIGASI SELULER (INTEGRASI LIVEWIRE)
@@ -232,10 +247,8 @@
         const hamburgerIcon = document.getElementById('hamburger-icon');
         const closeIcon = document.getElementById('close-icon');
 
-        // Batalkan inisialisasi jika elemen krusial tidak ditemukan di halaman aktif
         if (!toggleBtn || !backdrop || !menu) return;
 
-        // Fungsi pusat untuk menutup panel seluler dan mereset status ikon
         function closeMenu() {
             menu.classList.add('hidden');
             backdrop.classList.add('hidden');
@@ -243,7 +256,6 @@
             if (closeIcon) closeIcon.classList.add('hidden');
         }
 
-        // Fungsi pusat untuk membuka/menutup panel seluler secara bergantian
         function toggleMenu() {
             const isOpen = !menu.classList.contains('hidden');
             if (isOpen) {
@@ -256,81 +268,125 @@
             }
         }
 
-        // Membersihkan event listener lama untuk mencegah penumpukan fungsi (Memory Leak)
         toggleBtn.replaceWith(toggleBtn.cloneNode(true));
         backdrop.replaceWith(backdrop.cloneNode(true));
 
-        // Ambil kembali referensi elemen baru setelah proses kloning pembersihan
         const cleanToggleBtn = document.getElementById('mobile-menu-button');
         const cleanBackdrop = document.getElementById('mobile-menu-backdrop');
 
-        // Pasangkan kembali event listener tunggal yang bersih
         cleanToggleBtn.addEventListener('click', toggleMenu);
         cleanBackdrop.addEventListener('click', closeMenu);
     }
 
-    // Jalankan inisialisasi pada pemuatan awal halaman
     document.addEventListener('DOMContentLoaded', initAppNavigation);
-    
-    // Wajib dijalankan ulang setiap kali Livewire memuat DOM baru via wire:navigate
     document.addEventListener('livewire:navigated', initAppNavigation);
 
-// ==========================================
-// TAMBAHAN SCRIPT UNTUK PLAYLIST WALANG SUJI
-// ==========================================
-function playVideo(element, videoSrc, title, description, duration, posterSrc, youtubeEmbedUrl) {
-    const player = document.getElementById('mainMuseumPlayer');
-    const titleElem = document.getElementById('currentVideoTitle');
-    const descElem = document.getElementById('currentVideoDesc');
-    const durationElem = document.getElementById('currentVideoDuration');
+    // ==========================================
+    // 3. TEATER LIGHTBOX & PLAYER INTERAKTIF
+    // ==========================================
+    let currentActiveVideo = {
+        videoSrc: '{{ $firstVideo->video_file_path ? asset("storage/" . $firstVideo->video_file_path) : ($firstVideo->video_url ?? "") }}',
+        title: '{{ addslashes($firstVideo->title ?? "Belum Ada Konten") }}',
+        posterSrc: '{{ $firstVideo->thumbnail_path ? asset("storage/" . $firstVideo->thumbnail_path) : "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80" }}',
+        youtubeEmbedUrl: '{{ $youtubeEmbedUrl ?? "" }}'
+    };
 
-    if (player) {
-        if (youtubeEmbedUrl) {
-            player.outerHTML = '<iframe id="mainMuseumPlayer" class="w-full h-full" src="' + youtubeEmbedUrl + '" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        } else {
-            player.src = videoSrc || '';
-            player.poster = posterSrc || 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80';
-            player.load();
-            if (videoSrc) {
-                player.play().catch(() => {});
+    function playVideo(element, videoSrc, title, description, duration, posterSrc, youtubeEmbedUrl) {
+        currentActiveVideo = { videoSrc, title, posterSrc, youtubeEmbedUrl };
+
+        const playerContainer = document.querySelector('.lg\\:col-span-2 .aspect-video');
+        const titleElem = document.getElementById('currentVideoTitle');
+        const descElem = document.getElementById('currentVideoDesc');
+        const durationElem = document.getElementById('currentVideoDuration');
+
+        if (playerContainer) {
+            if (youtubeEmbedUrl) {
+                playerContainer.innerHTML = '<iframe id="mainMuseumPlayer" class="w-full h-full" src="' + youtubeEmbedUrl + '?autoplay=1" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            } else {
+                playerContainer.innerHTML = '<video id="mainMuseumPlayer" class="w-full h-full object-contain" controls autoplay poster="' + (posterSrc || 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80') + '"><source src="' + (videoSrc || '') + '" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>';
             }
         }
-    }
 
-    if (titleElem) titleElem.innerText = title || 'Judul belum tersedia';
-    if (descElem) descElem.innerText = description || 'Deskripsi belum tersedia';
-    if (durationElem) durationElem.innerText = duration || '00:00';
+        if (titleElem) titleElem.innerText = title || 'Judul belum tersedia';
+        if (descElem) descElem.innerText = description || 'Deskripsi belum tersedia';
+        if (durationElem) durationElem.innerText = duration || '00:00';
 
-    const allPlaylistItems = element.parentElement.children;
-    Array.from(allPlaylistItems).forEach((item) => {
-        item.classList.remove('bg-amber-50/70', 'border-amber-600');
-        item.classList.add('border-transparent');
+        const allPlaylistItems = element.parentElement.children;
+        Array.from(allPlaylistItems).forEach((item) => {
+            item.classList.remove('bg-amber-50/70', 'border-amber-600');
+            item.classList.add('border-transparent');
 
-        const itemTitle = item.querySelector('h4');
-        if (itemTitle) {
-            itemTitle.classList.remove('font-bold', 'text-amber-900');
-            itemTitle.classList.add('font-semibold', 'text-stone-800');
+            const itemTitle = item.querySelector('h4');
+            if (itemTitle) {
+                itemTitle.classList.remove('font-bold', 'text-amber-900');
+                itemTitle.classList.add('font-semibold', 'text-stone-800');
+            }
+
+            const badgeContainer = item.querySelector('.aspect-video > div');
+            if (badgeContainer) {
+                badgeContainer.innerHTML = '<span class="text-amber-400 text-xs">▶️</span>';
+            }
+        });
+
+        element.classList.add('bg-amber-50/70', 'border-amber-600');
+        element.classList.remove('border-transparent');
+
+        const activeTitle = element.querySelector('h4');
+        if (activeTitle) {
+            activeTitle.classList.remove('font-semibold', 'text-stone-800');
+            activeTitle.classList.add('font-bold', 'text-amber-900');
         }
 
-        const badgeContainer = item.querySelector('.aspect-video > div');
-        if (badgeContainer) {
-            badgeContainer.innerHTML = '<span class="text-amber-400 text-xs">▶️</span>';
+        const activeBadge = element.querySelector('.aspect-video > div');
+        if (activeBadge) {
+            activeBadge.innerHTML = '<span class="text-amber-400 text-xs">▶️ Aktif</span>';
+        }
+    }
+
+    function openTheaterModal() {
+        const modal = document.getElementById('theaterModal');
+        const modalTitle = document.getElementById('modalVideoTitle');
+        const modalPlayerContainer = document.getElementById('modalPlayerContainer');
+
+        if (!modal || !modalPlayerContainer) return;
+
+        if (modalTitle) modalTitle.innerText = currentActiveVideo.title;
+
+        // Stop inline player audio
+        const inlinePlayer = document.getElementById('mainMuseumPlayer');
+        if (inlinePlayer && typeof inlinePlayer.pause === 'function') {
+            inlinePlayer.pause();
+        }
+
+        if (currentActiveVideo.youtubeEmbedUrl) {
+            modalPlayerContainer.innerHTML = '<iframe class="w-full h-full" src="' + currentActiveVideo.youtubeEmbedUrl + '?autoplay=1" title="' + currentActiveVideo.title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        } else {
+            modalPlayerContainer.innerHTML = '<video class="w-full h-full object-contain" controls autoplay poster="' + currentActiveVideo.posterSrc + '"><source src="' + currentActiveVideo.videoSrc + '" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>';
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeTheaterModal() {
+        const modal = document.getElementById('theaterModal');
+        const modalPlayerContainer = document.getElementById('modalPlayerContainer');
+
+        if (!modal) return;
+
+        if (modalPlayerContainer) {
+            modalPlayerContainer.innerHTML = '';
+        }
+
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeTheaterModal();
         }
     });
-
-    element.classList.add('bg-amber-50/70', 'border-amber-600');
-    element.classList.remove('border-transparent');
-
-    const activeTitle = element.querySelector('h4');
-    if (activeTitle) {
-        activeTitle.classList.remove('font-semibold', 'text-stone-800');
-        activeTitle.classList.add('font-bold', 'text-amber-900');
-    }
-
-    const activeBadge = element.querySelector('.aspect-video > div');
-    if (activeBadge) {
-        activeBadge.innerHTML = '<span class="text-amber-400 text-xs">▶️ Aktif</span>';
-    }
-}
-
 </script>

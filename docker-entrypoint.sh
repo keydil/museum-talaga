@@ -3,10 +3,7 @@ set -e
 
 echo "🔧 Menjalankan setup aplikasi Museum Talaga..."
 
-echo "1. Generate app key jika belum ada..."
-php artisan key:generate --no-interaction
-
-echo "2. Discover packages..."
+echo "1. Discover packages..."
 php artisan package:discover --ansi
 
 echo "3. Menjalankan Database Migrations..."

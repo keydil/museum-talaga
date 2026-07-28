@@ -115,7 +115,7 @@
                         <button onclick="openTheaterModal()" class="bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition inline-flex items-center gap-1.5 shadow-sm">
                             🎬 Mode Teater Bioskop
                         </button>
-                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold px-4 py-2 rounded-lg transition">
+                        <button id="btnDownloadPdf" onclick="downloadCurrentPdf()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold px-4 py-2 rounded-lg transition inline-flex items-center gap-1.5">
                             📥 Unduh Brosur (PDF)
                         </button>
                     </div>
@@ -163,8 +163,17 @@
             if ($isYt) {
                 $ytEmbed = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $vSource);
             }
+
+            $pdfUrl = $video->guide_pdf_path ? asset('storage/' . $video->guide_pdf_path) : '';
         @endphp
-        <div onclick="playVideo(this, {{ json_encode($vSource) }}, {{ json_encode($video->title ?? '') }}, {{ json_encode($video->description ?? '') }}, {{ json_encode($video->duration ?? '00:00') }}, {{ json_encode($pSource) }}, {{ json_encode($ytEmbed) }})"
+        <div data-video-src="{{ $vSource }}"
+             data-title="{{ $video->title }}"
+             data-description="{{ $video->description }}"
+             data-duration="{{ $video->duration ?? '00:00' }}"
+             data-poster-src="{{ $pSource }}"
+             data-youtube-embed="{{ $ytEmbed }}"
+             data-guide-pdf="{{ $pdfUrl }}"
+             onclick="selectPlaylistItem(this)"
              class="w-full p-3.5 flex gap-3 cursor-pointer hover:bg-amber-50/50 transition items-start border-l-4 border-transparent group {{ $loop->first ? 'bg-amber-50/70 border-amber-600' : '' }}">
             <div class="w-24 aspect-video bg-stone-800 rounded relative shrink-0 overflow-hidden border border-amber-200">
                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -300,12 +309,141 @@
     // ==========================================
     // 3. TEATER LIGHTBOX & PLAYER INTERAKTIF
     // ==========================================
-    let currentActiveVideo = {
-        videoSrc: {{ json_encode($videoSource ?? '') }},
-        title: {{ json_encode($firstVideo->title ?? 'Belum Ada Konten') }},
-        posterSrc: {{ json_encode($posterSource ?? '') }},
-        youtubeEmbedUrl: {{ json_encode($youtubeEmbedUrl ?? '') }}
-    };
+    let currentActiveVideo = {};
+
+    function selectPlaylistItem(element) {
+        if (!element) return;
+
+        const videoSrc = element.getAttribute('data-video-src') || '';
+        const title = element.getAttribute('data-title') || 'Judul belum tersedia';
+        const description = element.getAttribute('data-description') || 'Deskripsi belum tersedia';
+        const duration = element.getAttribute('data-duration') || '00:00';
+        const posterSrc = element.getAttribute('data-poster-src') || '';
+        const youtubeEmbedUrl = element.getAttribute('data-youtube-embed') || '';
+        const guidePdf = element.getAttribute('data-guide-pdf') || '';
+
+        currentActiveVideo = { videoSrc, title, posterSrc, youtubeEmbedUrl, guidePdf };
+
+        const playerContainer = document.querySelector('.lg\\:col-span-2 .aspect-video');
+        const titleElem = document.getElementById('currentVideoTitle');
+        const descElem = document.getElementById('currentVideoDesc');
+        const durationElem = document.getElementById('currentVideoDuration');
+
+        if (playerContainer) {
+            if (youtubeEmbedUrl) {
+                playerContainer.innerHTML = '<iframe id="mainMuseumPlayer" class="w-full h-full" src="' + youtubeEmbedUrl + '?autoplay=1" title="' + title.replace(/"/g, '&quot;') + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            } else {
+                playerContainer.innerHTML = '<video id="mainMuseumPlayer" class="w-full h-full object-contain" controls autoplay poster="' + posterSrc + '"><source src="' + videoSrc + '" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>';
+            }
+        }
+
+        if (titleElem) titleElem.innerText = title;
+        if (descElem) descElem.innerText = description;
+        if (durationElem) durationElem.innerText = duration;
+
+        const allPlaylistItems = element.parentElement.children;
+        Array.from(allPlaylistItems).forEach((item) => {
+            item.classList.remove('bg-amber-50/70', 'border-amber-600');
+            item.classList.add('border-transparent');
+
+            const itemTitle = item.querySelector('h4');
+            if (itemTitle) {
+                itemTitle.classList.remove('font-bold', 'text-amber-900');
+                itemTitle.classList.add('font-semibold', 'text-stone-800');
+            }
+
+            const badgeContainer = item.querySelector('.aspect-video > div');
+            if (badgeContainer) {
+                badgeContainer.innerHTML = '<span class="text-amber-400 text-xs">▶️</span>';
+            }
+        });
+
+        element.classList.add('bg-amber-50/70', 'border-amber-600');
+        element.classList.remove('border-transparent');
+
+        const activeTitle = element.querySelector('h4');
+        if (activeTitle) {
+            activeTitle.classList.remove('font-semibold', 'text-stone-800');
+            activeTitle.classList.add('font-bold', 'text-amber-900');
+        }
+
+        const activeBadge = element.querySelector('.aspect-video > div');
+        if (activeBadge) {
+            activeBadge.innerHTML = '<span class="text-amber-400 text-xs">▶️ Aktif</span>';
+        }
+    }
+
+    function downloadCurrentPdf() {
+        if (currentActiveVideo && currentActiveVideo.guidePdf) {
+            window.open(currentActiveVideo.guidePdf, '_blank');
+        } else {
+            alert('Brosur / buku panduan PDF belum diunggah untuk babak ini.');
+        }
+    }
+
+    function openTheaterModal() {
+        const modal = document.getElementById('theaterModal');
+        const modalTitle = document.getElementById('modalVideoTitle');
+        const modalPlayerContainer = document.getElementById('modalPlayerContainer');
+
+        if (!modal || !modalPlayerContainer) return;
+
+        if (modalTitle) modalTitle.innerText = currentActiveVideo.title || 'Mode Teater';
+
+        // Stop inline player
+        const inlinePlayer = document.getElementById('mainMuseumPlayer');
+        if (inlinePlayer && typeof inlinePlayer.pause === 'function') {
+            inlinePlayer.pause();
+        }
+
+        if (currentActiveVideo.youtubeEmbedUrl) {
+            modalPlayerContainer.innerHTML = '<iframe class="w-full h-full" src="' + currentActiveVideo.youtubeEmbedUrl + '?autoplay=1" title="' + (currentActiveVideo.title || '').replace(/"/g, '&quot;') + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        } else {
+            modalPlayerContainer.innerHTML = '<video class="w-full h-full object-contain" controls autoplay poster="' + (currentActiveVideo.posterSrc || '') + '"><source src="' + (currentActiveVideo.videoSrc || '') + '" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>';
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeTheaterModal() {
+        const modal = document.getElementById('theaterModal');
+        const modalPlayerContainer = document.getElementById('modalPlayerContainer');
+
+        if (!modal) return;
+
+        if (modalPlayerContainer) {
+            modalPlayerContainer.innerHTML = '';
+        }
+
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+
+    function initInteractivePlayer() {
+        const firstItem = document.querySelector('[data-video-src]');
+        if (firstItem) {
+            const videoSrc = firstItem.getAttribute('data-video-src') || '';
+            const title = firstItem.getAttribute('data-title') || '';
+            const posterSrc = firstItem.getAttribute('data-poster-src') || '';
+            const youtubeEmbedUrl = firstItem.getAttribute('data-youtube-embed') || '';
+            const guidePdf = firstItem.getAttribute('data-guide-pdf') || '';
+
+            currentActiveVideo = { videoSrc, title, posterSrc, youtubeEmbedUrl, guidePdf };
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', initInteractivePlayer);
+    document.addEventListener('livewire:navigated', initInteractivePlayer);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeTheaterModal();
+        }
+    });
+</script>
 
     function playVideo(element, videoSrc, title, description, duration, posterSrc, youtubeEmbedUrl) {
         currentActiveVideo = { videoSrc, title, posterSrc, youtubeEmbedUrl };

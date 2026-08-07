@@ -31,6 +31,20 @@
                 {{ session('success') }}
             </div>
             @endif
+
+            {{-- Pemberitahuan: katalog publik sudah pindah ke aplikasi Arsip.
+                 Tanpa ini, pengelola bingung kenapa perubahan di halaman ini
+                 tidak muncul di situs. --}}
+            <div class="mb-8 p-5 bg-amber-50 border-l-4 border-amber-500 rounded-xl">
+                <h2 class="text-sm font-bold text-amber-900 mb-1">Katalog publik sudah pindah</h2>
+                <p class="text-xs text-stone-600 leading-relaxed">
+                    Katalog artefak yang dilihat pengunjung sekarang dikelola di
+                    <a href="{{ config('arsip.url') }}/admin/koleksi-3d" class="font-semibold text-amber-700 underline hover:text-amber-800">Panel Arsip &amp; Koleksi 3D</a> —
+                    di sana datanya lebih lengkap (deskripsi dua bahasa, dimensi, bahan, banyak foto, dan model 3D interaktif).
+                    <strong class="text-stone-800">Perubahan di halaman ini tidak lagi tampil di situs publik.</strong>
+                    Halaman ini dipertahankan sementara sebagai arsip data lama.
+                </p>
+            </div>
 <!-- Bagian Editor Header Dinamis Khusus Admin Galeri -->
 <div class="mb-8 p-6 bg-white border border-stone-200/80 rounded-2xl shadow-sm">
     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

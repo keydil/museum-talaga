@@ -36,6 +36,24 @@ class GaleriController extends Controller
         return view('galeri.show', compact('galeri', 'related'));
     }
 
+    // Tautan lama /galeri/{id} -> halaman artefak di aplikasi Arsip.
+    // Dicocokkan lewat judul (bukan id) karena id bergantung urutan seeder;
+    // kalau judulnya sudah diubah admin dan tidak ada di peta, pengunjung
+    // diarahkan ke halaman katalog Arsip supaya tidak mentok 404.
+    public function redirectToArsip(Galeri $galeri)
+    {
+        $peta = collect(config('arsip.slug_map'))
+            ->mapWithKeys(fn ($slug, $judul) => [mb_strtolower(trim($judul)) => $slug]);
+
+        $slug = $peta->get(mb_strtolower(trim($galeri->judul)));
+
+        $tujuan = $slug
+            ? config('arsip.url') . '/koleksi/' . $slug
+            : config('arsip.url') . '/koleksi';
+
+        return redirect($tujuan, 301);
+    }
+
     // =====================================================
     // ADMIN METHODS
     // =====================================================

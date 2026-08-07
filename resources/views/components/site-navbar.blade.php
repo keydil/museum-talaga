@@ -41,9 +41,16 @@
             </div>
 
             <!-- KATALOG & BERITA -->
-            <a href="{{ route('galeri') }}" wire:navigate 
-               class="{{ request()->routeIs('galeri*') ? 'text-amber-700 font-bold border-b-2 border-amber-600 pb-1' : 'hover:text-amber-700 transition' }}">
+            {{-- Katalog & Arsip Naskah tinggal di aplikasi terpisah (subdomain).
+                 TANPA wire:navigate — Livewire cuma bisa menavigasi halaman
+                 internal, kalau dipasang di tautan eksternal navigasinya rusak. --}}
+            <a href="{{ config('arsip.url') }}/koleksi"
+               class="hover:text-amber-700 transition">
                Katalog
+            </a>
+            <a href="{{ config('arsip.url') }}/arsip"
+               class="hover:text-amber-700 transition">
+               Arsip Naskah
             </a>
             <a href="{{ route('berita') }}" wire:navigate 
                class="{{ request()->routeIs('berita*') ? 'text-amber-700 font-bold border-b-2 border-amber-600 pb-1' : 'hover:text-amber-700 transition' }}">
@@ -107,7 +114,9 @@
             </div>
         </details>
 
-        <a href="{{ route('galeri') }}" wire:navigate class="block {{ request()->routeIs('galeri*') ? 'text-amber-700 font-bold' : 'hover:text-amber-700' }} py-1 transition">Katalog</a>
+        {{-- Tanpa wire:navigate: tautan ke aplikasi Arsip di subdomain lain. --}}
+        <a href="{{ config('arsip.url') }}/koleksi" class="block hover:text-amber-700 py-1 transition">Katalog</a>
+        <a href="{{ config('arsip.url') }}/arsip" class="block hover:text-amber-700 py-1 transition">Arsip Naskah</a>
         <a href="{{ route('berita') }}" wire:navigate class="block {{ request()->routeIs('berita*') ? 'text-amber-700 font-bold' : 'hover:text-amber-700' }} py-1 transition">Berita</a>
 
         <!-- DROPDOWN LIVING MUSEUM MOBILE -->

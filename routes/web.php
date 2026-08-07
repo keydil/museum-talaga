@@ -26,9 +26,16 @@ Route::get('/', [HalamanController::class, 'index'])->name('welcome');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 
-// Route Publik Galeri
-Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
-Route::get('/galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
+// Route Publik Galeri — DIPENSIUNKAN.
+// Katalog artefak sekarang dikelola aplikasi Arsip di subdomain terpisah
+// (lihat config/arsip.php). Route ini dipertahankan sebagai redirect 301
+// supaya tautan lama, bookmark, hasil pencarian Google, dan Home Card di
+// dashboard admin yang masih menunjuk /galeri tidak jadi mati.
+// Pakai permanentRedirect (bukan closure) supaya route ini tetap aman waktu
+// `php artisan route:cache` dijalankan saat deploy — closure tidak bisa
+// diserialisasi dan bikin deploy gagal.
+Route::permanentRedirect('/galeri', config('arsip.url') . '/koleksi')->name('galeri');
+Route::get('/galeri/{galeri}', [GaleriController::class, 'redirectToArsip'])->name('galeri.show');
 
 // Route Profil & Informasi Museum
 Route::get('/sejarah', [HalamanController::class, 'sejarah'])->name('sejarah');

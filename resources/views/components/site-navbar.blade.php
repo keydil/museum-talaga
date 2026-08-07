@@ -40,24 +40,25 @@
                 </div>
             </div>
 
-            <!-- DROPDOWN: ARSIP (Katalog 3D & Naskah Lontar) -->
+            <!-- DROPDOWN: KATALOG (Koleksi Artefak & Arsip Lontar) -->
             {{-- Dua tautan di dalamnya menuju aplikasi terpisah (subdomain),
                  jadi TANPA wire:navigate — Livewire cuma bisa menavigasi
                  halaman internal, kalau dipasang di tautan eksternal
-                 navigasinya rusak. --}}
+                 navigasinya rusak. Label anak sengaja tanpa kata "3D" —
+                 cuma sebagian artefak yang punya model 3D, sisanya foto. --}}
             <div class="relative inline-block text-left">
-                <button onclick="toggleDropdown(event, 'menuArsip')"
+                <button onclick="toggleDropdown(event, 'menuKatalog')"
                         class="flex items-center hover:text-amber-700 transition gap-1 focus:outline-none py-1">
-                    Arsip <span class="text-[9px]">▼</span>
+                    Katalog <span class="text-[9px]">▼</span>
                 </button>
-                <div id="menuArsip" class="absolute left-0 mt-2 w-48 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
+                <div id="menuKatalog" class="absolute left-0 mt-2 w-48 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
                     <a href="{{ config('arsip.url') }}/koleksi"
                        class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">
-                       Katalog Artefak 3D
+                       Koleksi Artefak
                     </a>
                     <a href="{{ config('arsip.url') }}/arsip"
                        class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">
-                       Arsip Naskah Lontar
+                       Arsip Lontar
                     </a>
                 </div>
             </div>
@@ -123,19 +124,19 @@
             </div>
         </details>
 
-        <!-- DROPDOWN ARSIP MOBILE -->
-        {{-- Dua tautan di dalamnya tanpa wire:navigate: menuju aplikasi
+        <!-- DROPDOWN KATALOG MOBILE -->
+        {{-- Tanpa wire:navigate: dua tautan di dalamnya menuju aplikasi
              Arsip di subdomain lain. --}}
         <details class="group my-1">
             <summary class="flex items-center justify-between w-full text-sm font-medium text-stone-700 hover:text-amber-700 cursor-pointer list-none py-1 [&::-webkit-details-marker]:hidden">
-                <span>Arsip</span>
+                <span>Katalog</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-stone-500 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </summary>
             <div class="dropdown-content border-l border-amber-200 ml-1 pl-4 space-y-2.5 mt-2">
-                <a href="{{ config('arsip.url') }}/koleksi" class="block text-xs text-stone-500 hover:text-amber-700">Katalog Artefak 3D</a>
-                <a href="{{ config('arsip.url') }}/arsip" class="block text-xs text-stone-500 hover:text-amber-700">Arsip Naskah Lontar</a>
+                <a href="{{ config('arsip.url') }}/koleksi" class="block text-xs text-stone-500 hover:text-amber-700">Koleksi Artefak</a>
+                <a href="{{ config('arsip.url') }}/arsip" class="block text-xs text-stone-500 hover:text-amber-700">Arsip Lontar</a>
             </div>
         </details>
         <a href="{{ route('berita') }}" wire:navigate class="block {{ request()->routeIs('berita*') ? 'text-amber-700 font-bold' : 'hover:text-amber-700' }} py-1 transition">Berita</a>

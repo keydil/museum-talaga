@@ -30,7 +30,7 @@
                     <li><a href="{{ route('sejarah') }}" wire:navigate class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Sejarah Museum</a></li>
                     <li><a href="{{ route('visimisi') }}" wire:navigate class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Visi & Misi</a></li>
                     {{-- Tanpa wire:navigate: dua tautan ini ke aplikasi Arsip di subdomain lain. --}}
-                    <li><a href="{{ config('arsip.url') }}/koleksi" class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Katalog Artefak 3D</a></li>
+                    <li><a href="{{ config('arsip.url') }}/koleksi" class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Koleksi Artefak</a></li>
                     <li><a href="{{ config('arsip.url') }}/arsip" class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Arsip Naskah Lontar</a></li>
                     <li><a href="{{ route('berita') }}" wire:navigate class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-600">›</span> Warta & Berita</a></li>
                 </ul>

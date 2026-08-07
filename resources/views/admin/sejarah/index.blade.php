@@ -23,6 +23,8 @@
 @endphp>
             
             <!-- ALERT & HEADER -->
+            <x-upload-warning />
+
             @if(session('success'))
                 <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-semibold">{{ session('success') }}</div>
             @endif

@@ -4,7 +4,9 @@
 
 <!-- Konten Pembungkus Utama Admin -->
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-       
+
+        <x-upload-warning />
+
             <!-- Bagian Editor Header Dinamis Khusus Admin Struktur Organisasi -->
     <div class="mb-8 p-6 bg-white border border-stone-200/80 rounded-2xl shadow-sm">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

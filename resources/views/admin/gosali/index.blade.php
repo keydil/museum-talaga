@@ -1,6 +1,8 @@
 <x-app-layout>
     <div class="min-h-screen bg-[#fdfbf2] py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <x-upload-warning />
+
             @if(session('success'))
                 <div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 shadow-sm">
                     <span class="font-semibold">Berhasil!</span> {{ session('success') }}

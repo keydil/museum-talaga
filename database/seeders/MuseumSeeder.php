@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class MuseumSeeder extends Seeder
@@ -19,16 +20,52 @@ class MuseumSeeder extends Seeder
     public function run(): void
     {
         // 1. SEED USER ADMINISTRATOR
-        User::updateOrCreate(
-            ['email' => 'admin@museum.com'],
-            [
+        //
+        // Sengaja TIDAK pakai updateOrCreate. Sebelumnya begitu, dengan
+        // password hardcoded, sementara entrypoint deploy menjalankan
+        // `db:seed` di setiap rilis — akibatnya password admin di-reset
+        // balik ke nilai bawaan tiap deploy, jadi ganti password lewat
+        // panel admin selalu sia-sia (dan nilai bawaannya gampang ditebak).
+        //
+        // Sekarang akun cuma dibuat kalau belum ada. Password diambil dari
+        // env ADMIN_SEED_PASSWORD; kalau tidak diisi, dibuatkan acak dan
+        // dicetak ke log deploy — supaya tidak ada kredensial lemah yang
+        // ikut ke dalam repositori.
+        $adminEmail = env('ADMIN_SEED_EMAIL', 'admin@museum.com');
+
+        if (! User::where('email', $adminEmail)->exists()) {
+            $adminPassword = env('ADMIN_SEED_PASSWORD') ?: Str::random(16);
+
+            User::create([
                 'name' => 'Administrator Museum',
-                'password' => Hash::make('admin123'),
-            ]
-        );
+                'email' => $adminEmail,
+                'password' => Hash::make($adminPassword),
+                'email_verified_at' => now(),
+            ]);
+
+            $this->command?->warn("Akun admin dibuat — email: {$adminEmail} | password: {$adminPassword}");
+            $this->command?->warn('Segera ganti password ini setelah login pertama.');
+        }
+
+        // ─────────────────────────────────────────────────────────────
+        // KONTEN DI BAWAH INI HANYA UNTUK MENGISI DATABASE YANG KOSONG
+        // (mis. deploy pertama / database baru).
+        //
+        // Entrypoint deploy menjalankan `php artisan db:seed --force` di
+        // SETIAP rilis. Dulu seeder ini melakukan truncate() lalu insert
+        // ulang, jadi semua berita, artefak, dan video yang ditambah atau
+        // diedit pengelola lewat panel admin ikut terhapus tiap deploy.
+        //
+        // Pengecekannya sengaja all-or-nothing (bukan per tabel) supaya
+        // tidak ada campuran data seed dengan data asli pengelola.
+        // ─────────────────────────────────────────────────────────────
+        if (DB::table('berita')->count() > 0 || DB::table('galeris')->count() > 0) {
+            $this->command?->info('Database sudah berisi konten — seeding data contoh dilewati.');
+
+            return;
+        }
 
         // 2. SEED ARTIKEL BERITA & SEJARAH (Tabel: berita)
-        DB::table('berita')->truncate();
         DB::table('berita')->insert([
             [
                 'kategori' => 'SEJARAH',
@@ -73,7 +110,6 @@ class MuseumSeeder extends Seeder
         ]);
 
         // 3. SEED KOLEKSI ARTEFAK GALERI (Tabel: galeris - Total 17 Artefak Lengkap)
-        DB::table('galeris')->truncate();
         DB::table('galeris')->insert([
             [
                 'judul' => 'Arca Raden Panglurah',
@@ -231,7 +267,6 @@ class MuseumSeeder extends Seeder
         ]);
 
         // 4. SEED DOKUMENTER WALANG SUJI (Tabel: walang_suji_videos - Rickroll Edition)
-        DB::table('walang_suji_videos')->truncate();
         DB::table('walang_suji_videos')->insert([
             [
                 'title' => 'Prosesi Adat Ritual Nyiramkeun Pusaka (Classic Rickroll)',
@@ -256,7 +291,6 @@ class MuseumSeeder extends Seeder
         ]);
 
         // 5. SEED DOKUMENTER GOSALI (Tabel: gosali_videos - Rickroll Edition)
-        DB::table('gosali_videos')->truncate();
         DB::table('gosali_videos')->insert([
             [
                 'title' => 'Kirab Budaya Nyiramkeun Pusaka & Kesenian Bebegig (Rick Astley)',

@@ -6,8 +6,18 @@ use Livewire\Volt\Volt;
 use App\Livewire\Actions\Logout; // Pastikan class action ini di-import di atas
 
 Route::middleware('guest')->group(function () {
-    Volt::route('register', 'pages.auth.register')
-        ->name('register');
+    // Pendaftaran publik DIMATIKAN.
+    //
+    // Panel admin cuma dilindungi middleware ['auth','verified'] tanpa sistem
+    // role — artinya siapa pun yang berhasil mendaftar lalu verifikasi email
+    // langsung punya akses admin penuh (bisa mengubah & menghapus seluruh
+    // konten situs). Museum tidak butuh pendaftaran mandiri.
+    //
+    // Menambah pengelola baru: lewat `php artisan tinker` di server, atau
+    // seeder. View yang menaut ke rute ini sudah dibungkus
+    // `@if (Route::has('register'))` jadi otomatis menyesuaikan.
+    //
+    // Volt::route('register', 'pages.auth.register')->name('register');
 
     Volt::route('login', 'pages.auth.login')
         ->name('login');
